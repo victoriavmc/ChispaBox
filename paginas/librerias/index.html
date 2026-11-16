@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Herramienta, librería, versión, fecha de publicación y privacidad de cada herramienta."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Librerías usadas | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="./estilos.css" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Librerías usadas" subtitulo="Qué librería usa cada herramienta, con su versión, la fecha en que se publicó y qué pasa con tus archivos." personaje="/images/characters/sopi-cutout.webp" -->
+
+          <div class="libs-table-wrap">
+            <table class="libs-table">
+              <thead>
+                <tr>
+                  <th scope="col">Avatar</th>
+                  <th scope="col">Herramienta</th>
+                  <th scope="col">Librería</th>
+                  <th scope="col">Versión</th>
+                  <th scope="col">Publicada</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- AUDIO -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/sopi-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Grabar audio</td>
+                  <td>
+                    MediaRecorder + Web Audio API (navegador) y <code>libmp3lame</code> (LAME) del núcleo FFmpeg propio para MP3
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> La grabación se queda en tu navegador y no se sube a ningún servidor. Al descargar en MP3, la codificación también ocurre en tu equipo.</p>
+                    </details>
+                  </td>
+                  <td>Nativa / <code>5.1.4</code></td>
+                  <td class="libs-muted">— / —</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/miles-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Convertir formato de audio</td>
+                  <td>
+                    <code>@ffmpeg/ffmpeg</code> + núcleo FFmpeg <code>5.1.4</code> propio (LGPL) + <code>@ffmpeg/util</code>
+                    (FFmpeg en WebAssembly, en el navegador; wrappers MIT; núcleo propio compilado sin GPL, LGPL-2.1 o posterior; <a href="/ffmpeg-lgpl/OFERTA-CODIGO-FUENTE.md">código fuente y avisos</a>)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> FFmpeg corre dentro de tu navegador y tus archivos no salen de tu equipo. La primera vez se descarga el núcleo (unos 19 MB) desde este mismo sitio.</p>
+                    </details>
+                  </td>
+                  <td><code>0.12.15</code> / <code>5.1.4</code> (núcleo propio) / <code>0.12.2</code></td>
+                  <td>16 nov 2026 (compilación propia)</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/mika-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Unificar audios</td>
+                  <td>
+                    Web Audio API (navegador) + <code>libmp3lame</code> (LAME) del núcleo FFmpeg propio para MP3
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Los audios se unen y se codifican en tu navegador. No se envía nada a servidores.</p>
+                    </details>
+                  </td>
+                  <td><code>5.1.4</code></td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/marcos-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Recortar audio</td>
+                  <td>
+                    Web Audio API (navegador) + <code>libmp3lame</code> (LAME) del núcleo FFmpeg propio para MP3
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El recorte se hace en tu navegador. El audio no se sube a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td><code>5.1.4</code></td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <!-- TEXTO Y ESCRITURA -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/florencia-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Contar palabras y caracteres</td>
+                  <td>
+                    JavaScript propio
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El texto se cuenta en tu navegador y no se envía a ningún lugar.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">—</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/enzo-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Limpiar texto</td>
+                  <td>
+                    JavaScript propio
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> La limpieza del texto se hace en tu navegador y no se envía a ningún lugar.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">—</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/silvi-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Buscar palabra</td>
+                  <td>
+                    API de Wiktionary en español (MediaWiki, CC BY-SA) para definiciones, sinónimos y antónimos; enlace a la RAE. Sugerencias ortográficas con <code>nspell</code> y <code>dictionary-es</code>
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> Cada búsqueda envía la palabra a la API de es.wiktionary.org (Wikimedia Foundation). Las sugerencias ortográficas se calculan en tu navegador. El enlace a la RAE abre un sitio externo.</p>
+                    </details>
+                  </td>
+                  <td><code>nspell</code> 2.1.5 · <code>dictionary-es</code> 4.0.0</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <!-- IMÁGENES Y DISEÑO -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/marcos-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Quitar fondo de imagen</td>
+                  <td>
+                    Canvas API y algoritmos propios (sin IA ni modelos)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> La imagen se procesa en tu navegador y no se sube a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/florencia-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Convertir formato de imagen</td>
+                  <td>
+                    Canvas (API del navegador)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> La conversión ocurre en tu navegador, sin subir la imagen a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/sopi-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Redimensionar y recortar imágenes</td>
+                  <td>
+                    Canvas (API del navegador) y funciones propias de recorte
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El tamaño y el recorte se aplican en tu navegador, sin subir la imagen a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/mika-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Mejorar calidad de imagen</td>
+                  <td>
+                    <code>sharp</code> (Apache-2.0) en el servidor de la aplicación + Canvas API
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--server">Servidor</span> La imagen se envía al servidor de la aplicación, donde <code>sharp</code> la procesa, y el resultado vuelve a tu navegador. No se usa inteligencia artificial.</p>
+                    </details>
+                  </td>
+                  <td><code>0.35.5</code></td>
+                  <td>27 sep 2026</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/vale-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Generador de favicon</td>
+                  <td>
+                    Canvas API + formato ICO y ZIP propios
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Los íconos se generan en tu navegador. Ningún archivo sale de tu equipo.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/miles-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Selector de color</td>
+                  <td>
+                    Canvas API
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> La imagen se lee en tu navegador para tomar el color del píxel. No se sube.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <!-- DOCUMENTOS Y PDF -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/florencia-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Documento a PDF</td>
+                  <td>
+                    <code>LibreOffice</code> (en el servidor de la aplicación; MPL-2.0) para Word, Excel y PowerPoint + escritor de PDF propio para imágenes. Ver <a href="/paginas/documentos-a-pdf/index.html">Documentos a PDF</a>
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--server">Parcial</span> Los documentos de Office se envían al servidor de la aplicación para convertirse a PDF. Las imágenes JPG, PNG y WebP se convierten en tu navegador. El tiempo que el servidor conserva los archivos no está detallado en esta página.</p>
+                    </details>
+                  </td>
+                  <td><code>26.8.3</code> / Nativa</td>
+                  <td>11 nov 2026 / —</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/marcos-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>PDF a documento</td>
+                  <td>
+                    <code>unpdf</code> (MIT), extracción de texto en el servidor de la aplicación
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--server">Servidor</span> El PDF se envía al servidor de la aplicación para extraer su texto. El resultado no siempre es exacto.</p>
+                    </details>
+                  </td>
+                  <td><code>1.9.1</code></td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/silvi-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Dividir PDF</td>
+                  <td>
+                    <code>pdf-lib</code> (MIT) + <code>pdfjs-dist</code> (Apache-2.0) para la vista previa
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El PDF se divide en tu navegador y no se sube. <code>pdf.js</code> solo muestra la vista previa.</p>
+                    </details>
+                  </td>
+                  <td><code>1.17.1</code> / <code>6.5.438</code></td>
+                  <td class="libs-muted">— / 1 nov 2026</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/enzo-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Unificar PDF</td>
+                  <td>
+                    <code>pdf-lib</code> (MIT)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Los PDF se unen en tu navegador, en el orden que elijas. Ningún archivo se envía a un servidor.</p>
+                    </details>
+                  </td>
+                  <td><code>1.17.1</code></td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/mika-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Organizar páginas</td>
+                  <td>
+                    <code>pdf-lib</code> (MIT) + <code>pdfjs-dist</code> (Apache-2.0) para las miniaturas
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Las miniaturas y los cambios de página se procesan en tu navegador. El PDF no se sube.</p>
+                    </details>
+                  </td>
+                  <td><code>1.17.1</code> / <code>6.5.438</code></td>
+                  <td class="libs-muted">— / 1 nov 2026</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/sopi-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Comprimir PDF</td>
+                  <td>
+                    <code>pdf-lib</code> (MIT) + <code>pdfjs-dist</code> (Apache-2.0) para la vista previa
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> La compresión se hace en tu navegador y el PDF no se envía a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td><code>1.17.1</code> / <code>6.5.438</code></td>
+                  <td class="libs-muted">— / 1 nov 2026</td>
+                </tr>
+
+                <!-- DATOS Y DESARROLLO -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/vale-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Convertidor de datos</td>
+                  <td>
+                    <code>papaparse</code> (CSV), <code>read-excel-file</code> (Excel .xlsx), DOMParser (XML, nativo del navegador)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> CSV, Excel y XML se leen y convierten en tu navegador, sin conexión a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted"><code>papaparse</code> 5.7.0 · <code>read-excel-file</code> 9.3.14</td>
+                  <td class="libs-muted">24 ago 2026 · 29 oct 2026</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/mika-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Formatear y validar JSON/XML</td>
+                  <td>
+                    JavaScript propio + DOMParser (XML, nativo del navegador)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El formato y la validación ocurren en tu navegador. Lo que pegues no se envía a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <!-- SEGURIDAD -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/miles-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Verificador de integridad</td>
+                  <td>
+                    Web Crypto API (SubtleCrypto, SHA-256; nativa)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El hash se calcula en tu navegador. El archivo no se sube.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/vale-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Generador de contraseñas</td>
+                  <td>
+                    Web Crypto API (<code>crypto.getRandomValues</code>; nativa)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Las contraseñas se generan en tu navegador con aleatoriedad criptográfica y no se envían a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/silvi-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Eliminar metadatos</td>
+                  <td>
+                    <code>pdf-lib</code> (MIT) para PDF + código propio para metadatos de imágenes
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Los metadatos (GPS, fecha, cámara, autor) se leen y se quitan en tu navegador. El archivo no se sube.</p>
+                    </details>
+                  </td>
+                  <td><code>1.17.1</code></td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/enzo-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Proteger PDF con contraseña</td>
+                  <td>
+                    QPDF compilado a WebAssembly (<code>@neslinesli93/qpdf-wasm</code>, Apache-2.0)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El cifrado AES-256 se hace en tu navegador. El PDF y la contraseña no salen de tu equipo.</p>
+                    </details>
+                  </td>
+                  <td><code>0.3.0</code></td>
+                  <td>27 jun 2025</td>
+                </tr>
+
+                <!-- HERRAMIENTAS WEB -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/vale-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Generador y lector de QR</td>
+                  <td>
+                    <code>qrcode</code> (MIT) para crear + <code>jsQR</code> (Apache-2.0) para leer
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Los códigos se crean y se leen en tu navegador. Al leer un QR, el contenido se muestra antes de abrir cualquier enlace.</p>
+                    </details>
+                  </td>
+                  <td><code>1.5.4</code> / <code>1.4.0</code></td>
+                  <td class="libs-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/marcos-cutout.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Acortador de enlaces</td>
+                  <td>
+                    JavaScript propio + Web Crypto API (códigos aleatorios) + localStorage
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Los enlaces acortados se guardan en el almacenamiento de tu navegador y no se envían a ningún servidor.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <p class="libs-muted libs-note">
+            Versión y fecha de LibreOffice 26.8.3 tomadas del listado oficial de descargas (download.documentfoundation.org, 11 nov 2026) y de sus notas de versión.
+          </p>
+          <section class="libs-licenses" aria-labelledby="libs-licencias-titulo">
+            <h2 id="libs-licencias-titulo">Avisos de licencia</h2>
+            <p class="libs-muted">Textos de las licencias de los componentes que se distribuyen en este sitio. Los del núcleo FFmpeg (LGPL y demás) están en la <a href="/ffmpeg-lgpl/licencias/LGPL-2.1-FFmpeg.txt">texto LGPL-2.1 de FFmpeg</a> (y los demás avisos de la carpeta <code>/ffmpeg-lgpl/licencias/</code>) y en la <a href="/ffmpeg-lgpl/OFERTA-CODIGO-FUENTE.md">oferta de código fuente</a>.</p>
+            <ul>
+              <li><a href="/licencias/ffmpeg-wasm-MIT.txt">@ffmpeg/ffmpeg y @ffmpeg/util (MIT)</a></li>
+              <li><a href="/licencias/qpdf-wasm-ISC.txt">@neslinesli93/qpdf-wasm (ISC)</a> y <a href="/licencias/qpdf-Apache-2.0.txt">QPDF (Apache-2.0)</a></li>
+              <li><a href="/licencias/pdfjs-dist-Apache-2.0.txt">pdfjs-dist (Apache-2.0)</a></li>
+              <li><a href="/licencias/jsqr-Apache-2.0.txt">jsqr (Apache-2.0)</a></li>
+              <li><a href="/licencias/pdf-lib-MIT.txt">pdf-lib (MIT)</a>, <a href="/licencias/pdf-lib-standard-fonts-MIT.txt">@pdf-lib/standard-fonts (MIT)</a>, <a href="/licencias/pdf-lib-upng-MIT.txt">@pdf-lib/upng (MIT)</a></li>
+              <li><a href="/licencias/pako-MIT-Zlib.txt">pako (MIT y Zlib)</a> y <a href="/licencias/tslib-0BSD.txt">tslib (0BSD)</a></li>
+              <li><a href="/licencias/papaparse-MIT.txt">papaparse (MIT)</a>, <a href="/licencias/nspell-MIT.txt">nspell (MIT)</a>, <a href="/licencias/read-excel-file-MIT.txt">read-excel-file (MIT)</a></li>
+              <li><a href="/licencias/qrcode-MIT.txt">qrcode (MIT)</a> y <a href="/licencias/dijkstrajs-MIT.txt">dijkstrajs (MIT)</a></li>
+              <li><a href="/licencias/fflate-MIT.txt">fflate (MIT)</a> y <a href="/licencias/is-buffer-MIT.txt">is-buffer (MIT)</a></li>
+            </ul>
+          </section>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+  </body>
+</html>

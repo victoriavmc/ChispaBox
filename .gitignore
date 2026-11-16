@@ -1,0 +1,94 @@
+node_modules/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+# Credenciales SMTP y secretos del servidor (nunca al repositorio)
+*.env
+!*.env.example
+
+# Configuración local de Claude Code (permisos, bloqueos de tareas)
+.claude/
+
+# Documento personal de estudio, no forma parte del proyecto
+Resumen de estudio Concurso de Ingreso 2027.docx
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Copia generada de PDF.js (scripts/copy-pdfjs.mjs)
+public/pdfjs/
+
+# Copia generada de Tesseract.js (scripts/copy-ocr.mjs)
+public/ocr/
+
+# Publicación inicial: código de YouTube (no aprobado para producción). Se conserva en el entorno local.
+# Nota: .gitignore no afecta a archivos ya versionados (README-YOUTUBE.md está en el commit inicial).
+server/youtube/
+src/lib/youtube-client.ts
+src/shared/youtube-names.ts
+src/shared/youtube-types.ts
+src/styles/youtube.css
+src/scripts/descargar-youtube-video.ts
+src/scripts/descargar-youtube-audio.ts
+src/scripts/descargar-playlist-youtube.ts
+paginas/descargar-youtube-video/
+paginas/descargar-youtube-audio/
+paginas/descargar-playlist-youtube/
+tests/youtube/
+docs/descargas-youtube.md
+
+# Publicación inicial: documentos legales obsoletos (se conservan en el entorno local)
+docs/LICENSE-version-anterior-derechos-reservados.txt
+docs/politica-privacidad-borrador.md
+
+# Configuración local de desarrollo con el plugin de YouTube (no versionada, ver vite.youtube.config.ts)
+vite.youtube.config.ts
+
+# Publicación inicial: licencias de un paquete ya eliminado (lamejs, sustituido por libmp3lame)
+licenses/_breezystack_lamejs/
+licenses/lamejs-upstream-LICENSE.txt
+
+# Publicación inicial: guía de descargas de YouTube (función no aprobada; el archivo se conserva localmente)
+README-YOUTUBE.md
+
+# Publicación inicial: documentación interna (informes operativos, matrices, infraestructura y documentos jurídicos de trabajo). Se conserva localmente.
+docs/auditoria-integral.md
+docs/manifiesto-publicacion.md
+docs/publicacion-github.md
+docs/matriz-legal-hostinger.md
+docs/matriz-privacidad.md
+docs/privacidad-y-retencion.md
+deploy/INFORME-PREPARACION.md
+TERMS_OF_USE.md
+PRIVACY_POLICY.md
+
+# Publicación inicial: OCR, transcripción y experimentos (no publicados; se conservan en el entorno local)
+src/scripts/ocr-documentos.ts
+src/styles/ocr-documentos.css
+paginas/ocr-documentos/
+scripts/copy-ocr.mjs
+src/scripts/transcribir-audio.ts
+src/styles/transcribir-audio.css
+paginas/transcribir-audio/
+experimentos/
+src/shared/ocr-export.ts
+tests/ocr-documentos/
+
+# Paquete local de OCR (dependencias privadas, no publicadas) y configuración local asociada
+local-ocr/
+vite.ocr.config.ts
+tsconfig.ocr.json
+
+# Documentación interna de despliegue (no publicada)
+docs/despliegue-hostinger.md
+
+# Herramientas locales (extras/local): dependencias, salida de compilación y configuración personal
+extras/local/node_modules/
+extras/local/dist/
+extras/local/.env
+extras/local/install.log
+extras/local/.tmp-*
+extras/local/*.log

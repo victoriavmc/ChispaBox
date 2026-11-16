@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="La página que buscás no existe o se movió."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <meta name="robots" content="noindex" />
+    <title>Página no encontrada | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <section class="section not-found" aria-labelledby="not-found-title">
+        <div class="container not-found__inner">
+          <div class="not-found__art">
+            <img
+              class="not-found__img"
+              src="/images/404/error-404.webp"
+              alt="Varios personajes preocupados alrededor de una computadora de torre derramando refresco, con signos de exclamación y de interrogación."
+              width="1664"
+              height="936"
+              decoding="async"
+            />
+          </div>
+
+          <div class="not-found__text">
+            <p class="not-found__code" aria-hidden="true">404</p>
+            <h1 class="section-title" id="not-found-title">
+              Ups, esta página no existe
+            </h1>
+            <p class="section-sub">
+              Puede que la dirección esté mal escrita o que la página se haya
+              movido. Mientras tanto, podés volver al inicio o probar una de
+              nuestras herramientas.
+            </p>
+
+            <div class="not-found__actions">
+              <a class="btn btn--primary btn--large" href="/"
+                >Volver al inicio</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+  </body>
+</html>

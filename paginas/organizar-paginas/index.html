@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Reordena, gira, quita y extrae páginas de un PDF. Se procesa en tu navegador con software libre; el archivo no se sube a ningún servidor."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Organizar páginas | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Organizar páginas" subtitulo="Reordená, girá, quitá o extraé páginas de un PDF y descargá el resultado. Todo se procesa en tu navegador: el archivo no se sube a ningún servidor y el original no se modifica." personaje="/images/characters/mika-cutout.webp" -->
+
+        <div id="panel-organizar" class="doc-panel">
+          <h2 class="doc-panel__title">Organizar un PDF</h2>
+
+          <section class="rec-panel" aria-labelledby="org-sel-heading">
+            <h3 class="field-label" id="org-sel-heading">1. Cargar el PDF</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="org-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="org-dropzone">
+              <label class="field-label" for="org-file">Seleccionar un PDF o arrastrarlo aquí</label>
+              <input class="bg-file" id="org-file" type="file" accept=".pdf,application/pdf" />
+            </div>
+            <p class="rec-error" id="org-error" role="alert" hidden></p>
+            <dl class="tool-info" id="org-info" hidden></dl>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="org-edit-heading">
+            <h3 class="field-label" id="org-edit-heading">2. Ordenar, girar, quitar y extraer</h3>
+            <p class="tool-note" id="org-summary"></p>
+            <ol class="org-list" id="org-list" aria-label="Páginas del resultado, en orden" hidden></ol>
+            <div class="org-removed" id="org-removed-wrap" hidden>
+              <h4 class="field-label">Páginas quitadas</h4>
+              <ul class="org-removed__list" id="org-removed-list"></ul>
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--ghost" id="org-reset" disabled>Restablecer orden original</button>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="org-run-heading">
+            <h3 class="field-label" id="org-run-heading">3. Descargar</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="org-nombre">Nombre del PDF organizado (sin .pdf)</label>
+              <input class="tool-select" id="org-nombre" type="text" maxlength="120" autocomplete="off" />
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="org-save" disabled>Guardar PDF organizado</button>
+              <button type="button" class="btn btn--ghost" id="org-extract" disabled>Extraer solo las marcadas</button>
+              <button type="button" class="btn btn--ghost" id="org-clear" disabled>Otro PDF</button>
+            </div>
+            <div class="bg-progress doc-progress" id="org-progress-wrap" hidden>
+              <progress aria-labelledby="org-progress-text"></progress>
+              <span id="org-progress-text"></span>
+            </div>
+            <div class="doc-result" id="org-results" hidden></div>
+          </section>
+
+          <p class="rec-status" id="org-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/organizar-paginas.ts"></script>
+  </body>
+</html>

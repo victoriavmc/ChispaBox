@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Mejorá nitidez, brillo, contraste y color con métodos clásicos, sin inteligencia artificial." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Mejorar calidad de imagen | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Mejorar calidad de imagen" subtitulo="Ajustá nitidez, brillo, contraste y color con métodos clásicos. No recupera detalles que no existen ni reemplaza una foto de mayor resolución." personaje="/images/characters/mika-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="mej-load-heading">
+          <h2 class="field-label" id="mej-load-heading">1. Elegí la imagen</h2>
+
+          <div class="tool-req" aria-label="Requisitos de entrada">
+            <p class="tool-req__title">Antes de cargar</p>
+            <ul class="tool-req__list" id="mej-requirements"></ul>
+          </div>
+
+          <div class="tool-dropzone" id="mej-dropzone">
+            <label class="field-label" for="mej-file">Seleccionar imagen o arrastrarla aquí</label>
+            <input
+              class="bg-file"
+              id="mej-file"
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            />
+          </div>
+
+          <div class="bg-progress" id="mej-progress-wrap" hidden>
+            <progress></progress>
+            <span id="mej-progress-text"></span>
+          </div>
+
+          <p class="rec-error" id="mej-error" role="alert" hidden></p>
+
+          <dl class="tool-info" id="mej-info" hidden></dl>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="mej-opt-heading">
+          <h2 class="field-label" id="mej-opt-heading">2. Método e intensidad</h2>
+
+          <fieldset class="tool-methods">
+            <legend class="tool-methods__legend">Método</legend>
+            <label class="tool-method"
+              ><input type="radio" name="mej-method" value="sharp" id="mej-method-sharp" />
+              <span>Mejorar con Sharp (servidor local)</span></label
+            >
+            <label class="tool-method"
+              ><input type="radio" name="mej-method" value="canvas" id="mej-method-canvas" checked />
+              <span>Mejorar con Canvas (navegador)</span></label
+            >
+          </fieldset>
+          <p class="tool-note" id="mej-sharp-note"></p>
+          <ul class="tool-req__list" id="mej-method-limits"></ul>
+
+          <fieldset class="tool-methods">
+            <legend class="tool-methods__legend">Intensidad</legend>
+            <label class="tool-method"
+              ><input type="radio" name="mej-intensity" value="suave" />
+              <span>Suave</span></label
+            >
+            <label class="tool-method"
+              ><input type="radio" name="mej-intensity" value="media" checked />
+              <span>Media</span></label
+            >
+            <label class="tool-method"
+              ><input type="radio" name="mej-intensity" value="intensa" />
+              <span>Intensa</span></label
+            >
+          </fieldset>
+          <p class="tool-note">
+            Las intensidades ajustan nitidez, color y contraste. Ninguna garantiza recuperar calidad perdida.
+          </p>
+
+          <div class="tool-panel">
+            <label class="field-label" for="mej-format">Formato de salida</label>
+            <select id="mej-format" class="tool-select">
+              <option value="jpeg">JPG</option>
+              <option value="png">PNG</option>
+              <option value="webp">WebP</option>
+            </select>
+          </div>
+
+          <div class="tool-panel" id="mej-quality-wrap">
+            <label class="field-label" for="mej-quality"
+              >Calidad de compresión: <span id="mej-quality-value">92</span></label
+            >
+            <input type="range" id="mej-quality" min="1" max="100" value="92" />
+          </div>
+
+          <div class="tool-panel">
+            <label class="tool-method"
+              ><input type="checkbox" id="mej-keep-size" checked />
+              <span>Conservar dimensiones originales</span></label
+            >
+            <div id="mej-size-fields" hidden>
+              <label class="tool-method"
+                ><input type="checkbox" id="mej-keep-ratio" checked />
+                <span>Conservar proporciones</span></label
+              >
+              <div class="conv-size-row">
+                <label class="field-label" for="mej-width">Ancho (px)</label>
+                <input type="number" id="mej-width" min="1" max="8000" step="1" />
+                <label class="field-label" for="mej-height">Alto (px)</label>
+                <input type="number" id="mej-height" min="1" max="8000" step="1" />
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-panel" id="mej-interp-wrap">
+            <label class="field-label" for="mej-interp">Interpolación al cambiar tamaño (Canvas)</label>
+            <select id="mej-interp" class="tool-select">
+              <option value="low">Rápida</option>
+              <option value="medium">Media</option>
+              <option value="high" selected>Alta calidad</option>
+            </select>
+          </div>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--ghost" id="mej-cancel" hidden>Cancelar</button>
+            <button type="button" class="btn btn--ghost" id="mej-reset-opts">Restablecer opciones</button>
+            <button type="button" class="btn btn--ghost" id="mej-clear">Otra imagen</button>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="mej-preview-heading">
+          <h2 class="field-label" id="mej-preview-heading">3. Comparar</h2>
+
+          <div class="tool-zoom" id="mej-stage-wrap" hidden>
+            <div class="tool-zoom__bar">
+              <button type="button" class="btn btn--ghost" id="mej-zoom-out" aria-label="Alejar">Alejar −</button>
+              <span id="mej-zoom-label" aria-live="polite">100 %</span>
+              <button type="button" class="btn btn--ghost" id="mej-zoom-in" aria-label="Acercar">Acercar +</button>
+              <button type="button" class="btn btn--ghost" id="mej-zoom-reset">Ajustar a la pantalla</button>
+            </div>
+            <div class="tool-zoom__scroll">
+              <div class="tool-stage tool-checker" id="mej-stage">
+                <img id="mej-original" alt="Imagen original" />
+                <img id="mej-result" alt="Imagen mejorada" hidden />
+                <div class="tool-split" id="mej-split" aria-hidden="true" hidden></div>
+                <span class="tool-tag tool-tag--left" aria-hidden="true">Mejorada</span>
+                <span class="tool-tag tool-tag--right" aria-hidden="true">Original</span>
+              </div>
+            </div>
+            <label class="field-label" for="mej-compare"
+              >Deslizá para comparar: a la izquierda la mejorada, a la derecha el original</label
+            >
+            <input type="range" id="mej-compare" min="0" max="100" value="50" />
+          </div>
+
+          <dl class="tool-info" id="mej-summary" hidden></dl>
+
+          <ul class="conv-list" id="mej-results" hidden></ul>
+
+          <div class="rec-actions">
+            <p class="tool-note" id="mej-size" aria-live="polite"></p>
+            <button type="button" class="btn btn--primary" id="mej-download" disabled>Descargar resultado</button>
+          </div>
+        </section>
+
+        <p class="rec-status" id="mej-status" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/mejorar-imagen.ts"></script>
+  </body>
+</html>

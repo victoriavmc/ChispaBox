@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Layouts adaptables (mobile-first):
+   - Móvil:   1 columna de herramientas.
+   - Tablet:  2 columnas (≥ 48rem / 768px).
+   - Escritorio: 3 columnas (≥ 64rem / 1024px).
+   Todas las unidades son fluidas (rem, %, clamp, minmax).
+   ========================================================================== */
+
+/* Pantallas muy pequeñas */
+@media (max-width: 47.99rem) {
+  }
+
+@media (max-width: 22rem) {
+  .text-tool__metrics,
+  .text-tool__actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tool-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__art {
+    gap: 0.4rem;
+  }
+}
+
+/* Tablet y superiores */
+@media (min-width: 48rem) {
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+
+  .site-header__inner {
+    flex-wrap: nowrap;
+  }
+
+  .site-nav {
+    width: auto;
+    order: 0;
+  }
+
+  .header-actions {
+    width: auto;
+    order: 0;
+  }
+
+  .nav-list {
+    justify-content: flex-start;
+  }
+
+  /* En tablet la barra cabe en una fila solo con texto */
+  .nav-link .icon {
+    display: none;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hero__art {
+    max-width: none;
+  }
+
+  .features__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tools-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+
+
+  .text-tool__actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .text-tool__actions .btn {
+    width: auto;
+  }
+}
+
+/* Escritorio */
+@media (min-width: 64rem) {
+  .site-header__inner {
+    padding-block: 0.8rem;
+  }
+
+  .nav-link .icon {
+    display: block;
+  }
+
+  .tools-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+
+  .text-tool {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-areas:
+      "editor stats"
+      "actions ."
+      "rules rules"
+      "status status";
+  }
+
+  /* Métricas al costado: ocupan desde la etiqueta hasta el borde inferior del editor */
+  .text-tool__metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1 1 auto;
+  }
+
+  .text-tool__metrics .metric {
+    flex: 1 1 0;
+  }
+
+  /* Tamaño fijo: el editor no se estira para igualar la columna de métricas */
+  .text-input,
+  .text-highlight {
+    height: 11rem;
+    min-height: 11rem;
+  }
+
+  .symbol-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+
+
+
+
+
+  .chibi--peek {
+    height: 11rem;
+  }
+
+}
+
+/* Buscar y reemplazar: en escritorio, campos y botón en una sola fila */
+@media (min-width: 64rem) {
+  .replace-rule {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto;
+  }
+}
+
+/* Escritorio amplio */
+@media (min-width: 90rem) {
+  .hero__title {
+    font-size: 4.4rem;
+  }
+}

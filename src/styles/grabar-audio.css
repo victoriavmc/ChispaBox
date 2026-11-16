@@ -1,0 +1,110 @@
+/* Página «Grabar audio» */
+
+[hidden] {
+  display: none !important;
+}
+
+.rec-panel {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1rem, 3vw, 1.75rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.rec-permit p {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+}
+
+.rec-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rec-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.35;
+}
+
+.rec-panel.is-recording .rec-dot {
+  opacity: 1;
+  animation: rec-pulse 1s ease-in-out infinite;
+}
+
+@keyframes rec-pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.rec-timer {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.rec-state {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.rec-canvas {
+  display: block;
+  width: 100%;
+  height: 10rem;
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+}
+
+.rec-controls {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.rec-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.rec-actions .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rec-result {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.rec-audio {
+  width: 100%;
+}
+
+.rec-status {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.rec-error {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec-panel.is-recording .rec-dot {
+    animation: none;
+  }
+}

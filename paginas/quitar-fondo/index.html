@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Quitá el fondo de una imagen directamente en tu navegador."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Quitar fondo de imagen | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Quitar fondo de imagen" subtitulo="Quitá un fondo uniforme con algoritmos clásicos, sin inteligencia artificial. Todo ocurre en tu navegador." personaje="/images/characters/marcos-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="bg-heading">
+          <h2 class="field-label" id="bg-heading">1. Elegí la imagen</h2>
+
+          <div class="tool-req" aria-label="Requisitos de entrada">
+            <p class="tool-req__title">Antes de cargar</p>
+            <ul class="tool-req__list" id="bg-requirements"></ul>
+          </div>
+
+          <div class="tool-dropzone" id="bg-dropzone">
+            <label class="field-label" for="bg-file"
+              >Seleccionar imagen o arrastrar el archivo aquí</label
+            >
+            <input
+              class="bg-file"
+              id="bg-file"
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            />
+            <p class="bg-hint">
+              La imagen no sale de tu equipo. El original nunca se modifica.
+            </p>
+          </div>
+
+          <div class="bg-progress" id="bg-progress-wrap" hidden>
+            <progress></progress>
+            <span id="bg-progress-text"></span>
+          </div>
+
+          <p class="rec-error" id="bg-error" role="alert" hidden></p>
+
+          <dl class="tool-info" id="bg-info" hidden></dl>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="bg-tools-heading">
+          <h2 class="field-label" id="bg-tools-heading">2. Quitá el fondo</h2>
+
+          <fieldset class="tool-methods">
+            <legend class="tool-methods__legend">Método</legend>
+            <label class="tool-method"
+              ><input type="radio" name="bg-method" value="uniform" checked />
+              <span>Fondo uniforme</span></label
+            >
+            <label class="tool-method"
+              ><input type="radio" name="bg-method" value="picker" />
+              <span>Seleccionar color</span></label
+            >
+            <label class="tool-method"
+              ><input type="radio" name="bg-method" value="region" />
+              <span>Región conectada</span></label
+            >
+            <label class="tool-method"
+              ><input type="radio" name="bg-method" value="brush" />
+              <span>Corrección con pincel</span></label
+            >
+          </fieldset>
+
+          <div class="tool-panel" data-bg-panel="uniform">
+            <label class="field-label" for="bg-uniform-color"
+              >Color del fondo</label
+            >
+            <select id="bg-uniform-color" class="tool-select">
+              <option value="auto">Detectar en las esquinas</option>
+              <option value="white">Blanco</option>
+              <option value="black">Negro</option>
+              <option value="green">Verde</option>
+            </select>
+            <p class="tool-note" id="bg-uniform-hint"></p>
+          </div>
+
+          <div class="tool-panel" data-bg-panel="picker" hidden>
+            <p class="tool-note">
+              Tocá la imagen en el color que querés quitar. Después usá
+              «Quitar el color elegido».
+            </p>
+            <p class="tool-swatch-row">
+              <span class="tool-label">Color elegido</span>
+              <span class="tool-swatch" id="bg-picked" aria-hidden="true"></span>
+            </p>
+          </div>
+
+          <div class="tool-panel" data-bg-panel="region" hidden>
+            <p class="tool-note">
+              Tocá una zona del fondo: se quita esa zona y las partes del mismo
+              color que estén conectadas con ella.
+            </p>
+          </div>
+
+          <div class="tool-panel" data-bg-panel="brush" hidden>
+            <label class="field-label" for="bg-brush-mode">Acción</label>
+            <select id="bg-brush-mode" class="tool-select">
+              <option value="erase">Borrar (quitar)</option>
+              <option value="restore">Recuperar (restaurar)</option>
+            </select>
+            <label class="field-label" for="bg-brush-size"
+              >Tamaño del pincel: <span id="bg-brush-size-value">24 px</span></label
+            >
+            <input type="range" id="bg-brush-size" min="2" max="200" value="24" />
+          </div>
+
+          <div class="tool-panel" id="bg-tolerance-wrap">
+            <label class="field-label" for="bg-tolerance"
+              >Tolerancia: <span id="bg-tolerance-value">30</span></label
+            >
+            <input type="range" id="bg-tolerance" min="0" max="100" value="30" />
+            <p class="tool-note">
+              Baja: solo colores casi iguales. Alta: también tonos parecidos.
+            </p>
+          </div>
+
+          <div class="rec-actions tool-actions-end">
+            <button type="button" class="btn btn--ghost" id="bg-restore" disabled>
+              Restaurar todo
+            </button>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="bg-preview-heading">
+          <h2 class="field-label" id="bg-preview-heading">3. Vista previa</h2>
+
+          <div class="tool-zoom" id="bg-stage-wrap" hidden>
+            <div class="tool-zoom__bar">
+              <button type="button" class="btn btn--ghost" id="bg-zoom-out" aria-label="Alejar">Alejar −</button>
+              <span id="bg-zoom-label" aria-live="polite">100 %</span>
+              <button type="button" class="btn btn--ghost" id="bg-zoom-in" aria-label="Acercar">Acercar +</button>
+              <button type="button" class="btn btn--ghost" id="bg-zoom-reset">
+                Ajustar a la pantalla
+              </button>
+            </div>
+            <div class="tool-zoom__scroll" id="bg-zoom-wrap">
+              <div class="tool-stage tool-checker" id="bg-stage">
+                <canvas id="bg-canvas" aria-label="Imagen con el fondo quitado"></canvas>
+                <img id="bg-original" alt="Imagen original" />
+                <div class="tool-split" id="bg-split" aria-hidden="true"></div>
+                <span class="tool-tag tool-tag--left" aria-hidden="true">Resultado</span>
+                <span class="tool-tag tool-tag--right" aria-hidden="true">Original</span>
+              </div>
+            </div>
+            <label class="field-label" for="bg-compare"
+              >Deslizá para comparar: a la izquierda el resultado, a la derecha el original</label
+            >
+            <input type="range" id="bg-compare" min="0" max="100" value="50" />
+            <p class="tool-note">
+              Los cuadros grises y blancos indican transparencia. Tocá la imagen
+              con el pincel o con el cuentagotas según el método elegido.
+            </p>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="bg-export-heading">
+          <h2 class="field-label" id="bg-export-heading">4. Descargar</h2>
+          <div class="tool-export">
+            <label class="field-label" for="bg-format">Formato</label>
+            <select id="bg-format" class="tool-select">
+              <option value="png">PNG · con transparencia</option>
+              <option value="png-solid">PNG · sin transparencia</option>
+              <option value="webp">WebP · con transparencia</option>
+              <option value="webp-solid">WebP · sin transparencia</option>
+              <option value="jpeg">JPG · sin transparencia</option>
+            </select>
+            <div id="bg-jpeg-bg-wrap" hidden>
+              <label class="field-label" for="bg-jpeg-bg"
+                >Color de fondo (para las versiones sin transparencia)</label
+              >
+              <input type="color" id="bg-jpeg-bg" value="#ffffff" />
+              <p class="tool-note">
+                Sin transparencia, las zonas quitadas se rellenan con este color.
+              </p>
+            </div>
+            <p class="tool-note" id="bg-size" aria-live="polite"></p>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="bg-download" disabled>
+                Descargar imagen
+              </button>
+              <button type="button" class="btn btn--ghost" id="bg-reset">
+                Otra imagen
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <p class="rec-status" id="bg-status" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+      <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/quitar-fondo.ts"></script>
+  </body>
+</html>

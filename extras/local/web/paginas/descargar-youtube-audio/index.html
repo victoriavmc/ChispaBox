@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Descarga el audio de un video de YouTube en MP3, M4A, WAV o FLAC, con el nombre Artista - Título." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Descargar música de YouTube | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page yt-page">
+        <!-- @include:encabezado titulo="Descargar música de YouTube" subtitulo="Obtené el audio de un video propio o cuya descarga esté autorizada. El nombre sigue el formato «Artista - Título». Si YouTube no informa el artista, lo escribís vos: no se inventa." personaje="/images/characters/marcos-cutout.webp" -->
+
+        <p class="rec-error yt-unavailable" id="yt-unavailable" role="status" hidden>
+          Esta herramienta no está disponible en este entorno.
+        </p>
+
+        <div id="yt-app" hidden>
+          <section class="rec-panel" aria-labelledby="yt-link-heading">
+            <h2 class="field-label" id="yt-link-heading">1. Enlace del video</h2>
+            <label class="field-label" for="yt-url">Enlace de YouTube</label>
+            <div class="yt-row">
+              <input
+                class="text-input yt-input"
+                id="yt-url"
+                type="url"
+                inputmode="url"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="https://www.youtube.com/watch?v=…"
+              />
+              <button type="button" class="btn btn--primary" id="yt-analyze">Analizar</button>
+            </div>
+            <p class="tool-note">Se aceptan enlaces de youtube.com/watch, m.youtube.com, youtu.be y shorts. No se admiten listas ni canales.</p>
+            <p class="rec-error" id="yt-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" id="yt-info-panel" aria-labelledby="yt-info-heading" hidden>
+            <h2 class="field-label" id="yt-info-heading">2. Información</h2>
+            <dl class="tool-info" id="yt-info"></dl>
+          </section>
+
+          <section class="rec-panel" id="yt-options-panel" aria-labelledby="yt-opt-heading" hidden>
+            <h2 class="field-label" id="yt-opt-heading">3. Artista, título y formato</h2>
+
+            <div class="tool-panel">
+              <label class="field-label" for="yt-artist">Artista</label>
+              <input class="text-input yt-input" id="yt-artist" type="text" maxlength="200" autocomplete="off" />
+              <p class="yt-hint" id="yt-artist-hint" hidden>
+                No se detectó un artista fiable. Escribilo si querés que aparezca en el nombre.
+              </p>
+            </div>
+
+            <div class="tool-panel">
+              <label class="field-label" for="yt-title">Título de la canción</label>
+              <input class="text-input yt-input" id="yt-title" type="text" maxlength="200" autocomplete="off" />
+            </div>
+
+            <div class="tool-panel">
+              <label class="field-label" for="yt-format">Formato de audio</label>
+              <select id="yt-format" class="tool-select"></select>
+              <p class="tool-note" id="yt-format-note"></p>
+            </div>
+
+            <div class="tool-panel" id="yt-quality-wrap" hidden>
+              <label class="field-label" for="yt-quality">Calidad (no supera la del origen)</label>
+              <select id="yt-quality" class="tool-select"></select>
+            </div>
+
+            <div class="tool-panel">
+              <p class="tool-note yt-size" id="yt-size" aria-live="polite"></p>
+            </div>
+
+            <div class="tool-panel">
+              <p class="field-label">Nombre del archivo</p>
+              <p class="tool-note">
+                Nombre final:
+                <strong class="yt-final-name" id="yt-final-name"></strong>
+              </p>
+            </div>
+          </section>
+
+          <section class="rec-panel" id="yt-run-panel" aria-labelledby="yt-run-heading" hidden>
+            <h2 class="field-label" id="yt-run-heading">4. Descargar y guardar</h2>
+
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="yt-download" disabled>Descargar audio</button>
+              <button type="button" class="btn btn--ghost" id="yt-cancel" hidden>Cancelar</button>
+            </div>
+
+            <div class="bg-progress" id="yt-progress-wrap" hidden>
+              <progress id="yt-progress" max="100" value="0"></progress>
+              <span id="yt-progress-text"></span>
+            </div>
+          </section>
+
+          <p class="rec-status" id="yt-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/extras/local/web/scripts/descargar-youtube-audio.ts"></script>
+  </body>
+</html>

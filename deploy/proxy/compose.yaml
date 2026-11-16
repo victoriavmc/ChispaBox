@@ -1,0 +1,49 @@
+# Proxy compartido del VPS (Caddy). Proyecto Compose independiente de ChispaBox.
+# Propuesta para revisión: NO desplegar hasta aprobar el plan.
+# Ruta prevista en el VPS: /opt/proxy/compose.yaml
+
+name: proxy
+
+services:
+  caddy:
+    # Fijar versión exacta y, tras revisarla, el digest (image@sha256:...).
+    image: caddy:2.10-alpine
+    container_name: proxy-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"        # HTTP/3
+    env_file:
+      - ./.env               # CHISPABOX_DOMAIN, ACME_EMAIL (sin secretos)
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data     # certificados ACME: no borrar
+      - caddy_config:/config
+    networks:
+      - edge
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE     # solo para escuchar en 80/443
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  edge:
+    name: edge               # red compartida: cada sitio se une a ella con su propio servicio web
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

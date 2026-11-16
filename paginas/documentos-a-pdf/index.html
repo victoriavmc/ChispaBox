@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Convierte documentos Word, Excel y PowerPoint a PDF con LibreOffice local, e imágenes JPG, PNG y WebP a PDF en tu navegador."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Documentos a PDF | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Documentos a PDF" subtitulo="Elegí el tipo de origen. Las imágenes se convierten en tu navegador. Word, Excel y PowerPoint se convierten con LibreOffice en el servidor de esta aplicación, sin servicios externos. Los originales nunca se modifican." personaje="/images/characters/florencia-cutout.webp" -->
+
+        <div class="doc-tabs" role="tablist" aria-label="Tipo de documento de origen">
+          <button type="button" role="tab" class="doc-tab" id="doc-tab-word" aria-selected="true" aria-controls="panel-oficina" data-tipo="word">Word</button>
+          <button type="button" role="tab" class="doc-tab" id="doc-tab-excel" aria-selected="false" aria-controls="panel-oficina" data-tipo="excel" tabindex="-1">Excel</button>
+          <button type="button" role="tab" class="doc-tab" id="doc-tab-powerpoint" aria-selected="false" aria-controls="panel-oficina" data-tipo="powerpoint" tabindex="-1">PowerPoint</button>
+          <button type="button" role="tab" class="doc-tab" id="doc-tab-imagenes" aria-selected="false" aria-controls="panel-imagenes" data-tipo="imagenes" tabindex="-1">Imágenes</button>
+        </div>
+
+        <!-- ===================== Word, Excel y PowerPoint (LibreOffice en el servidor) ===================== -->
+        <div id="panel-oficina" role="tabpanel" aria-labelledby="doc-tab-word" class="doc-panel">
+          <h2 class="doc-panel__title" id="ofi-heading">Word a PDF</h2>
+
+          <section class="rec-panel" aria-labelledby="ofi-sel-heading">
+            <h3 class="field-label" id="ofi-sel-heading">1. Seleccionar el documento</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="ofi-requirements"></ul>
+            </div>
+            <p class="rec-error" id="ofi-unavailable" hidden></p>
+            <div class="tool-dropzone" id="ofi-dropzone">
+              <label class="field-label" for="ofi-file">Seleccionar un documento o arrastrarlo aquí</label>
+              <input class="bg-file" id="ofi-file" type="file" accept=".docx,.doc" />
+            </div>
+            <p class="rec-error" id="ofi-error" role="alert" hidden></p>
+            <dl class="tool-info" id="ofi-info" hidden></dl>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ofi-opt-heading">
+            <h3 class="field-label" id="ofi-opt-heading">2. Opciones</h3>
+            <p class="tool-note" id="ofi-kind-note"></p>
+            <div id="ofi-options" class="tool-panel" hidden>
+              <label class="field-label" for="ofi-orientation">Orientación</label>
+              <select id="ofi-orientation" class="tool-select">
+                <option value="original">Según el libro</option>
+                <option value="vertical">Vertical</option>
+                <option value="horizontal">Horizontal</option>
+              </select>
+              <label class="field-label" for="ofi-paper">Tamaño de página</label>
+              <select id="ofi-paper" class="tool-select">
+                <option value="original">Según el libro</option>
+                <option value="a4">A4</option>
+                <option value="letter">Carta</option>
+                <option value="legal">Oficio/Legal</option>
+              </select>
+              <label class="field-label" for="ofi-fit">Escala</label>
+              <select id="ofi-fit" class="tool-select">
+                <option value="original">Conservar la escala original</option>
+                <option value="ancho">Ajustar todas las columnas al ancho de la página</option>
+              </select>
+              <p class="tool-note">Las hojas se exportan con su área de impresión. Las macros no se ejecutan y los datos externos no se actualizan.</p>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ofi-run-heading">
+            <h3 class="field-label" id="ofi-run-heading">3. Convertir y descargar</h3>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="ofi-run" disabled>Convertir a PDF</button>
+              <button type="button" class="btn btn--ghost" id="ofi-cancel" hidden>Cancelar</button>
+              <button type="button" class="btn btn--ghost" id="ofi-clear">Otro documento</button>
+            </div>
+            <div class="bg-progress doc-progress" id="ofi-progress-wrap" hidden>
+              <progress aria-labelledby="ofi-progress-text"></progress>
+              <span id="ofi-progress-text"></span>
+            </div>
+            <div class="doc-result" id="ofi-results" hidden></div>
+            <div class="doc-viewer" id="ofi-viewer" hidden></div>
+          </section>
+
+          <p class="rec-status" id="ofi-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <!-- ===================== Imágenes a PDF (navegador) ===================== -->
+        <div id="panel-imagenes" role="tabpanel" aria-labelledby="doc-tab-imagenes" class="doc-panel" hidden>
+          <h2 class="doc-panel__title">Imágenes a PDF</h2>
+
+          <section class="rec-panel" aria-labelledby="img-sel-heading">
+            <h3 class="field-label" id="img-sel-heading">1. Seleccionar las imágenes</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="img-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="img-dropzone">
+              <label class="field-label" for="img-file">Seleccionar una o varias imágenes, o arrastrarlas aquí</label>
+              <input class="bg-file" id="img-file" type="file" multiple accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
+            </div>
+            <p class="rec-error" id="img-error" role="alert" hidden></p>
+
+            <h3 class="field-label doc-subheading">2. Orden y validación</h3>
+            <p class="tool-note">Arrastrá una fila para cambiar el orden, o usá Subir y Bajar. En «PDF único» cada imagen ocupa una página en este orden.</p>
+            <dl class="tool-info" id="img-summary" hidden></dl>
+            <ol class="img-list" id="img-list" hidden></ol>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="img-opt-heading">
+            <h3 class="field-label" id="img-opt-heading">3. Opciones</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="img-mode">Salida</label>
+              <select id="img-mode" class="tool-select">
+                <option value="unico">Un único PDF con todas las imágenes</option>
+                <option value="separados">Un PDF por imagen</option>
+              </select>
+              <label class="field-label" for="img-size">Tamaño de página</label>
+              <select id="img-size" class="tool-select">
+                <option value="a4">A4</option>
+                <option value="letter">Carta</option>
+                <option value="legal">Oficio/Legal</option>
+                <option value="ajustado">Ajustado a la imagen</option>
+              </select>
+              <label class="field-label" for="img-orientation">Orientación</label>
+              <select id="img-orientation" class="tool-select">
+                <option value="automatica">Automática (según la imagen)</option>
+                <option value="vertical">Vertical</option>
+                <option value="horizontal">Horizontal</option>
+              </select>
+              <label class="field-label" for="img-margin">Márgenes</label>
+              <select id="img-margin" class="tool-select">
+                <option value="normal">Normales (0,5 in)</option>
+                <option value="reducido">Reducidos (1/6 in)</option>
+                <option value="ninguno">Sin márgenes</option>
+              </select>
+              <label class="field-label" for="img-fit">Ajuste de la imagen</label>
+              <select id="img-fit" class="tool-select">
+                <option value="ajustar">Ajustar (imagen completa)</option>
+                <option value="rellenar">Rellenar (recorta bordes)</option>
+                <option value="original">Tamaño original o proporcional</option>
+              </select>
+              <p class="tool-note" id="img-fit-note"></p>
+            </div>
+            <div class="tool-panel" id="img-bg-wrap">
+              <label class="field-label" for="img-bg">Color de fondo para la transparencia</label>
+              <input type="color" id="img-bg" value="#ffffff" />
+              <p class="tool-note">Por defecto, blanco. Las zonas transparentes de PNG y WebP se pintan con este color.</p>
+            </div>
+            <h3 class="field-label doc-subheading">Vista previa</h3>
+            <p class="tool-note">Es la misma distribución que se exporta.</p>
+            <div id="img-preview" hidden></div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="img-run-heading">
+            <h3 class="field-label" id="img-run-heading">4. Convertir y descargar</h3>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="img-run" disabled>Convertir a PDF</button>
+              <button type="button" class="btn btn--ghost" id="img-cancel" hidden>Cancelar</button>
+              <button type="button" class="btn btn--ghost" id="img-clear">Quitar todas</button>
+            </div>
+            <div class="bg-progress doc-progress" id="img-progress-wrap" hidden>
+              <progress id="img-progress" max="1" value="0"></progress>
+              <span id="img-progress-text"></span>
+            </div>
+            <div class="doc-result" id="img-results" hidden></div>
+            <div class="doc-viewer" id="img-viewer" hidden></div>
+          </section>
+
+          <p class="rec-status" id="img-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/documentos-pdf.ts"></script>
+  </body>
+</html>

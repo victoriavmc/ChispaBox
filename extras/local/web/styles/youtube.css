@@ -1,0 +1,262 @@
+/* Ajustes de las páginas de descarga de YouTube. Reutiliza las clases de image-tools.css. */
+
+.yt-page [hidden] {
+  display: none !important;
+}
+
+.yt-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.yt-input {
+  flex: 1 1 260px;
+  min-width: 0;
+  width: 100%;
+}
+
+.yt-row .btn {
+  flex: 0 0 auto;
+}
+
+.yt-final-name {
+  display: block;
+  margin-top: 0.35rem;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+.yt-hint {
+  margin-top: 0.35rem;
+  color: var(--text-muted, inherit);
+  font-size: 0.9rem;
+}
+
+.yt-unavailable {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px dashed currentColor;
+  text-align: center;
+}
+
+/* ---- Diseño de formularios de las páginas de descarga ---- */
+
+/* Títulos de cada paso: visibles y separados del contenido. */
+.yt-page .rec-panel > .field-label:first-child {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* Campos de texto: caja visible (no el estilo de área de texto del contador). */
+.yt-page input.yt-input {
+  box-sizing: border-box;
+  align-self: start;
+  width: 100%;
+  height: 2.9rem;
+  min-height: 2.9rem;
+  max-height: 2.9rem;
+  margin: 0;
+  padding: 0.7rem 0.95rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition:
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
+}
+
+.yt-page input.yt-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
+.yt-page input.yt-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-ring) 35%, transparent);
+}
+
+.yt-page input.yt-input:disabled,
+.yt-page select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Fila de enlace + botón: el campo ocupa el espacio disponible. */
+.yt-row {
+  align-items: center;
+}
+
+.yt-row .btn {
+  align-self: center;
+  min-height: 2.9rem;
+  padding-inline: 1.4rem;
+}
+
+/* Selectores: mismo alto y bordes que los campos. */
+.yt-page .tool-select {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 30rem;
+  min-height: 2.9rem;
+  font-size: 1rem;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.yt-page .tool-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-ring) 35%, transparent);
+}
+
+/* Bloques de opción con separación uniforme. */
+.yt-page .tool-panel {
+  gap: 0.45rem;
+}
+
+.yt-page .tool-panel .field-label {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+/* Nombre final destacado. */
+.yt-page .yt-final-name {
+  display: block;
+  margin-top: 0.3rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+}
+
+/* Tamaño aproximado: resaltado como dato clave. */
+.yt-page .yt-size {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Información del video en tarjeta. */
+.yt-page .tool-info {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.yt-page .yt-hint {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* Barra de progreso y estado con más presencia. */
+.yt-page .bg-progress progress {
+  height: 0.6rem;
+}
+
+.yt-page .rec-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Botones de acción alineados y con el mismo tamaño. */
+.yt-page .rec-actions .btn {
+  min-height: 2.9rem;
+  padding-inline: 1.3rem;
+}
+
+@media (max-width: 640px) {
+  .yt-page .tool-select {
+    max-width: none;
+  }
+
+  .yt-row .btn {
+    width: 100%;
+  }
+}
+
+/* ---- Página de playlists y lotes ---- */
+
+.yt-page textarea.yt-textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 7rem;
+  padding: 0.7rem 0.95rem;
+  font: inherit;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+}
+
+.yt-page textarea.yt-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-ring) 35%, transparent);
+}
+
+.yt-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 22rem;
+  overflow: auto;
+}
+
+.yt-list__item {
+  padding: 0.6rem 0.8rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.yt-list__label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.yt-list__label input {
+  margin-top: 0.25rem;
+}
+
+.yt-list__text {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.yt-list__text strong {
+  overflow-wrap: anywhere;
+}
+
+.yt-list__text small {
+  color: var(--text-muted);
+}
+
+.yt-notes {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+}

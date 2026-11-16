@@ -1,0 +1,6 @@
+Diccionario español para corrección ortográfica (es_ES, versión 2.8, de LibreOffice/Apache OpenOffice; autor original Santiago Bosio).
+Empaquetado para npm: dictionary-es 4.0.0 (Titus Wormer, repositorio wooorm/dictionaries).
+
+Licencia elegida por ChispaBox: MPL-1.1 (Mozilla Public License 1.1), entre las tres que ofrece el propio diccionario
+(GPL-3.0 o posterior, LGPL-3.0 o posterior, MPL-1.1 o posterior). Texto completo: LICENSE-MPL-1.1.txt.
+Texto original de la licencia del diccionario: LICENSE-dictionary-es.

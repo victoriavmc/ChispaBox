@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Reconoce texto de fotos o documentos escaneados (OCR) en tu navegador, sin IA en la nube ni servicios externos. Copiá el texto o exportalo a TXT o DOCX."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>OCR de documentos | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="OCR de documentos" subtitulo="Reconoce el texto de una foto o de un documento escaneado. El reconocimiento corre en tu propio navegador: el archivo no se sube a ningún servidor. Revisá el texto antes de usarlo, sobre todo si la imagen es borrosa." personaje="/images/characters/miles-cutout.webp" -->
+
+        <div id="panel-ocr" class="doc-panel">
+          <h2 class="doc-panel__title">Reconocer texto</h2>
+
+          <section class="rec-panel" aria-labelledby="ocr-sel-heading">
+            <h3 class="field-label" id="ocr-sel-heading">1. Seleccionar la imagen o el PDF</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="ocr-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="ocr-dropzone">
+              <label class="field-label" for="ocr-file">Seleccionar una imagen o un PDF, o arrastrarlo aquí</label>
+              <input
+                class="bg-file"
+                id="ocr-file"
+                type="file"
+                accept=".jpg,.jpeg,.png,.webp,.pdf,image/jpeg,image/png,image/webp,application/pdf"
+              />
+            </div>
+            <p class="rec-error" id="ocr-error" role="alert" hidden></p>
+            <dl class="tool-info" id="ocr-info" hidden></dl>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ocr-opt-heading">
+            <h3 class="field-label" id="ocr-opt-heading">2. Idioma del texto</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="ocr-lang">Idioma</label>
+              <select id="ocr-lang" class="tool-select">
+                <option value="spa" selected>Español</option>
+                <option value="eng">Inglés</option>
+                <option value="spa+eng">Español e inglés (documentos mixtos)</option>
+              </select>
+              <p class="tool-note">Elegí el idioma del documento: mejora mucho el resultado.</p>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ocr-run-heading">
+            <h3 class="field-label" id="ocr-run-heading">3. Reconocer el texto</h3>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="ocr-run" disabled>Reconocer texto</button>
+              <button type="button" class="btn btn--ghost" id="ocr-cancel" hidden>Cancelar</button>
+              <button type="button" class="btn btn--ghost" id="ocr-clear">Otro archivo</button>
+            </div>
+            <div class="bg-progress doc-progress" id="ocr-progress-wrap" hidden>
+              <progress id="ocr-progress" max="1" value="0" aria-labelledby="ocr-progress-text"></progress>
+              <span id="ocr-progress-text"></span>
+            </div>
+          </section>
+
+          <section class="rec-panel" id="ocr-results-section" aria-labelledby="ocr-result-heading">
+            <div class="doc-result" id="ocr-results" hidden>
+              <div class="ocr-result-head">
+                <h3 class="field-label" id="ocr-result-heading">4. Comparar con el original</h3>
+              </div>
+              <div class="ocr-compare">
+                <figure class="ocr-preview" aria-labelledby="ocr-preview-caption">
+                  <figcaption class="field-label" id="ocr-preview-caption">Original</figcaption>
+                  <img
+                    id="ocr-preview-img"
+                    class="ocr-preview__media"
+                    alt="Vista previa de la imagen cargada"
+                    hidden
+                  />
+                  <canvas
+                    id="ocr-preview-canvas"
+                    class="ocr-preview__media"
+                    role="img"
+                    aria-label="Vista previa de la página del PDF"
+                    hidden
+                  ></canvas>
+                  <div class="ocr-preview__nav" id="ocr-preview-nav" hidden>
+                    <button type="button" class="btn btn--ghost" id="ocr-prev">Anterior</button>
+                    <span id="ocr-preview-label" aria-live="polite"></span>
+                    <button type="button" class="btn btn--ghost" id="ocr-next">Siguiente</button>
+                  </div>
+                </figure>
+                <div class="ocr-text-block">
+                  <label class="field-label" for="ocr-text">Texto reconocido: podés corregirlo antes de copiarlo o exportarlo</label>
+                  <textarea
+                    id="ocr-text"
+                    class="ocr-text"
+                    spellcheck="true"
+                    rows="14"
+                    placeholder="Acá aparece el texto cuando termina el reconocimiento."
+                  ></textarea>
+                  <div class="ocr-result-actions">
+                    <button type="button" class="btn btn--primary" id="ocr-copy">Copiar texto</button>
+                    <button type="button" class="btn btn--ghost" id="ocr-txt">Descargar TXT</button>
+                    <button type="button" class="btn btn--ghost" id="ocr-docx">Descargar DOCX</button>
+                  </div>
+                  <p class="ocr-note">
+                    El texto lo genera un programa y puede tener errores. Compará cada parte con la vista previa antes de usarlo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <p class="rec-status" id="ocr-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/extras/local/web/scripts/ocr-documentos.ts"></script>
+  </body>
+</html>

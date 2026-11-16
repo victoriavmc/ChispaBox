@@ -1,0 +1,33 @@
+# Desarrollo local de la imagen de producción (sin Caddy ni formulario).
+# Para el VPS se usa deploy/proxy y deploy/chispabox.
+name: mi-pagina-herramientas
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chispabox-web:1.0.1
+    container_name: mi-pagina-herramientas
+    ports:
+      - "127.0.0.1:8080:8080"   # solo local; nginx escucha en 8080 sin root
+    restart: unless-stopped
+    user: "101:101"
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s

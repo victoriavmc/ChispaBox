@@ -1,0 +1,9 @@
+node_modules
+*.log
+# Secretos y entorno local: nunca en la imagen
+.env
+.env.*
+*.env
+!*.env.example
+# Pruebas locales (sink SMTP de desarrollo y sus dependencias)
+pruebas

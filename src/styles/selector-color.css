@@ -1,0 +1,80 @@
+/* Estilos de «Selector de color»: imagen clicable, coordenadas y valores. */
+
+.color-stage {
+  display: flex;
+  justify-content: center;
+  margin: 0.75rem 0;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.color-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+.color-canvas:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.color-coords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.color-coord {
+  width: 7rem;
+}
+
+.color-result {
+  display: grid;
+  gap: 1rem;
+}
+
+.color-swatch {
+  width: 100%;
+  max-width: 14rem;
+  height: 6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: #808080;
+}
+
+.color-values {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  margin: 0;
+}
+
+.color-values dt {
+  font-weight: 600;
+}
+
+.color-values dd {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.color-values button {
+  min-height: 2.4rem;
+}
+
+@media (max-width: 30rem) {
+  .color-values {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Calcula el SHA-256 de un archivo y compáralo con el hash esperado para comprobar si cambió. Todo en tu navegador, sin subir archivos."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Verificador de integridad | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+          <!-- @include:encabezado titulo="Verificador de integridad" subtitulo="Calcula el SHA-256 de un archivo y compáralo con el hash que te pasaron para saber si cambió. El archivo se procesa en tu navegador: no se sube a ningún servidor." personaje="/images/characters/miles-cutout.webp" -->
+
+          <div id="panel-integridad" class="doc-panel">
+            <h2 class="doc-panel__title">Verificar un archivo</h2>
+
+            <section class="rec-panel" aria-labelledby="integ-sel-heading">
+              <h3 class="field-label" id="integ-sel-heading">1. Elegir el archivo</h3>
+              <div class="tool-req" aria-label="Requisitos de entrada">
+                <p class="tool-req__title">Antes de cargar</p>
+                <ul class="tool-req__list">
+                  <li>Cualquier tipo de archivo.</li>
+                  <li>Tamaño máximo: 500 MB.</li>
+                  <li>El archivo no se sube: el hash se calcula en tu navegador.</li>
+                </ul>
+              </div>
+              <div class="tool-dropzone" id="integ-dropzone">
+                <label class="field-label" for="integ-file">Seleccionar un archivo o arrastrarlo aquí</label>
+                <input class="bg-file" id="integ-file" type="file" />
+              </div>
+              <p class="rec-error" id="integ-error" role="alert" hidden></p>
+            </section>
+
+            <section class="rec-panel" aria-labelledby="integ-hash-heading">
+              <h3 class="field-label" id="integ-hash-heading">2. Hash SHA-256 calculado</h3>
+              <p class="verificador-hash" id="integ-hash" aria-live="polite">Todavía no elegiste un archivo.</p>
+              <div>
+                <button type="button" class="btn btn--ghost" id="integ-copy" disabled>Copiar hash</button>
+              </div>
+              <p class="tool-note" id="integ-copy-status" role="status" aria-live="polite"></p>
+            </section>
+
+            <section class="rec-panel" aria-labelledby="integ-cmp-heading">
+              <h3 class="field-label" id="integ-cmp-heading">3. Comparar con el hash esperado</h3>
+              <label class="field-label" for="integ-expected">Pegá el hash SHA-256 que te dieron (opcional)</label>
+              <input
+                class="tool-select verificador-input"
+                id="integ-expected"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                maxlength="200"
+                placeholder="64 caracteres hexadecimales"
+                aria-describedby="integ-cmp-hint"
+              />
+              <p class="tool-note" id="integ-cmp-hint">Se ignoran mayúsculas, espacios y saltos de línea.</p>
+              <p class="verificador-result" id="integ-result" role="status" aria-live="polite" hidden></p>
+            </section>
+
+            <p class="rec-status" id="integ-status" role="status" aria-live="polite"></p>
+          </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/verificador-integridad.ts"></script>
+  </body>
+</html>

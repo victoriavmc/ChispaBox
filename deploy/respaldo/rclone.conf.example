@@ -1,0 +1,12 @@
+# Plantilla de configuración de rclone para Cloudflare R2. Copiar a ~/.config/rclone/rclone.conf EN EL VPS
+# (permisos 600) y completar allí. Los valores de ejemplo NO son reales.
+# Crear el token de acceso en el panel de Cloudflare R2, con permiso solo sobre el bucket de respaldos.
+
+[r2]
+type = s3
+provider = Cloudflare
+access_key_id = <ID-DE-CLAVE-DE-ACCESO-R2>
+secret_access_key = <SECRETO-DE-CLAVE-DE-ACCESO-R2>
+endpoint = https://<ID-DE-CUENTA>.r2.cloudflarestorage.com
+acl = private
+region = auto

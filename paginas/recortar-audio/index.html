@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Recortá un audio eligiendo el inicio y el final. Se procesa en tu navegador con Web Audio: el audio no se sube a ningún servidor."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Recortar audio | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Recortar audio" subtitulo="Elegí el inicio y el final de un audio y descargá solo esa parte. Todo se procesa en tu navegador con Web Audio: el audio no se sube a ningún servidor y el original no se modifica." personaje="/images/characters/marcos-cutout.webp" -->
+
+        <div id="panel-recortar-audio" class="doc-panel">
+          <h2 class="doc-panel__title">Recortar un audio</h2>
+
+          <section class="rec-panel" aria-labelledby="ra-sel-heading">
+            <h3 class="field-label" id="ra-sel-heading">1. Elegir el audio</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de elegir</p>
+              <ul class="tool-req__list">
+                <li>Hasta 100 MB y 60 minutos de duración.</li>
+                <li>Formatos que tu navegador pueda leer (MP3, WAV, OGG, M4A, WebM).</li>
+              </ul>
+            </div>
+            <div class="tool-dropzone" id="ra-dropzone">
+              <label class="field-label" for="ra-file">Seleccionar un audio o arrastrarlo aquí</label>
+              <input class="bg-file" id="ra-file" type="file" accept="audio/*" />
+            </div>
+            <p class="tool-note" id="ra-info" hidden></p>
+            <p class="rec-error" id="ra-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ra-rango-heading">
+            <h3 class="field-label" id="ra-rango-heading">2. Elegir la parte a conservar</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="ra-inicio">Inicio (m:ss o m:ss,d)</label>
+              <input class="tool-select" id="ra-inicio" type="text" inputmode="decimal" autocomplete="off" placeholder="0:00.0" disabled />
+            </div>
+            <div class="tool-panel">
+              <label class="field-label" for="ra-fin">Final (m:ss o m:ss,d)</label>
+              <input class="tool-select" id="ra-fin" type="text" inputmode="decimal" autocomplete="off" placeholder="0:00.0" disabled />
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--soft" id="ra-escuchar" disabled>Escuchar la selección</button>
+              <button type="button" class="btn btn--ghost" id="ra-parar" disabled>Detener</button>
+            </div>
+            <p class="rec-status" id="ra-rango-msg" role="status" aria-live="polite"></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ra-run-heading">
+            <h3 class="field-label" id="ra-run-heading">3. Formato y descarga</h3>
+            <fieldset class="tool-panel">
+              <legend class="field-label">Formato del archivo</legend>
+              <label class="tool-radio">
+                <input type="radio" name="ra-formato" id="ra-formato-mp3" value="mp3" checked />
+                MP3 (128 kbps, más liviano)
+              </label>
+              <label class="tool-radio">
+                <input type="radio" name="ra-formato" id="ra-formato-wav" value="wav" />
+                WAV (sin compresión, más pesado)
+              </label>
+            </fieldset>
+            <div class="tool-panel">
+              <label class="field-label" for="ra-nombre">Nombre del archivo (sin extensión)</label>
+              <input class="tool-select" id="ra-nombre" type="text" maxlength="120" autocomplete="off" disabled />
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="ra-run" disabled>Recortar y descargar</button>
+              <button type="button" class="btn btn--ghost" id="ra-clear" disabled>Quitar audio</button>
+            </div>
+            <div class="doc-result" id="ra-results" hidden></div>
+          </section>
+
+          <p class="rec-status" id="ra-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/recortar-audio.ts"></script>
+  </body>
+</html>

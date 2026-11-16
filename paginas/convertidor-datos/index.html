@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Convierte CSV a JSON, JSON a CSV, XML a JSON y Excel a CSV en tu navegador, sin subir archivos."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Convertidor de datos | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Convertidor de datos" subtitulo="Convierte CSV a JSON, JSON a CSV, XML a JSON, Excel a CSV y CSV a Excel. Todo se procesa en tu navegador: el archivo no se sube a ningún servidor." personaje="/images/characters/vale-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="dat-tipo-heading">
+          <h2 class="field-label" id="dat-tipo-heading">1. Elegí la conversión</h2>
+          <select id="dat-modo" class="tool-select">
+            <option value="csv-json">CSV a JSON</option>
+            <option value="json-csv">JSON a CSV</option>
+            <option value="xml-json">XML a JSON</option>
+            <option value="xlsx-csv">Excel (.xlsx) a CSV</option>
+            <option value="csv-xlsx">CSV a Excel (.xlsx)</option>
+          </select>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="dat-load-heading">
+          <h2 class="field-label" id="dat-load-heading">2. Elegí el archivo</h2>
+
+          <div class="tool-req" aria-label="Requisitos de entrada">
+            <p class="tool-req__title">Antes de cargar</p>
+            <ul class="tool-req__list" id="dat-requirements"></ul>
+          </div>
+
+          <div class="tool-dropzone" id="dat-dropzone">
+            <label class="field-label" for="dat-file">Seleccionar un archivo o arrastrarlo aquí</label>
+            <input class="bg-file" id="dat-file" type="file" />
+          </div>
+
+          <p class="rec-error" id="dat-error" role="alert" hidden></p>
+          <p class="tool-note" id="dat-file-info" hidden></p>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="dat-opt-heading">
+          <h2 class="field-label" id="dat-opt-heading">3. Opciones</h2>
+
+          <div class="tool-panel" id="dat-opt-csv-in" hidden>
+            <label class="field-label" for="dat-csv-delim">Separador del CSV de entrada</label>
+            <select id="dat-csv-delim" class="tool-select">
+              <option value="auto">Detectar automáticamente</option>
+              <option value=",">Coma ( , )</option>
+              <option value=";">Punto y coma ( ; )</option>
+              <option value="&#9;">Tabulador</option>
+              <option value="|">Barra vertical ( | )</option>
+            </select>
+            <label class="tool-method"
+              ><input type="checkbox" id="dat-csv-header" checked />
+              <span>La primera fila son los nombres de las columnas</span></label
+            >
+          </div>
+
+          <div class="tool-panel" id="dat-opt-xlsx" hidden>
+            <label class="field-label" for="dat-sheet">Hoja del libro</label>
+            <select id="dat-sheet" class="tool-select" disabled>
+              <option value="">Elegí un archivo primero</option>
+            </select>
+          </div>
+
+          <div class="tool-panel" id="dat-opt-csv-out" hidden>
+            <label class="field-label" for="dat-out-delim">Separador del CSV de salida</label>
+            <select id="dat-out-delim" class="tool-select">
+              <option value=",">Coma ( , )</option>
+              <option value=";">Punto y coma ( ; )</option>
+              <option value="&#9;">Tabulador</option>
+            </select>
+          </div>
+
+          <div class="tool-panel" id="dat-opt-protect" hidden>
+            <label class="tool-method"
+              ><input type="checkbox" id="dat-protect" checked />
+              <span>Proteger contra fórmulas en Excel</span></label
+            >
+            <p class="tool-note">
+              Agrega una comilla delante de las celdas que empiezan con = + - @. Así Excel no las ejecuta como fórmulas.
+            </p>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="dat-run-heading">
+          <h2 class="field-label" id="dat-run-heading">4. Convertir y descargar</h2>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--primary" id="dat-run" disabled>Convertir</button>
+            <button type="button" class="btn btn--ghost" id="dat-clear">Otro archivo</button>
+          </div>
+
+          <p class="rec-status" id="dat-status" role="status" aria-live="polite"></p>
+
+          <div id="dat-result" hidden>
+            <p class="tool-note" id="dat-result-meta"></p>
+            <ul class="tool-req__list" id="dat-warnings" hidden></ul>
+            <label class="field-label" for="dat-output">Vista previa del resultado</label>
+            <textarea id="dat-output" class="dat-output" rows="12" readonly spellcheck="false"></textarea>
+            <p class="tool-note" id="dat-preview-note" hidden></p>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="dat-download">Descargar</button>
+              <button type="button" class="btn btn--ghost" id="dat-copy">Copiar</button>
+            </div>
+            <p class="tool-note" id="dat-copy-status" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/convertidor-datos.ts"></script>
+  </body>
+</html>

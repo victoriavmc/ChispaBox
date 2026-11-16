@@ -1,0 +1,142 @@
+<div class="text-tool">
+  <div class="text-tool__editor">
+    <label class="field-label" for="text-input">Texto a analizar</label>
+    <div class="text-input-wrap">
+      <div class="text-highlight" id="text-highlight" aria-hidden="true"></div>
+      <textarea
+        class="text-input"
+        id="text-input"
+        rows="8"
+        placeholder="Escribí o pegá tu texto acá..."
+        spellcheck="true"
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="text-tool__stats" aria-labelledby="stats-title">
+    <p class="field-label" id="stats-title">Resultados</p>
+    <div class="text-tool__metrics">
+      <div class="metric">
+        <span class="metric__icon" aria-hidden="true"><svg class="icon"><use href="#i-note"/></svg></span>
+        <div class="metric__body">
+          <span class="metric__label" id="word-label">Palabras</span>
+          <output class="metric__value" id="word-count" for="text-input" aria-labelledby="word-label">0</output>
+        </div>
+      </div>
+      <div class="metric">
+        <span class="metric__icon metric__icon--text" aria-hidden="true">Aa</span>
+        <div class="metric__body">
+          <span class="metric__label" id="char-label">Caracteres (con espacios)</span>
+          <output class="metric__value" id="char-count" for="text-input" aria-labelledby="char-label">0</output>
+        </div>
+      </div>
+      <div class="metric" id="nospace-metric">
+        <span class="metric__icon metric__icon--text" aria-hidden="true">Aa</span>
+        <div class="metric__body">
+          <span class="metric__label" id="nospace-label">Caracteres (sin espacios)</span>
+          <output class="metric__value" id="nospace-count" for="text-input" aria-labelledby="nospace-label">0</output>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-tool__actions" role="group" aria-label="Acciones sobre el texto">
+    <button type="button" class="btn btn--primary" id="btn-count">
+      <svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>Contar
+    </button>
+    <button type="button" class="btn btn--soft" id="btn-clean">
+      <svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>Limpiar texto
+    </button>
+    <button type="button" class="btn btn--soft" id="btn-undo" disabled>
+      <svg class="icon" aria-hidden="true"><use href="#i-undo"/></svg>Deshacer
+    </button>
+    <button type="button" class="btn btn--soft" id="btn-clear">
+      <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Borrar
+    </button>
+    <button type="button" class="btn btn--soft" id="btn-copy">
+      <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copiar
+    </button>
+  </div>
+
+  <details class="clean-rules">
+    <summary class="clean-rules__summary">Reglas de limpieza</summary>
+    <div class="clean-rules__body">
+      <section class="rules-group" aria-labelledby="rules-fillers-title">
+        <h4 class="rules-group__title" id="rules-fillers-title">Muletillas</h4>
+        <label class="check">
+          <input type="checkbox" id="rule-fillers" checked />
+          <span>Eliminar muletillas</span>
+        </label>
+        <div class="field">
+          <label class="field-label" for="fillers-list">Muletillas a eliminar (separadas por coma)</label>
+          <input class="text-field" type="text" id="fillers-list" value="eh, ehm, em, emm, ajá, mmm" autocomplete="off" />
+        </div>
+      </section>
+
+      <section class="rules-group" aria-labelledby="rules-symbols-title">
+        <h4 class="rules-group__title" id="rules-symbols-title">Caracteres especiales</h4>
+        <div class="symbol-grid">
+          <label class="check">
+            <input type="checkbox" id="rule-hashes" checked />
+            <span>Eliminar #</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="rule-asterisks" checked />
+            <span>Eliminar asteriscos (*)</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="rule-underscores" checked />
+            <span>Eliminar _</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="rule-triple-hyphens" checked />
+            <span>Eliminar --- (tres guiones seguidos)</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="rule-hyphens" />
+            <span>Eliminar - (todos los guiones)</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="rules-group" aria-labelledby="rules-spacing-title">
+        <h4 class="rules-group__title" id="rules-spacing-title">Espacios y saltos de línea</h4>
+        <div class="symbol-grid">
+          <label class="check">
+            <input type="checkbox" id="rule-spaces" checked />
+            <span>Normalizar espacios repetidos</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="rule-newlines" checked />
+            <span>Eliminar saltos de línea excesivos</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="rules-group" aria-labelledby="rules-replace-title">
+        <h4 class="rules-group__title" id="rules-replace-title">Buscar y reemplazar</h4>
+        <p class="rules-hint">
+          Lo que escribas en «Buscar» se resalta en el texto. Con «Reemplazar por» vacío, las coincidencias se eliminan.
+        </p>
+        <div class="replace-rule">
+          <div class="field">
+            <label class="field-label" for="replace-find">Buscar</label>
+            <input class="text-field" type="text" id="replace-find" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="replace-with">Reemplazar por</label>
+            <input class="text-field" type="text" id="replace-with" autocomplete="off" />
+          </div>
+          <label class="check">
+            <input type="checkbox" id="replace-word" checked />
+            <span>Solo palabra completa</span>
+          </label>
+          <button type="button" class="btn btn--primary" id="btn-replace">Reemplazar</button>
+        </div>
+        <p class="replace-count" id="replace-count" aria-live="polite"></p>
+      </section>
+    </div>
+  </details>
+
+  <p class="tool-status" id="tool-status" role="status" aria-live="polite"></p>
+</div>

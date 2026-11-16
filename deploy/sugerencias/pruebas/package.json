@@ -1,0 +1,9 @@
+{
+  "name": "chispabox-sugerencias-pruebas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "smtp-server": "3.13.7"
+  }
+}

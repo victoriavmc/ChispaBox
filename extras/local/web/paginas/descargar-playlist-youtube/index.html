@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Descarga una playlist o varios videos de YouTube juntos, en un único ZIP." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Descargar playlist de YouTube | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page yt-page">
+        <!-- @include:encabezado titulo="Descargar playlist de YouTube" subtitulo="Pegá una playlist o varios enlaces de videos, uno por línea. Elegí el formato y se descargan todos juntos en un único ZIP. Solo contenido propio o cuya descarga esté autorizada." personaje="/images/characters/florencia-cutout.webp" -->
+
+        <p class="rec-error yt-unavailable" id="yt-unavailable" role="status" hidden>
+          Esta herramienta no está disponible en este entorno.
+        </p>
+
+        <div id="yt-app" hidden>
+          <section class="rec-panel" aria-labelledby="pl-link-heading">
+            <h2 class="field-label" id="pl-link-heading">1. Playlist o enlaces</h2>
+            <label class="field-label" for="pl-text">Pegá la playlist y/o los enlaces (uno por línea)</label>
+            <textarea
+              class="yt-textarea"
+              id="pl-text"
+              rows="5"
+              spellcheck="false"
+              placeholder="https://www.youtube.com/playlist?list=…&#10;https://youtu.be/…"
+            ></textarea>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="pl-analyze">Analizar</button>
+            </div>
+            <p class="tool-note">Máximo 50 videos por lote. Las playlists privadas no se pueden leer.</p>
+            <p class="rec-error" id="pl-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" id="pl-list-panel" aria-labelledby="pl-list-heading" hidden>
+            <h2 class="field-label" id="pl-list-heading">2. Videos encontrados</h2>
+            <p class="tool-note" id="pl-summary"></p>
+            <ul class="yt-list" id="pl-list"></ul>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--ghost" id="pl-select-all">Seleccionar todos</button>
+              <button type="button" class="btn btn--ghost" id="pl-select-none">Quitar selección</button>
+            </div>
+            <div class="yt-notes" id="pl-notes" hidden></div>
+          </section>
+
+          <section class="rec-panel" id="pl-options-panel" aria-labelledby="pl-opt-heading" hidden>
+            <h2 class="field-label" id="pl-opt-heading">3. Formato y calidad</h2>
+
+            <div class="tool-panel">
+              <label class="field-label" for="pl-type">Tipo</label>
+              <select id="pl-type" class="tool-select">
+                <option value="video">Video</option>
+                <option value="audio">Audio</option>
+              </select>
+            </div>
+
+            <div class="tool-panel" id="pl-video-wrap">
+              <label class="field-label" for="pl-container">Formato de video</label>
+              <select id="pl-container" class="tool-select">
+                <option value="mp4">MP4 (recomendado)</option>
+                <option value="webm">WebM</option>
+                <option value="mkv">MKV</option>
+              </select>
+              <label class="field-label" for="pl-height">Calidad máxima</label>
+              <select id="pl-height" class="tool-select"></select>
+              <p class="tool-note">
+                Cada video usa la mejor calidad que tenga hasta este límite. Si un video no tiene ese formato, se omite y se informa.
+              </p>
+            </div>
+
+            <div class="tool-panel" id="pl-audio-wrap" hidden>
+              <label class="field-label" for="pl-format">Formato de audio</label>
+              <select id="pl-format" class="tool-select">
+                <option value="mp3">MP3</option>
+                <option value="m4a">M4A</option>
+                <option value="wav">WAV</option>
+                <option value="flac">FLAC</option>
+              </select>
+              <div id="pl-bitrate-wrap">
+                <label class="field-label" for="pl-bitrate">Calidad máxima</label>
+                <select id="pl-bitrate" class="tool-select"></select>
+              </div>
+              <p class="tool-note">Cada video nunca supera el bitrate de su propio origen.</p>
+            </div>
+
+            <div class="tool-panel">
+              <label class="field-label" for="pl-zip-name">Nombre del ZIP (sin extensión)</label>
+              <input class="text-input yt-input" id="pl-zip-name" type="text" maxlength="180" value="Lote de YouTube" />
+            </div>
+          </section>
+
+          <section class="rec-panel" id="pl-run-panel" aria-labelledby="pl-run-heading" hidden>
+            <h2 class="field-label" id="pl-run-heading">4. Descargar</h2>
+            <p class="tool-note" id="pl-size"></p>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="pl-download" disabled>Descargar lista</button>
+              <button type="button" class="btn btn--ghost" id="pl-cancel" hidden>Cancelar</button>
+            </div>
+            <div class="bg-progress" id="pl-progress-wrap" hidden>
+              <progress id="pl-progress" max="100" value="0"></progress>
+              <span id="pl-progress-text"></span>
+            </div>
+          </section>
+
+          <p class="rec-status" id="pl-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/extras/local/web/scripts/descargar-playlist-youtube.ts"></script>
+  </body>
+</html>

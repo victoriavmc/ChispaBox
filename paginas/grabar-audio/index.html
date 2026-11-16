@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Graba audio desde el micrófono, mirá el nivel en vivo y guardá, pausá o descartá."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Grabar audio | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Grabar audio" subtitulo="Graba audio desde el micrófono, mirá el nivel en vivo y guardá, pausá o descartá." personaje="/images/characters/sopi-cutout.webp" -->
+
+        <section class="rec-panel" id="rec-panel" aria-labelledby="rec-heading">
+          <h2 class="field-label" id="rec-heading">Grabadora</h2>
+
+          <div class="rec-permit" id="rec-permit-step">
+            <p>
+              Primero necesitamos tu permiso para usar el micrófono. El audio se
+              queda en tu equipo: no se sube a ningún servidor.
+            </p>
+            <button type="button" class="btn btn--primary" id="rec-permit">
+              Solicitar permiso del micrófono
+            </button>
+          </div>
+
+          <div class="rec-controls" id="rec-controls" hidden>
+            <div class="rec-top">
+              <span class="rec-dot" aria-hidden="true"></span>
+              <span class="rec-timer" id="rec-timer" aria-live="off"
+                >00:00</span
+              >
+              <span class="rec-state" id="rec-state"></span>
+            </div>
+
+            <canvas
+              class="rec-canvas"
+              id="rec-canvas"
+              aria-hidden="true"
+            ></canvas>
+
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="rec-start">
+                Empezar a grabar
+              </button>
+              <button
+                type="button"
+                class="btn btn--soft"
+                id="rec-pause"
+                disabled
+              >
+                Pausar
+              </button>
+              <button
+                type="button"
+                class="btn btn--soft"
+                id="rec-save"
+                disabled
+              >
+                Guardar
+              </button>
+              <button
+                type="button"
+                class="btn btn--ghost"
+                id="rec-discard"
+                disabled
+              >
+                Descartar
+              </button>
+            </div>
+          </div>
+
+          <div class="rec-result" id="rec-result" hidden>
+            <audio
+              class="rec-audio"
+              id="rec-audio"
+              controls
+              preload="metadata"
+            ></audio>
+            <label class="field-label" for="rec-format">Formato de descarga</label>
+            <select class="tool-select" id="rec-format"></select>
+            <p class="tool-note" id="rec-size" aria-live="polite"></p>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="rec-download">Descargar</button>
+              <button type="button" class="btn btn--primary" id="rec-again">
+                Nueva grabación
+              </button>
+            </div>
+          </div>
+
+          <p
+            class="rec-status"
+            id="rec-status"
+            role="status"
+            aria-live="polite"
+          ></p>
+          <p class="rec-error" id="rec-error" role="alert" hidden></p>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/grabar-audio.ts"></script>
+  </body>
+</html>

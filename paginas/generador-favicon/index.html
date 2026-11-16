@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Genera el favicon de tu sitio: favicon.ico, PNG para celulares, manifiesto web y el código para el head. Todo en tu navegador, sin subir archivos."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Generador de favicon | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Generador de favicon" subtitulo="Subí una imagen y obtené el paquete de íconos de tu sitio: favicon.ico, PNG para la pantalla de inicio de celulares y el manifiesto web. Todo se genera en tu navegador; ningún archivo se sube." personaje="/images/characters/vale-cutout.webp" -->
+
+        <div id="panel-favicon" class="doc-panel">
+          <h2 class="doc-panel__title">Crear el paquete de favicon</h2>
+
+          <section class="rec-panel" aria-labelledby="fav-sel-heading">
+            <h3 class="field-label" id="fav-sel-heading">1. Seleccionar la imagen</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="fav-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="fav-dropzone">
+              <label class="field-label" for="fav-file">Seleccionar una imagen o arrastrarla aquí</label>
+              <input class="bg-file" id="fav-file" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
+            </div>
+            <p class="rec-error" id="fav-error" role="alert" hidden></p>
+            <dl class="tool-info" id="fav-info" hidden></dl>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="fav-opt-heading">
+            <h3 class="field-label" id="fav-opt-heading">2. Ajustes</h3>
+            <div class="tool-panel fav-options">
+              <label>
+                <span class="field-label">Encuadre</span>
+                <select id="fav-fit" class="tool-select">
+                  <option value="cover" selected>Llenar el cuadrado (recorta los bordes)</option>
+                  <option value="contain">Imagen completa (con bordes)</option>
+                </select>
+              </label>
+              <label>
+                <span class="field-label">Color de fondo</span>
+                <input id="fav-bg" type="color" value="#ffffff" class="tool-select" />
+              </label>
+              <label class="fav-check">
+                <input id="fav-transparent" type="checkbox" />
+                <span>Fondo transparente</span>
+              </label>
+              <label>
+                <span class="field-label">Color del tema (opcional)</span>
+                <input id="fav-theme" type="color" value="#E61932" class="tool-select" />
+              </label>
+              <label>
+                <span class="field-label">Nombre del sitio (para el manifiesto)</span>
+                <input id="fav-name" type="text" maxlength="60" value="Mi sitio" class="tool-select" />
+              </label>
+            </div>
+            <div class="fav-preview-wrap">
+              <canvas class="fav-preview" id="fav-preview" width="128" height="128" aria-label="Vista previa del favicon" role="img" hidden></canvas>
+              <p class="tool-note">La vista previa muestra el favicon de 128 px. Los tamaños exactos se generan al crear el paquete.</p>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="fav-run-heading">
+            <h3 class="field-label" id="fav-run-heading">3. Generar el paquete</h3>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="fav-run" disabled>Generar paquete</button>
+              <button type="button" class="btn btn--ghost" id="fav-clear">Otra imagen</button>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="fav-result-heading">
+            <div class="doc-result" id="fav-results" hidden>
+              <h3 class="field-label" id="fav-result-heading">4. Descargar</h3>
+              <ul class="fav-sizes" id="fav-sizes"></ul>
+              <div class="fav-result-actions">
+                <button type="button" class="btn btn--primary" id="fav-zip">Descargar paquete (ZIP)</button>
+                <button type="button" class="btn btn--ghost" id="fav-ico">Descargar favicon.ico</button>
+              </div>
+              <label class="field-label" for="fav-snippet">Código para pegar dentro de &lt;head&gt;</label>
+              <textarea id="fav-snippet" class="fav-snippet" readonly rows="7"></textarea>
+              <div class="fav-result-actions">
+                <button type="button" class="btn btn--ghost" id="fav-copy">Copiar código</button>
+              </div>
+            </div>
+          </section>
+
+          <p class="rec-status" id="fav-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/generador-favicon.ts"></script>
+  </body>
+</html>

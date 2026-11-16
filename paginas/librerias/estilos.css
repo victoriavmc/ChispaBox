@@ -1,0 +1,93 @@
+      .libs-table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .libs-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        min-width: 40rem;
+      }
+      .libs-table th,
+      .libs-table td {
+        padding: 0.7rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+      }
+      .libs-table th {
+        background: var(--surface-2);
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .libs-table tr:last-child td {
+        border-bottom: 0;
+      }
+      .libs-table td.libs-face {
+        width: 3.5rem;
+        padding-right: 0;
+      }
+      .libs-face img {
+        display: block;
+        width: 2.75rem;
+        height: auto;
+        margin: 0 auto;
+      }
+      .libs-table code {
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 0.9em;
+      }
+      .libs-muted {
+        color: var(--text-muted);
+      }
+      .libs-privacy {
+        margin-top: 0.4rem;
+        font-size: 0.85rem;
+      }
+      .libs-privacy summary {
+        cursor: pointer;
+        color: var(--text-muted);
+        text-decoration: underline dotted;
+        width: fit-content;
+      }
+      .libs-privacy summary:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+      .libs-privacy[open] summary {
+        margin-bottom: 0.3rem;
+      }
+      .libs-privacy p {
+        margin: 0.3rem 0 0;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+      .libs-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+      }
+      .libs-tag::before {
+        content: "";
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: currentColor;
+      }
+      .libs-tag--local::before {
+        background: #16a34a;
+      }
+      .libs-tag--server::before {
+        background: #d97706;
+      }
+      .libs-tag--external::before {
+        background: #2563eb;
+      }

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Redimensiona y recorta imágenes en tu navegador, sin subirlas a ningún servidor." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Redimensionar y recortar imágenes | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Redimensionar y recortar imágenes" subtitulo="Recortá y cambiá el tamaño de tus imágenes a las medidas que necesites. Todo se hace en tu navegador: no se sube nada a ningún servidor." personaje="/images/characters/sopi-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="res-load-heading">
+          <h2 class="field-label" id="res-load-heading">1. Elegí la imagen</h2>
+
+          <div class="tool-req" aria-label="Requisitos de entrada">
+            <p class="tool-req__title">Antes de cargar</p>
+            <ul class="tool-req__list" id="res-requirements"></ul>
+          </div>
+
+          <div class="tool-dropzone" id="res-dropzone">
+            <label class="field-label" for="res-file">Seleccionar una imagen o arrastrarla aquí</label>
+            <input class="bg-file" id="res-file" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
+          </div>
+
+          <p class="rec-error" id="res-error" role="alert" hidden></p>
+
+          <dl class="tool-info" id="res-info" hidden></dl>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="res-crop-heading">
+          <h2 class="field-label" id="res-crop-heading">2. Recortá la zona que querés conservar</h2>
+
+          <div class="tool-panel">
+            <label class="field-label" for="res-aspect">Proporción del recorte</label>
+            <select id="res-aspect" class="tool-select" disabled>
+              <option value="libre" selected>Libre</option>
+              <option value="1:1">1:1 (cuadrado)</option>
+              <option value="4:3">4:3</option>
+              <option value="3:4">3:4</option>
+              <option value="3:2">3:2</option>
+              <option value="16:9">16:9</option>
+              <option value="9:16">9:16</option>
+            </select>
+            <p class="tool-note">Elegir una proporción centra el recorte más grande posible. Editar los valores a mano lo pasa a «Libre».</p>
+          </div>
+
+          <div class="tool-panel">
+            <div class="conv-size-row">
+              <label class="field-label" for="res-crop-x">Desde X (px)</label>
+              <input type="number" id="res-crop-x" min="0" step="1" disabled />
+              <label class="field-label" for="res-crop-y">Desde Y (px)</label>
+              <input type="number" id="res-crop-y" min="0" step="1" disabled />
+            </div>
+            <div class="conv-size-row">
+              <label class="field-label" for="res-crop-w">Ancho del recorte (px)</label>
+              <input type="number" id="res-crop-w" min="1" step="1" disabled />
+              <label class="field-label" for="res-crop-h">Alto del recorte (px)</label>
+              <input type="number" id="res-crop-h" min="1" step="1" disabled />
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--ghost" id="res-center" disabled>Centrar recorte</button>
+            </div>
+            <p class="rec-error" id="res-crop-msg" role="alert" hidden></p>
+          </div>
+
+          <figure class="bg-figure bg-figure--checker">
+            <canvas id="res-preview" hidden aria-label="Vista previa del recorte: la zona clara es la que se conserva"></canvas>
+            <p class="tool-note" id="res-preview-empty">Cargá una imagen para ver el recorte.</p>
+            <figcaption>Zona clara = lo que se conserva</figcaption>
+          </figure>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="res-size-heading">
+          <h2 class="field-label" id="res-size-heading">3. Tamaño de salida</h2>
+
+          <div class="tool-panel">
+            <label class="tool-method"
+              ><input type="checkbox" id="res-resize" disabled />
+              <span>Cambiar el tamaño de salida</span></label
+            >
+            <p class="tool-note">Si no lo cambiás, la imagen sale del tamaño del recorte.</p>
+            <div id="res-size-fields" hidden>
+              <label class="tool-method"
+                ><input type="checkbox" id="res-keep-ratio" checked />
+                <span>Conservar proporciones</span></label
+              >
+              <div class="conv-size-row">
+                <label class="field-label" for="res-out-w">Ancho (px)</label>
+                <input type="number" id="res-out-w" min="1" max="8000" step="1" />
+                <label class="field-label" for="res-out-h">Alto (px)</label>
+                <input type="number" id="res-out-h" min="1" max="8000" step="1" />
+              </div>
+            </div>
+            <p class="tool-note" id="res-size-hint"></p>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="res-format-heading">
+          <h2 class="field-label" id="res-format-heading">4. Formato</h2>
+
+          <div class="tool-panel">
+            <label class="field-label" for="res-format">Formato de salida</label>
+            <select id="res-format" class="tool-select" disabled>
+              <option value="png" selected>PNG (sin pérdida, con transparencia)</option>
+              <option value="jpeg">JPG (más liviano, sin transparencia)</option>
+              <option value="webp">WebP (liviano, con transparencia)</option>
+            </select>
+          </div>
+
+          <div class="tool-panel" id="res-quality-wrap" hidden>
+            <label class="field-label" for="res-quality"
+              >Calidad: <span id="res-quality-value">90</span></label
+            >
+            <input type="range" id="res-quality" min="1" max="100" value="90" />
+            <p class="tool-note">Solo para JPG y WebP. Más calidad significa archivos más pesados.</p>
+          </div>
+
+          <div class="tool-panel" id="res-bg-wrap" hidden>
+            <label class="field-label" for="res-bg">Color de fondo para JPG</label>
+            <input type="color" id="res-bg" value="#ffffff" />
+            <p class="tool-note">JPG no tiene transparencia: las zonas transparentes se rellenan con este color.</p>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="res-run-heading">
+          <h2 class="field-label" id="res-run-heading">5. Procesar y descargar</h2>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--primary" id="res-run" disabled>Procesar imagen</button>
+            <button type="button" class="btn btn--ghost" id="res-reset" disabled>Restablecer opciones</button>
+            <button type="button" class="btn btn--ghost" id="res-clear">Otra imagen</button>
+          </div>
+
+          <figure class="bg-figure bg-figure--checker" id="res-result-wrap" hidden>
+            <img id="res-result" alt="Resultado del recorte y redimensionado" hidden />
+            <figcaption id="res-result-meta"></figcaption>
+          </figure>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--primary" id="res-download" hidden>Descargar</button>
+          </div>
+        </section>
+
+        <p class="rec-status" id="res-status" role="status" aria-live="polite">Elegí una imagen para empezar.</p>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/redimensionar-imagen.ts"></script>
+  </body>
+</html>

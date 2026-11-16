@@ -1,0 +1,72 @@
+/* Estilos de «Unificar PDF»: lista ordenable de archivos. */
+
+.unificar-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.unificar-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.unificar-item__order {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-pill);
+  background: var(--chip-bg);
+  font-weight: 700;
+}
+
+.unificar-item__meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.unificar-item__name {
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+.unificar-item__info {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.unificar-item__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.unificar-item__btn {
+  min-height: 2.6rem;
+}
+
+.unificar-item__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (min-width: 40rem) {
+  .unificar-item {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .unificar-item__actions {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,72 @@
+/* Espaciado de la página «Proteger PDF con contraseña». Solo aplica dentro de .pp-page. */
+
+.pp-page .rec-panel {
+  gap: 1.5rem;
+}
+
+/* Títulos de cada paso: más grandes y con aire debajo. */
+.pp-page .rec-panel > .field-label {
+  font-size: 1rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.pp-page .tool-panel {
+  gap: 0.6rem;
+}
+
+.pp-page .tool-panel + .tool-panel,
+.pp-page .tool-panel + details,
+.pp-page details + .tool-panel {
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--border);
+}
+
+.pp-page .tool-panel > .field-label {
+  margin: 0;
+}
+
+.pp-page .tool-select {
+  width: 100%;
+  max-width: 24rem;
+  box-sizing: border-box;
+}
+
+/* Las casillas no deben estirarse a todo el ancho: ocupan solo lo que necesitan. */
+.pp-page .tool-method {
+  justify-self: start;
+  width: fit-content;
+  margin-top: 0.25rem;
+}
+
+.pp-page .tool-note {
+  line-height: 1.5;
+  max-width: 48rem;
+}
+
+/* El mensaje de coincidencia de contraseñas solo ocupa lugar cuando hay texto. */
+.pp-page #pp-clave-msg:empty {
+  display: none;
+}
+
+.pp-page .pp-details {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+
+.pp-page .pp-details summary {
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.pp-page .pp-details__body {
+  margin-top: 0.85rem;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.pp-page .rec-actions {
+  margin-top: 0.5rem;
+}

@@ -23,7 +23,7 @@ No metí mil librerías "por si acaso". Cada una entró porque cumple estos crit
 
 1. 🆓 **Gratuita y de uso libre**, con licencia clara (MIT, Apache-2.0, BSD, LGPL o GPL).
 2. 🔎 **Mantenida y con versión fijada**, para saber exactamente qué código se usa.
-3. 🧠 **Sin IA ni servicios en la nube**: el procesamiento queda en tu navegador.
+3. 🧠 **Sin IA ni servicios en la nube en el sitio público**: el procesamiento queda en tu navegador. La transcripción con Whisper (IA) existe solo como herramienta local opcional en `extras/local/`, que se ejecuta en tu computadora.
 4. 🛡️ **Sin vulnerabilidades conocidas:** `npm audit` no reporta hallazgos (revisión del 15 de noviembre de 2026, sobre 218 paquetes del árbol de dependencias).
 5. 📦 **Empaquetada dentro del propio sitio:** nada se carga desde CDN de terceros.
 
@@ -33,9 +33,8 @@ No metí mil librerías "por si acaso". Cada una entró porque cumple estos crit
 | [PDF.js](https://github.com/mozilla/pdf.js)                          | Ver miniaturas y comprimir PDF         | Apache-2.0       |
 | [qrcode](https://github.com/soldair/node-qrcode)                     | Crear códigos QR                       | MIT              |
 | [jsQR](https://github.com/cozmo/jsQR)                                | Leer códigos QR desde imágenes         | Apache-2.0       |
-| [lamejs](https://github.com/zhuker/lamejs)                           | Generar MP3 al unificar audios         | LGPL-3.0         |
-| [FFmpeg (WebAssembly)](https://github.com/ffmpegwasm/ffmpeg.wasm)    | Convertir formatos de audio            | GPL-2.0-or-later |
-| [Tesseract.js](https://github.com/naptha/tesseract.js)               | Reconocer texto (OCR)                  | Apache-2.0       |
+| libmp3lame (LAME, LGPL-2.0; núcleo FFmpeg propio)                           | Generar MP3 al unificar audios         | LGPL-3.0         |
+| Núcleo FFmpeg propio 5.1.4 (`public/ffmpeg-lgpl/`), con [@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm) y @ffmpeg/util | Convertir formatos de audio | LGPL-2.1-or-later (núcleo, compilado sin GPL); MIT (envoltorios) |
 | [QPDF (qpdf-wasm)](https://github.com/neslinesli93/qpdf-wasm)        | Proteger PDF con contraseña (AES-256)  | Apache-2.0       |
 | [PapaParse](https://github.com/mholt/PapaParse)                      | Leer y escribir CSV                    | MIT              |
 | [read-excel-file](https://github.com/catamphetamine/read-excel-file) | Leer hojas de cálculo .xlsx            | MIT              |
@@ -55,7 +54,7 @@ ChispaBox/
 │   ├── scripts/             # TypeScript de la landing y del contador
 │   └── shared/              # Lógica de cada herramienta
 ├── public/                  # Archivos copiados tal cual (personajes, favicon, theme-init.js)
-├── scripts/                 # Utilidades de build (new-page, copia de PDF.js y OCR)
+├── scripts/                 # Utilidades de build (new-page, copia de PDF.js)
 ├── tests/                   # Pruebas (node:test)
 ├── docs/                    # Detalle de las herramientas más complejas
 ├── deploy/                  # Configuración de despliegue
@@ -63,7 +62,6 @@ ChispaBox/
 ├── Dockerfile               # Build multietapa: Node Alpine → Nginx Alpine
 ├── compose.yaml
 ├── DEPENDENCIAS.md          # Inventario de librerías, versiones y licencias
-├── README-YOUTUBE.md        # Cómo activar las descargas de YouTube en local
 └── package.json
 ```
 
@@ -159,9 +157,9 @@ Vive en su propia página, `contador.html` (`http://localhost:8080/contador.html
 | Herramienta                       | Estado                                                                                                                                                                                                                                                                                                                                                                         |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Grabar audio                      | Operativa en el navegador (MediaRecorder). Página `paginas/grabar-audio/index.html`.                                                                                                                                                                                                                                                                                           |
-| Transcribir audio a texto         | Operativa con la Web Speech API del navegador (dictado por micrófono, sin modelos propios). Depende del navegador: en Chrome y Edge el reconocimiento lo procesa el servicio del navegador, así que el audio sale de tu equipo. Hay un aviso de privacidad en la página.                                                                                                       |
+
 | Convertir formato de audio        | Operativa en el navegador (FFmpeg WebAssembly, sin servidor): entrada OGG, MP3, MP4, M4A, WAV, FLAC, WebM y más; salida MP3, OGG (Opus), M4A, MP4 (audio), WAV, FLAC o WebM. La primera carga descarga el motor (~32 MB).                                                                                                                                                      |
-| Unificar audios                   | Operativa en el navegador (Web Audio API y lamejs, sin IA ni servidor): une hasta 20 grabaciones en un MP3 (128 kbps) o WAV, en el orden elegido. Límite: 15 min de duración total. Página `paginas/unificar-audios/index.html`.                                                                                                                                               |
+| Unificar audios                   | Operativa en el navegador (Web Audio API y libmp3lame del núcleo propio, sin IA ni servidor): une hasta 20 grabaciones en un MP3 (128 kbps) o WAV, en el orden elegido. Límite: 15 min de duración total. Página `paginas/unificar-audios/index.html`.                                                                                                                                               |
 | Recortar audio                    | Operativa en el navegador. Página `paginas/recortar-audio/index.html`.                                                                                                                                                                                                                                                                                                         |
 | Contar palabras y caracteres      | Operativa. Página `paginas/contador/index.html`.                                                                                                                                                                                                                                                                                                                               |
 | Limpiar texto                     | Operativa. Página `paginas/limpiador/index.html`.                                                                                                                                                                                                                                                                                                                              |
@@ -178,7 +176,6 @@ Vive en su propia página, `contador.html` (`http://localhost:8080/contador.html
 | Unificar PDF                      | Operativa en el navegador (pdf-lib, MIT, sin IA ni servidor): varios PDF en uno, en el orden elegido. Límites: 30 archivos, 50 MB por archivo, 200 MB en total y 3000 páginas. Página `paginas/unificar-pdf/index.html`.                                                                                                                                                       |
 | Organizar páginas                 | Operativa en el navegador (pdf-lib y PDF.js, sin IA ni servidor): reordenar, girar, quitar y extraer páginas. Máximo 500 páginas y 50 MB. Página `paginas/organizar-paginas/index.html`.                                                                                                                                                                                       |
 | Comprimir PDF                     | Operativa en el navegador (PDF.js, pdf-lib, sin IA ni servidor): cada página se convierte en JPEG en dos niveles (correo 96 ppp o impresión 150 ppp). Pierde el texto seleccionable y los enlaces. Solo entrega si el resultado pesa menos. Página `paginas/comprimir-pdf/index.html`.                                                                                         |
-| OCR de documentos                 | Operativa en el navegador con Tesseract.js (sin servidor): reconoce texto de imágenes y PDF escaneados. Página `paginas/ocr-documentos/index.html`.                                                                                                                                                                                                                            |
 | Convertidor de datos              | Operativa en el navegador: lee y escribe CSV (PapaParse) y lee hojas .xlsx (read-excel-file). No lee .xls ni .xlsm. Página `paginas/convertidor-datos/index.html`.                                                                                                                                                                                                             |
 | Formatear y validar JSON/XML      | Operativa en el navegador. Página `paginas/formato-json-xml/index.html`.                                                                                                                                                                                                                                                                                                       |
 | Verificador de integridad         | Operativa en el navegador (Web Crypto, sin IA ni servidor): calcula el SHA-256 de un archivo (máximo 500 MB) y lo compara con el hash que pegues. Requiere conexión segura (https) o localhost. Página `paginas/verificador-integridad/index.html`. Pruebas: `npm run test:verificador-integridad`.                                                                            |
@@ -187,15 +184,22 @@ Vive en su propia página, `contador.html` (`http://localhost:8080/contador.html
 | Proteger PDF con contraseña       | Operativa en el navegador (QPDF compilado a WebAssembly): cifra con AES-256. Ver `DEPENDENCIAS.md`. Página `paginas/proteger-pdf/index.html`.                                                                                                                                                                                                                                  |
 | Generador y lector de QR          | Operativa en el navegador: crea QR de enlaces, texto, Wi-Fi o contactos (qrcode, MIT) en PNG o SVG, y lee QR desde imágenes (jsQR, Apache-2.0). Los enlaces leídos solo se abren al confirmarlos y únicamente si son http o https. Página `paginas/generador-qr/index.html`.                                                                                                   |
 | Acortador de enlaces              | Operativa en el navegador (sin IA ni servidor): guarda el enlace en el almacenamiento local y genera `paginas/acortador-enlaces/index.html?c=código`, que redirige al original. Solo funciona en el navegador donde se creó. Solo http y https. Pruebas: `npm run test:acortador-enlaces`.                                                                                     |
-| Descargar video de YouTube        | Operativa solo con `npm run dev` o `npm run preview` (uso personal, contenido propio o autorizado). Desactivada en producción. Cómo activarla en local: [README-YOUTUBE.md](README-YOUTUBE.md).                                                                                                                                                                                |
-| Descargar música de YouTube       | Operativa solo con `npm run dev` o `npm run preview` (MP3, M4A, WAV, FLAC; «Artista - Título»). Desactivada en producción. Cómo activarla en local: [README-YOUTUBE.md](README-YOUTUBE.md).                                                                                                                                                                                    |
-| Descargar playlist de YouTube     | Operativa solo con `npm run dev` o `npm run preview`, igual que las otras descargas de YouTube. Desactivada en producción. Cómo activarla en local: [README-YOUTUBE.md](README-YOUTUBE.md).                                                                                                                                                                                    |
 
-Todas las herramientas de la landing tienen su página. Las que dependen de `npm run dev` o `npm run preview` (LibreOffice, Sharp o las descargas de YouTube) lo indican en su fila.
+Todas las herramientas de la landing tienen su página. Las que dependen de `npm run dev` o `npm run preview` (LibreOffice o Sharp) lo indican en su fila.
+
+## Herramientas locales (extras/local)
+
+Cinco herramientas se ejecutan solo en tu computadora y **no se publican en Hostinger**: descargar video, música y playlist de YouTube (yt-dlp y FFmpeg), OCR de documentos (Tesseract.js) y transcripción de audio con Whisper en el navegador (el audio no sale del equipo). En la página principal aparecen como «Disponible en la versión local».
+
+Cómo instalarlas y ejecutarlas, con sus requisitos, pruebas y licencias: **[extras/local/README.md](extras/local/README.md)**.
+
+## Repositorio de YouTube previo
+
+El commit inicial del repositorio (`cfb5fa8`) contiene `README-YOUTUBE.md`, con las instrucciones de configuración local de esa versión. Se conserva en el historial y su contenido no incluye secretos. La documentación vigente es la de extras/local.
 
 ## Ilustraciones
 
-- Los personajes de `public/images/characters/` son recortes optimizados de las ilustraciones de referencia (WebP, alto máximo 900 px). Se muestran con `object-fit: cover` para mostrar la cabeza y el torso.
+- Los personajes de `public/images/characters/` son creaciones de VictoriaVMC: se crearon con ChatGPT (generación de imágenes) a partir de sus indicaciones, con selección de resultados y pedidos de modificación hasta obtener las versiones del sitio. Luego se optimizaron en WebP (alto máximo 900 px). Se muestran con `object-fit: cover` para mostrar la cabeza y el torso. Procedencia detallada en `docs/procedencia-imagenes.md`.
 - Para reemplazarlos por recortes con fondo transparente, guardá el archivo con el mismo nombre (o cambiá la ruta en `index.html`). Las dimensiones están reservadas con `width`, `height` y `aspect-ratio`, así que no se mueve el diseño.
 - Las mascotas (perritos) todavía no tienen ilustración. Cuando estén disponibles, se pueden agregar en el hero y en el banner de novedades siguiendo el mismo patrón.
 
@@ -301,7 +305,7 @@ Página `paginas/selector-color/index.html` (tarjeta «Selector de color» de la
 Página `paginas/unificar-audios/index.html` (tarjeta «Unificar audios» de la landing).
 
 - Agregá grabaciones y ordenalas con «Subir» y «Bajar». Podés escuchar el resultado antes de descargarlo.
-- Salida: MP3 a 128 kbps (liviano, codificado con lamejs, LGPL-3.0) o WAV sin compresión.
+- Salida: MP3 a 128 kbps (liviano, codificado con libmp3lame del núcleo FFmpeg propio, LGPL-2.0) o WAV sin compresión.
 - Límites: 20 audios, 100 MB por archivo y 15 minutos de duración total (el audio se guarda sin comprimir mientras se trabaja).
 - Pruebas: `npm run test:unificar-audios` (`tests/unificar-audios/`).
 

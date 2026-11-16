@@ -17,7 +17,8 @@ Guía paso a paso para instalar ChispaBox en un VPS de Hostinger con Docker. Est
 
 Ya tenés contratado un **Hostinger KVM 2**. **No reinstales el sistema operativo** ni hagas cambios en el servidor sin antes completar la sección 3.
 
-- Anotá las especificaciones reales del panel (CPU, RAM, disco) y el sistema operativo que tiene instalado.
+- Sistema operativo verificado en el servidor: **Ubuntu 26.04.1 LTS** (2 vCPU, 7,7 GiB de RAM, disco de 96 GiB). Confirmalo de nuevo con `cat /etc/os-release` antes de cada cambio.
+- Anotá las especificaciones que muestra el panel y revisá que coincidan con lo anterior.
 - Si el servidor ya tiene datos, aplicaciones o servicios en uso, **no los modifiques**: documentalos y decidí cómo convivir con ellos antes de instalar ChispaBox.
 - Guardá la contraseña de acceso que muestra el panel en tu gestor de contraseñas. Vas a cambiar el acceso en la sección 2.
 
@@ -69,9 +70,13 @@ Qué hacer con el resultado:
 
 ## 4. Instalar Docker y Compose
 
+Swap: el servidor no tenía. Se agregó un archivo de 2 GiB (`/swapfile`, permisos 600) y se dejó persistente en `/etc/fstab`. Verificá con `swapon --show`.
+
 Si Docker ya está instalado, **no lo reinstales**: verificá la versión y seguí con el paso 5.
 
-Seguí la instalación oficial de Docker Engine para Ubuntu (repositorio de Docker) y verificá:
+Seguí la instalación oficial de Docker Engine para Ubuntu (repositorio de Docker). En Ubuntu 26.04 (`resolute`) el repositorio `download.docker.com` ya publica los paquetes. Registro de la instalación realizada el 16 nov 2026: Docker Engine 29.10.0 y Compose v5.7.1.
+
+Verificá:
 
 ```bash
 docker --version
@@ -241,3 +246,16 @@ Antes de cada actualización, hacé un respaldo (sección 9).
 - Especificaciones reales del KVM 2 y resultado del diagnóstico de la sección 3.
 - Conectividad SMTP 465/587 desde el servidor.
 - Cuentas de Cloudflare R2 y UptimeRobot, y la clave de age (la guardás vos).
+
+## 13. Verificar los compose con Compose v5 (antes del primer arranque)
+
+El servidor tiene Compose v5.7.1. Antes de construir o arrancar, validá los archivos con esa versión:
+
+```bash
+cd /opt/src-chispabox/deploy/proxy
+docker compose -f compose.yaml config > /dev/null && echo "proxy: sintaxis OK"
+cd /opt/src-chispabox/deploy/chispabox
+docker compose -f compose.yaml config > /dev/null && echo "chispabox: sintaxis OK"
+```
+
+Si alguno falla, no arranques: pegá el mensaje de error completo para revisarlo.

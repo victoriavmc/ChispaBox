@@ -48,7 +48,7 @@
 
 .pw-check code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  color: var(--accent);
+  color: var(--accent-texto);
 }
 
 .pw-output {
@@ -78,16 +78,67 @@
   outline-offset: 2px;
 }
 
-.pw-char--mayus { color: #E61932; }
-.pw-char--minus { color: #2563EB; }
-.pw-char--num { color: #16A34A; }
-.pw-char--sim { color: #D97706; }
+/* Colores de cada tipo de carácter con contraste WCAG AA sobre el fondo del campo, en ambos temas */
+:root {
+  --pw-mayus: #b0102a;
+  --pw-minus: #1d4ed8;
+  --pw-num: #15803d;
+  --pw-sim: #b45309;
+}
 
 @media (prefers-color-scheme: dark) {
-  .pw-char--minus { color: #60A5FA; }
-  .pw-char--num { color: #4ADE80; }
-  .pw-char--sim { color: #FBBF24; }
+  :root:not([data-theme="light"]) {
+    --pw-mayus: #ff5a6e;
+    --pw-minus: #60a5fa;
+    --pw-num: #4ade80;
+    --pw-sim: #fbbf24;
+  }
 }
+
+:root[data-theme="dark"] {
+  --pw-mayus: #ff5a6e;
+  --pw-minus: #60a5fa;
+  --pw-num: #4ade80;
+  --pw-sim: #fbbf24;
+}
+
+.pw-char--mayus { color: var(--pw-mayus); }
+.pw-char--minus { color: var(--pw-minus); }
+.pw-char--num { color: var(--pw-num); }
+.pw-char--sim { color: var(--pw-sim); }
+
+/* Texto de la fuerza de la contraseña (las barras conservan sus colores) */
+:root {
+  --pw-f1: #b0102a;
+  --pw-f2: #9a3412;
+  --pw-f3: #854d0e;
+  --pw-f4: #15803d;
+  --pw-f5: #166534;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pw-f1: #ff5a6e;
+    --pw-f2: #fb923c;
+    --pw-f3: #facc15;
+    --pw-f4: #4ade80;
+    --pw-f5: #86efac;
+  }
+}
+
+:root[data-theme="dark"] {
+  --pw-f1: #ff5a6e;
+  --pw-f2: #fb923c;
+  --pw-f3: #facc15;
+  --pw-f4: #4ade80;
+  --pw-f5: #86efac;
+}
+
+#pw-fuerza-etiqueta[data-nivel="muy-debil"] { color: var(--pw-f1); }
+#pw-fuerza-etiqueta[data-nivel="debil"] { color: var(--pw-f2); }
+#pw-fuerza-etiqueta[data-nivel="aceptable"] { color: var(--pw-f3); }
+#pw-fuerza-etiqueta[data-nivel="fuerte"] { color: var(--pw-f4); }
+#pw-fuerza-etiqueta[data-nivel="muy-fuerte"] { color: var(--pw-f5); }
 
 .pw-fieldset .field-label {
   margin-bottom: 0.25rem;
@@ -148,6 +199,6 @@
 
 .pw-usados__item code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  color: var(--accent);
+  color: var(--accent-texto);
   font-weight: 700;
 }

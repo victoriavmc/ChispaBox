@@ -26,7 +26,7 @@
 }
 
 .legal__indice a {
-  color: var(--accent-solid);
+  color: var(--accent-texto);
   font-weight: 600;
 }
 
@@ -48,7 +48,7 @@
 .legal__seccion h2 {
   margin: 0 0 0.75rem;
   font-size: clamp(1.25rem, 3vw, 1.6rem);
-  color: var(--accent-solid);
+  color: var(--accent-texto);
 }
 
 .legal__seccion h3 {
@@ -61,7 +61,7 @@
 }
 
 .legal__seccion a {
-  color: var(--accent-solid);
+  color: var(--accent-texto);
   text-underline-offset: 0.15em;
 }
 

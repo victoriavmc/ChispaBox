@@ -92,3 +92,4 @@ extras/local/.env
 extras/local/install.log
 extras/local/.tmp-*
 extras/local/*.log
+docs/auditoria-legal-2026-11-16.md

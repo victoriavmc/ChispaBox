@@ -38,6 +38,10 @@ const GLOBAL_WINDOW_MS = 60 * 60 * 1000;
 const GLOBAL_MAX = Number(env.GLOBAL_MAX || 60); // sugerencias aceptadas en total por hora
 const AUTOREPLY_MAX = 20; // agradecimientos enviados en total por hora (evita usarlo como correo masivo)
 const AUTOREPLY_PER_EMAIL_MAX = 1; // como máximo un agradecimiento por dirección y día (nadie puede usar el formulario para escribir repetidamente a una persona)
+// Límite para pedir preguntas del captcha (GET /captcha). Un usuario normal pide una por visita y otra
+// tras cada envío o error; 30 cada 10 minutos por IP deja margen amplio y frena el abuso automatizado.
+const CAPTCHA_WINDOW_MS = 10 * 60 * 1000;
+const CAPTCHA_PER_IP_MAX = Number(env.CAPTCHA_PER_IP_MAX || 30);
 
 // Agradecimiento: texto y imagen incrustada (cid). El texto de usuario nunca entra en el HTML.
 const GRACIAS_ASUNTO = 'Gracias por tu sugerencia en ChispaBox';
@@ -92,7 +96,11 @@ setInterval(() => {
 
 const hashIp = (ip) => createHash('sha256').update(IP_SALT + ip).digest('hex');
 
-// Caddy añade la IP real del cliente al final de X-Forwarded-For. Solo se confía en el último valor.
+// Caddy (reverse_proxy) añade la IP real del cliente al final de X-Forwarded-For, conservando lo que el
+// cliente haya enviado antes. Por eso solo se confía en el último valor: lo que el cliente escriba al
+// principio no cuenta. Esto solo es seguro mientras el servicio no tenga puerto publicado (compose.yaml,
+// sin "ports:") y solo Caddy esté en la red "edge" como cliente. Si algún día se pone otro proxy delante
+// (p. ej. Cloudflare), hay que cambiar esta función para leer la cabecera que ese proxy fija.
 const clientIp = (req) => {
   const xff = String(req.headers['x-forwarded-for'] || '').split(',').map((s) => s.trim()).filter(Boolean);
   return xff.length ? xff[xff.length - 1] : req.socket.remoteAddress || 'desconocida';
@@ -103,6 +111,10 @@ const clientIp = (req) => {
 const firmarReto = (texto) => createHmac('sha256', CAPTCHA_SECRET).update(texto).digest('hex');
 
 // Devuelve un token firmado (expiración y suma, sin revelar la suma en claro) y la pregunta.
+// AVISO: este captcha NO es una defensa robusta frente a bots. La pregunta viaja en texto y un script
+// puede leerla y responderla. Su función es frenar envíos automáticos simples; la protección real contra
+// spam son los límites de frecuencia, el honeypot y la cola. No presentarlo como prueba de humanidad.
+// El token contiene la suma firmada; la firma impide manipularla, pero no oculta la respuesta a quien lo lea.
 const nuevoReto = () => {
   const a = randomInt(1, 10);
   const b = randomInt(1, 10);
@@ -137,13 +149,14 @@ const transport = nodemailer.createTransport({
   socketTimeout: 15_000,
 });
 
-const send = (json, res, status) => {
+const send = (json, res, status, extra = {}) => {
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
     'Content-Security-Policy': "default-src 'none'",
     'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': 'no-referrer',
+    ...extra,
   });
   res.end(JSON.stringify(json));
 };
@@ -247,6 +260,15 @@ const server = http.createServer(async (req, res) => {
   const ruta = (req.url || '').split('?')[0];
   if (ruta === '/api/sugerencias/captcha') {
     if (req.method !== 'GET') return send({ error: 'method' }, res, 405);
+    // Clave con IP sujeta a sal (no se guarda la IP completa). No se registran tokens ni preguntas.
+    const claveCaptcha = `captcha:${hashIp(clientIp(req))}`;
+    const recientes = hitsFor(claveCaptcha, CAPTCHA_WINDOW_MS);
+    if (recientes.length >= CAPTCHA_PER_IP_MAX) {
+      // Retry-After: segundos hasta que caduca la petición más antigua de la ventana.
+      const espera = Math.max(1, Math.ceil((recientes[0] + CAPTCHA_WINDOW_MS - Date.now()) / 1000));
+      return send({ error: 'rate' }, res, 429, { 'Retry-After': String(espera) });
+    }
+    register(claveCaptcha);
     return send(nuevoReto(), res, 200);
   }
   if (ruta !== '/api/sugerencias') return send({ error: 'not found' }, res, 404);

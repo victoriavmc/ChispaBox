@@ -54,7 +54,7 @@ LAME (MP3), Opus y zlib forman parte del núcleo FFmpeg (fila 1). Sus avisos y f
 | Emscripten (runtime de `ffmpeg-core.js` y glue) | 3.1.30 (imagen `emscripten/emsdk:3.1.30`, digest `sha256:3977e19e…`, según `tools/ffmpeg-lgpl/versions.sh`) | **MIT o University of Illinois/NCSA** (a elección) | Tag `3.1.30` de `emscripten-core/emscripten`, commit `cfe2bdfe2692457cb5f5770672f6e5ccb3ffc2f2` (API de GitHub). `LICENSE` leído en ese tag: «Copyright (c) 2010-2014 Emscripten authors, see AUTHORS file.» | El `licenses/Emscripten-LICENSE.txt` local pesa 5093 bytes, igual que el archivo del tag (5093 caracteres, ASCII). **No se comparó byte a byte.** | **Confirmado** (texto). El **contenido de la imagen Docker no se pudo inspeccionar**: Docker no está activo en este equipo. |
 | dlmalloc (asignador de memoria en el `.wasm`) | 2.8.6 | **Dominio público** (declaración del código: «released to the public domain») | `system/lib/dlmalloc.c` del tag 3.1.30 | Cabecera leída (primeras líneas y texto de dedicatoria) | Confirmado por el código. Presencia en el binario: **inferida** del enlazado. |
 | musl libc (libc en el `.wasm`) | — | **MIT** (`COPYRIGHT`, Rich Felker et al.) | `git.musl-libc.org/cgit/musl/plain/COPYRIGHT` | `licenses/musl-COPYRIGHT.txt` | Texto verificado. Presencia en el binario **inferida** del enlazado (`-lc`). |
-| libc++ / libc++abi | — | Apache-2.0 con excepción LLVM | — | No verificado: no se inspeccionó el binario ni la imagen | **Pendiente.** Hace falta `wasm-objdump` o un mapa de enlace del contenedor para confirmar si hay símbolos de libc++. |
+| libc++ / libc++abi | — | Apache-2.0 con excepción LLVM | `public/ffmpeg-lgpl/ffmpeg-core.wasm` (sha256 78959ed5…, 16 nov 2026) y `tools/ffmpeg-lgpl/build-lgpl.sh` | Búsqueda en el binario: 0 coincidencias para `_ZNSt`, `_ZNSt3__1`, `__cxa_`, `__gxx_personality_v0`, `std::`, `libc++` y `libc++abi`. El script compila FFmpeg, LAME, Opus y zlib con `emcc` y no enlaza con C++. | **No presente** en el binario distribuido (evidencia fuerte, no un mapa de enlace). No hay obligación de aviso de libc++ mientras no se incluya. Limitación: no se analizó el mapa de enlace ni un desensamblado completo. |
 
 **Limitación de la verificación:** no se ejecutó Docker, así que no se confirmó el contenido de la imagen ni el mapa de enlace del binario. Las presencias de musl y dlmalloc son inferidas del script de compilación.
 
@@ -85,13 +85,22 @@ LAME (MP3), Opus y zlib forman parte del núcleo FFmpeg (fila 1). Sus avisos y f
 
 ## 7. Pendientes antes de distribuir
 
-1. **worker-f (fila 21):** consulta enviada al autor el 16 nov 2026; respuesta pendiente. No hay texto de licencia verificado. Hace falta una fuente nueva (por ejemplo, el repositorio en otra plataforma, o el autor). Mientras tanto, no se publica aviso.
-2. **Vínculo tarball ↔ commit de @ffmpeg/ffmpeg y @ffmpeg/util (filas 2 y 3):** inferido. Los registros npm no indican `gitHead`.
-3. **QPDF (fila 8):** la versión 12.2.0 está confirmada por el `Dockerfile`. Falta confirmar que el binario se compiló con ese `Dockerfile` (inferido).
-4. **Wiktionary (fila 23):** revisión jurídica de ShareAlike para la consulta en vivo.
-5. **Emscripten (sección 3):** inspeccionar la imagen `emscripten/emsdk:3.1.30` con Docker y confirmar la ausencia o presencia de libc++ en el binario.
-6. **Decisión:** si `licenses/` debe servirse en `dist/` (ya se sirven los textos de `public/licencias/`).
-7. Repetir el inventario (`vite build --sourcemap`) si cambia cualquier dependencia.
+1. **worker-f (fila 21):** consulta enviada al autor el 16 nov 2026; respuesta pendiente. No hay texto de licencia verificado. No se distribuye, así que no bloquea la publicación.
+2. **Vínculo tarball ↔ commit de @ffmpeg/ffmpeg y @ffmpeg/util (filas 2 y 3):** inferido. Los registros npm no indican `gitHead`. Riesgo bajo: ambos paquetes son MIT y el aviso se conserva igualmente.
+3. **QPDF (fila 8):** la versión 12.2.0 está confirmada por el `Dockerfile`. Falta confirmar que el binario se compiló con ese `Dockerfile` (inferido). Riesgo bajo: Apache-2.0 y aviso incluido.
+4. **Wiktionary (fila 23):** revisión jurídica de ShareAlike para la consulta en vivo y la visualización reorganizada (ver sección «Wiktionary» abajo).
+5. **Emscripten (sección 3):** el texto de la licencia coincide con el tag 3.1.30; el contenido de la imagen Docker no se inspeccionó (sin Docker en este equipo). Riesgo bajo: el aviso MIT/UIUC está incluido.
+6. **libc++ (sección 3):** resuelto como «no presente» con la evidencia de la sección 3. Si se recompila el núcleo con C++, reabrir este punto.
+7. **Decisión:** si `licenses/` debe servirse en `dist/` (ya se sirven los textos de `public/licencias/`).
+8. Repetir el inventario (`vite build --sourcemap`) si cambia cualquier dependencia.
+
+## 9. Wiktionary: qué se hace y qué requiere interpretación
+
+- **Qué hace la herramienta:** consulta en vivo la API pública de es.wiktionary.org (`prop=extracts`, texto plano) cuando la persona busca una palabra, separa definiciones, sinónimos y antónimos, y los muestra reorganizados en su navegador. Nada se guarda en el servidor ni se incluye en `dist/`.
+- **Cumplido (verificado en la página):** fuente (Wiktionary en español), enlace a la licencia CC BY-SA 4.0, aviso de que el texto se extrajo y reorganizó, y enlace a la entrada original.
+- **Depende de interpretación:** si mostrar extractos reorganizados en la pantalla del visitante es «adaptación» que, en su distribución, activaría ShareAlike sobre el resultado. Un argumento a favor es que no se distribuye copia alguna; uno en contra es que la página muestra y reorganiza el texto. Esto no se resuelve sin asesoramiento jurídico.
+- **Lo que no se afirma:** que todo ChispaBox deba estar bajo CC BY-SA. Esa exigencia solo podría recaer sobre una adaptación redistribuida del propio texto de Wiktionary; el código de ChispaBox no es esa adaptación.
+- **Consulta a Wiktionary:** enviada por VictoriaVMC; no hay respuesta registrada en este documento.
 
 ## 8. Herramientas locales (extras/local/): no distribuidas por el repositorio
 

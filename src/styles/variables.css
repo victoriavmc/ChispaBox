@@ -32,6 +32,8 @@
   --accent-2: var(--c-fuchsia);
   --on-accent: var(--c-white);
   --chip-bg: #ffe2ea;
+  /* Texto rojo sobre fondos claros (insignias): contraste WCAG AA 4,5:1 o más. */
+  --accent-texto: #b0102a;
   --footer-bg: var(--c-rose);
   --footer-text: var(--c-ink);
   --watermark-alpha: 1;
@@ -76,6 +78,7 @@
     --accent-2: var(--c-red-accent);
     --on-accent: var(--c-white);
     --chip-bg: #2d1418;
+    --accent-texto: #ff5a6e;
     --footer-bg: var(--c-black-2);
     --footer-text: var(--c-white);
     --watermark-alpha: 1;
@@ -101,6 +104,7 @@
   --accent-2: var(--c-red-accent);
   --on-accent: var(--c-white);
   --chip-bg: #2d1418;
+  --accent-texto: #ff5a6e;
   --footer-bg: var(--c-black-2);
   --footer-text: var(--c-white);
   --watermark-alpha: 1;

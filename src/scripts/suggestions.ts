@@ -92,12 +92,21 @@ export function initSuggestions(): void {
   // ---- Captcha propio: pregunta y token firmado por el servidor ----
   // Cada token sirve una sola vez, así que tras cada envío (o error de captcha) se pide uno nuevo.
   let captchaToken = '';
+  let captchaRetryTimer = 0;
   const loadCaptcha = async (): Promise<void> => {
     captchaToken = '';
+    window.clearTimeout(captchaRetryTimer);
     captchaQuestion.textContent = 'cargando la pregunta…';
     if (!endpoint) return;
     try {
       const response = await fetch(`${endpoint}/captcha`, { cache: 'no-store', credentials: 'omit' });
+      if (response.status === 429) {
+        // Demasiadas preguntas pedidas desde esta conexión: esperar lo que indica el servidor y reintentar.
+        const espera = Math.min(Math.max(Number(response.headers.get('Retry-After')) || 30, 5), 600);
+        captchaQuestion.textContent = `Pediste muchas preguntas seguidas. Se volverá a intentar en ${espera} s.`;
+        captchaRetryTimer = window.setTimeout(() => void loadCaptcha(), espera * 1000);
+        return;
+      }
       const data = (await response.json()) as { token?: unknown; pregunta?: unknown };
       if (!response.ok || typeof data.token !== 'string' || typeof data.pregunta !== 'string') {
         throw new Error('captcha');
@@ -105,9 +114,13 @@ export function initSuggestions(): void {
       captchaToken = data.token;
       captchaQuestion.textContent = data.pregunta;
     } catch {
-      captchaQuestion.textContent = 'no pudimos cargar la pregunta';
+      captchaQuestion.textContent = 'no pudimos cargar la pregunta (tocá para reintentar)';
     }
   };
+  // Si no pudo cargarse, un toque sobre la pregunta vuelve a pedirla.
+  captchaQuestion.addEventListener('click', () => {
+    if (!captchaToken && endpoint) void loadCaptcha();
+  });
   void loadCaptcha();
 
   // ---- Errores por campo ----

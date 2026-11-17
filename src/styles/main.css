@@ -239,7 +239,7 @@ a {
 
 .badge--soon {
   background: var(--chip-bg);
-  color: var(--accent);
+  color: var(--accent-texto, var(--accent));
 }
 
 .badge--future {

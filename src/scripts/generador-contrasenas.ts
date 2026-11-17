@@ -92,7 +92,7 @@ function pintarFortaleza(opciones: OpcionesContrasena): void {
   const bits = entropiaBits(opciones);
   const fuerza = evaluarFortaleza(bits);
   E.fuerzaEtiqueta.textContent = fuerza.etiqueta;
-  E.fuerzaEtiqueta.style.color = COLORES[fuerza.nivel];
+  E.fuerzaEtiqueta.dataset.nivel = fuerza.nivel;
   E.barra.style.width = `${fuerza.porcentaje}%`;
   E.barra.style.background = COLORES[fuerza.nivel];
   E.detalle.textContent =
@@ -109,7 +109,7 @@ function generar(): void {
     E.resultado.replaceChildren();
     E.copiar.disabled = true;
     E.fuerzaEtiqueta.textContent = '—';
-    E.fuerzaEtiqueta.style.color = '';
+    delete E.fuerzaEtiqueta.dataset.nivel;
     E.barra.style.width = '0%';
     E.detalle.textContent = '';
     E.usados.replaceChildren();

@@ -51,8 +51,9 @@ Puedes reemplazar `ffmpeg-core.js` y `ffmpeg-core.wasm` por tu propia compilaci�
 
 ## 5. Oferta escrita
 
-Quien reciba este binario puede obtener el código fuente correspondiente de los componentes anteriores durante al menos tres años desde su distribución, sin costo, mediante los mismos archivos publicados en `fuentes/` y, si los necesitas, solicitándolos por el formulario de contacto de ChispaBox (sección «Contacto y sugerencias» de la página de políticas).
+Quien reciba este binario puede obtener el código fuente correspondiente de los componentes anteriores durante al menos tres años desde su distribución, sin costo, mediante los mismos archivos publicados en `fuentes/` y, si los necesitas, solicitándolos por correo a victoriavmcortitrabajos@gmail.com (indicá la versión del núcleo que usaste, que figura en la sección 1). La oferta vale mientras el binario esté distribuido y durante al menos tres años desde esa distribución.
 
 ## 6. Límites de esta oferta
-- Los archivos generados por Emscripten (runtime de `ffmpeg-core.js` y libc incluida en el `.wasm`) están bajo licencias permisivas (MIT en Emscripten y musl). La versión exacta de sus avisos en el contenedor 3.1.30 **no se ha verificado** y debe comprobarse antes de publicar.
+- Los archivos generados por Emscripten (runtime de `ffmpeg-core.js` y libc incluida en el `.wasm`) están bajo licencias permisivas (MIT o UIUC en Emscripten; MIT en musl). Los textos están en `licencias/` (`Emscripten-LICENSE-MIT-UIUC.txt`, `musl-COPYRIGHT-MIT.txt`). El texto de Emscripten coincide con el del tag 3.1.30 del repositorio oficial; el contenido del contenedor Docker no se inspeccionó.
+- **Biblioteca C++ (libc++ / libc++abi):** no aparece en el binario distribuido. Comprobado el 16 nov 2026 sobre `ffmpeg-core.wasm`: no hay símbolos mangled de C++ (`_ZNSt`, `_ZNSt3__1`), ni símbolos o cadenas de libc++abi (`__cxa_*`, `__gxx_personality_v0`), ni `std::`. La compilación usa solo `emcc` para FFmpeg, LAME, Opus y zlib, sin enlazar con C++. Limitación: no se analizó el mapa de enlace ni un desensamblado completo.
 - Esta oferta es una medida técnica de cumplimiento. No constituye asesoramiento jurídico (**revisión jurídica pendiente**).

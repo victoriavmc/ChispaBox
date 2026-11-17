@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Ordena, indenta y valida JSON y XML en tu navegador, y marca la línea y la columna donde está el error. Sin subir archivos."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Formatear y validar JSON/XML | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Formatear y validar JSON/XML" subtitulo="Ordena, indenta y valida JSON y XML, y marca dónde está el error. Todo se procesa en tu navegador: el texto no se sube a ningún servidor." personaje="/images/characters/mika-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="fx-entrada-heading">
+          <h2 class="field-label" id="fx-entrada-heading">1. Pegá el texto o elegí un archivo</h2>
+
+          <div class="fx-controles">
+            <div class="fx-campo">
+              <label class="field-label" for="fx-tipo">Tipo de contenido</label>
+              <select id="fx-tipo" class="tool-select">
+                <option value="auto">Detectar automáticamente</option>
+                <option value="json">JSON</option>
+                <option value="xml">XML</option>
+              </select>
+            </div>
+            <div class="fx-campo">
+              <label class="field-label" for="fx-archivo">Archivo (.json o .xml)</label>
+              <input class="bg-file" id="fx-archivo" type="file" accept=".json,.xml,application/json,text/xml,application/xml" />
+            </div>
+          </div>
+
+          <label class="field-label" for="fx-entrada">Texto a revisar</label>
+          <textarea
+            id="fx-entrada"
+            class="fx-texto"
+            rows="10"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+            placeholder='Por ejemplo: {"nombre": "Ana", "edad": 30}'
+          ></textarea>
+
+          <p class="fx-vivo" id="fx-vivo" role="status" aria-live="polite" hidden></p>
+
+          <p class="tool-note">Límite: 5 MB. Los datos se revisan en tu navegador; nada se envía a internet.</p>
+          <p class="rec-error" id="fx-archivo-error" role="alert" hidden></p>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="fx-acciones-heading">
+          <h2 class="field-label" id="fx-acciones-heading">2. Validar o formatear</h2>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--ghost" id="fx-validar">Validar</button>
+            <button type="button" class="btn btn--primary" id="fx-formatear">Formatear</button>
+            <button type="button" class="btn btn--ghost" id="fx-limpiar">Limpiar</button>
+          </div>
+
+          <p class="rec-status" id="fx-estado" role="status" aria-live="polite"></p>
+
+          <div class="fx-resultado fx-resultado--error" id="fx-error" role="alert" hidden>
+            <p class="fx-resultado__titulo" id="fx-error-titulo"></p>
+            <p class="fx-resultado__detalle" id="fx-error-detalle"></p>
+            <pre class="fx-extracto" id="fx-extracto" hidden></pre>
+          </div>
+
+          <div class="fx-resultado fx-resultado--ok" id="fx-ok" role="status" hidden>
+            <p class="fx-resultado__titulo" id="fx-ok-titulo"></p>
+            <p class="fx-resultado__detalle" id="fx-ok-detalle"></p>
+            <ul class="fx-cambios" id="fx-cambios" hidden></ul>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--ghost" id="fx-deshacer" hidden>Volver al original</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="fx-salida-heading" id="fx-salida-panel" hidden>
+          <h2 class="field-label" id="fx-salida-heading">3. Resultado</h2>
+
+          <label class="field-label" for="fx-salida">Texto formateado</label>
+          <textarea id="fx-salida" class="fx-texto fx-texto--salida" rows="12" readonly spellcheck="false"></textarea>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--primary" id="fx-descargar">Descargar</button>
+            <button type="button" class="btn btn--ghost" id="fx-copiar">Copiar</button>
+          </div>
+          <p class="tool-note" id="fx-copia-estado" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/formato-json-xml.ts"></script>
+  </body>
+</html>

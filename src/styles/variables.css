@@ -1,0 +1,116 @@
+/*
+ * Tokens de diseño.
+ * - Tema claro por defecto.
+ * - Tema oscuro: se aplica con prefers-color-scheme mientras no exista preferencia guardada
+ *   (:root sin data-theme="light") y con data-theme="dark" cuando el usuario lo elige.
+ */
+
+:root {
+  /* Paleta de marca (tema claro) */
+  --c-white: #ffffff;
+  --c-red: #e61932;
+  --c-fuchsia: #f72568;
+  --c-rose: #fff0f4;
+  --c-ink: #19191d;
+
+  /* Paleta de marca (tema oscuro) */
+  --c-black: #101013;
+  --c-black-2: #19191e;
+  --c-red-accent: #ff2438;
+  --c-surface-dark: #25252b;
+
+  /* Tokens semánticos: tema claro */
+  --bg: var(--c-white);
+  --bg-soft: var(--c-rose);
+  --surface: var(--c-white);
+  --surface-2: #fff8fa;
+  --text: var(--c-ink);
+  --text-muted: #55555e;
+  --border: #f1d3dc;
+  --accent: var(--c-red);
+  --accent-solid: var(--c-red);
+  --accent-2: var(--c-fuchsia);
+  --on-accent: var(--c-white);
+  --chip-bg: #ffe2ea;
+  /* Texto rojo sobre fondos claros (insignias): contraste WCAG AA 4,5:1 o más. */
+  --accent-texto: #b0102a;
+  --footer-bg: var(--c-rose);
+  --footer-text: var(--c-ink);
+  --watermark-alpha: 1;
+  --focus-ring: var(--c-fuchsia);
+  --shadow: 0 6px 18px rgb(25 25 29 / 8%);
+  --shadow-hover: 0 14px 30px rgb(25 25 29 / 14%);
+  --stripe: rgb(230 25 50 / 9%);
+
+  /* Escala y forma */
+  --radius-lg: 1.25rem;
+  --radius-md: 0.875rem;
+  --radius-pill: 999px;
+  --container: 74rem;
+  --gutter: clamp(1rem, 3vw, 2rem);
+  --space-section: clamp(2.5rem, 5vw, 4.5rem);
+
+  /* Tipografía (fuentes del sistema, sin descargas externas) */
+  --font-base:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 180ms;
+
+  color-scheme: light;
+}
+
+/* Tema oscuro por preferencia del sistema (solo si no hay preferencia guardada) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: var(--c-black);
+    --bg-soft: var(--c-black-2);
+    --surface: var(--c-black-2);
+    --surface-2: var(--c-surface-dark);
+    --text: var(--c-white);
+    --text-muted: #c9c9d1;
+    --border: #3a3a43;
+    --accent: var(--c-red-accent);
+    --accent-solid: #e0102a;
+    --accent-2: var(--c-red-accent);
+    --on-accent: var(--c-white);
+    --chip-bg: #2d1418;
+    --accent-texto: #ff5a6e;
+    --footer-bg: var(--c-black-2);
+    --footer-text: var(--c-white);
+    --watermark-alpha: 1;
+    --focus-ring: var(--c-red-accent);
+    --shadow: 0 6px 18px rgb(0 0 0 / 40%);
+    --shadow-hover: 0 14px 30px rgb(0 0 0 / 55%);
+    --stripe: rgb(255 36 56 / 14%);
+    color-scheme: dark;
+  }
+}
+
+/* Tema oscuro elegido explícitamente por el usuario */
+:root[data-theme="dark"] {
+  --bg: var(--c-black);
+  --bg-soft: var(--c-black-2);
+  --surface: var(--c-black-2);
+  --surface-2: var(--c-surface-dark);
+  --text: var(--c-white);
+  --text-muted: #c9c9d1;
+  --border: #3a3a43;
+  --accent: var(--c-red-accent);
+  --accent-solid: #e0102a;
+  --accent-2: var(--c-red-accent);
+  --on-accent: var(--c-white);
+  --chip-bg: #2d1418;
+  --accent-texto: #ff5a6e;
+  --footer-bg: var(--c-black-2);
+  --footer-text: var(--c-white);
+  --watermark-alpha: 1;
+  --focus-ring: var(--c-red-accent);
+  --shadow: 0 6px 18px rgb(0 0 0 / 40%);
+  --shadow-hover: 0 14px 30px rgb(0 0 0 / 55%);
+  --stripe: rgb(255 36 56 / 14%);
+  color-scheme: dark;
+}

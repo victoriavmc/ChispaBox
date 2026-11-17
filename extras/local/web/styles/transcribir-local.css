@@ -1,0 +1,58 @@
+/* Ajustes de la página local «Transcribir audio a texto» (archivo). Usa los tokens de variables.css. */
+
+.rec-note {
+  margin: 0.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* La casilla de autorización va en su propio renglón, con aire debajo. */
+label.rec-note {
+  display: block;
+  margin: 0.75rem 0 1.25rem;
+  line-height: 1.5;
+}
+
+.rec-note input[type='checkbox'] {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.tr-select-label {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: 600;
+}
+
+#up-lang {
+  margin-top: 0.4rem;
+}
+
+/* Botones de la transcripción: separados del selector y de la casilla. */
+.rec-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+#up-output {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 12rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+#up-output:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}

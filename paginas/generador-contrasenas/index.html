@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Generá contraseñas aleatorias y seguras con tus propias reglas, y mirá qué tan fuerte es. Todo se genera en tu navegador."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Generador de contraseñas | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Generador de contraseñas" subtitulo="Elegí la longitud y los tipos de caracteres. La contraseña se genera con el generador aleatorio seguro de tu navegador: nada se envía a un servidor y no se guarda en ningún lado." personaje="/images/characters/vale-cutout.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Crear una contraseña</h2>
+
+          <section class="rec-panel" aria-labelledby="pw-config-heading">
+            <h3 class="field-label" id="pw-config-heading">1. Configuración</h3>
+
+            <div class="tool-panel">
+              <label class="field-label" for="pw-longitud-rango">
+                Longitud: <output id="pw-longitud-valor" for="pw-longitud-rango">16</output> caracteres
+              </label>
+              <input
+                class="pw-range"
+                id="pw-longitud-rango"
+                type="range"
+                min="8"
+                max="128"
+                step="1"
+                value="16"
+              />
+            </div>
+
+            <fieldset class="pw-fieldset">
+              <legend class="field-label">Caracteres a usar</legend>
+              <div class="pw-options">
+                <label class="pw-check"><input type="checkbox" id="pw-mayusculas" checked /> <span>Mayúsculas <code>ABC</code></span></label>
+                <label class="pw-check"><input type="checkbox" id="pw-minusculas" checked /> <span>Minúsculas <code>abc</code></span></label>
+                <label class="pw-check"><input type="checkbox" id="pw-numeros" checked /> <span>Números <code>123</code></span></label>
+                <label class="pw-check"><input type="checkbox" id="pw-simbolos" checked /> <span>Símbolos <code>#$&amp;</code></span></label>
+              </div>
+              <label class="pw-check pw-check--solo">
+                <input type="checkbox" id="pw-sin-ambiguos" />
+                <span>Excluir caracteres que se confunden (<code>0 O 1 l I</code>)</span>
+              </label>
+            </fieldset>
+            <p class="rec-error" id="pw-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="pw-resultado-heading">
+            <h3 class="field-label" id="pw-resultado-heading">2. Tu contraseña</h3>
+
+            <div class="pw-output">
+              <div
+                class="pw-output__texto"
+                id="pw-resultado"
+                role="textbox"
+                aria-readonly="true"
+                aria-label="Contraseña generada"
+                tabindex="0"
+              ></div>
+            </div>
+
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="pw-copiar">Copiar</button>
+              <button type="button" class="btn btn--ghost" id="pw-generar">Generar otra</button>
+            </div>
+
+            <div class="pw-fuerza" aria-live="polite">
+              <div class="pw-fuerza__cabecera">
+                <span class="field-label">Seguridad:</span>
+                <strong id="pw-fuerza-etiqueta">—</strong>
+              </div>
+              <div class="pw-barra" role="img" aria-label="Medidor de seguridad">
+                <div class="pw-barra__relleno" id="pw-barra-relleno"></div>
+              </div>
+              <p class="tool-note" id="pw-fuerza-detalle"></p>
+            </div>
+
+            <h4 class="field-label">Caracteres usados</h4>
+            <ul class="pw-usados" id="pw-usados"></ul>
+          </section>
+
+          <p class="rec-status" id="pw-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/generador-contrasenas.ts"></script>
+  </body>
+</html>

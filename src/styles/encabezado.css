@@ -1,0 +1,32 @@
+/* Encabezado de herramienta (plantilla templates/encabezado.html).
+   Título + subtítulo a la izquierda y personaje a la derecha. Se carga en todas las páginas desde main.ts. */
+
+.tool-hero--chibi {
+  position: relative;
+  min-height: 15rem;
+  padding-right: clamp(7.5rem, 24vw, 11rem);
+}
+
+.tool-hero__chibi {
+  position: absolute;
+  right: 0.25rem;
+  bottom: 0;
+  height: 14.5rem;
+  width: auto;
+  max-width: 40%;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .tool-hero--chibi {
+    min-height: 0;
+    padding-right: 0;
+    padding-bottom: 9.5rem;
+  }
+
+  .tool-hero__chibi {
+    right: 50%;
+    height: 8.5rem;
+    transform: translateX(50%);
+  }
+}

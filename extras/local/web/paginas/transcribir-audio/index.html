@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Convertí un archivo de audio en texto con Whisper, sin enviarlo a ningún servicio."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Transcribir audio a texto | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Transcribir audio a texto (local)" subtitulo="Convertí un audio en texto con Whisper en tu navegador. El audio no sale de tu equipo; el modelo se descarga una sola vez." personaje="/images/characters/vale-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="up-heading">
+          <h2 class="tr-section-title" id="up-heading">Archivo de audio</h2>
+          <p class="rec-note">Formatos que reconoce el navegador (WAV, MP3, OGG, M4A, FLAC). Máximo 100 MB. Requiere unos 1 GB de memoria libre y tarda varios minutos con audios largos.</p>
+          <label class="btn btn--soft" for="up-file">Elegir archivo de audio</label>
+          <input id="up-file" type="file" accept="audio/*" hidden />
+          <p id="up-file-name" class="rec-state">Ningún archivo elegido.</p>
+          <label class="tr-select-label" for="up-lang">Idioma del audio</label>
+          <select class="tr-select" id="up-lang"></select>
+          <label class="rec-note"><input type="checkbox" id="up-consent" /> Autorizo la descarga única del modelo de reconocimiento (unos 80 MB desde huggingface.co). El audio nunca se envía.</label>
+          <div class="rec-controls">
+            <button type="button" class="btn btn--primary" id="up-start" disabled>Transcribir</button>
+            <button type="button" class="btn btn--soft" id="up-copy" disabled>Copiar texto</button>
+            <button type="button" class="btn btn--soft" id="up-clear">Limpiar</button>
+          </div>
+          <progress id="up-progress" max="100" value="0" hidden></progress>
+          <textarea id="up-output" rows="12" readonly aria-label="Texto transcrito"></textarea>
+          <p class="rec-state" id="up-status" role="status" aria-live="polite"></p>
+          <p class="rec-error" id="up-error" role="alert" hidden></p>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/extras/local/web/scripts/transcribir-whisper.ts"></script>
+  </body>
+</html>

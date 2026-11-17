@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Combiná varias grabaciones en un solo archivo de audio, en el orden que elijas. Se procesa en tu navegador; el audio no se sube a ningún servidor."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Unificar audios | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Unificar audios" subtitulo="Agregá varias grabaciones, ordenalas y descargá un solo archivo de audio. Todo se procesa en tu navegador: los audios no se suben a ningún servidor y los originales no se modifican." personaje="/images/characters/mika-cutout.webp" -->
+
+        <div id="panel-unir-audio" class="doc-panel">
+          <h2 class="doc-panel__title">Unir varias grabaciones</h2>
+
+          <section class="rec-panel" aria-labelledby="ua-sel-heading">
+            <h3 class="field-label" id="ua-sel-heading">1. Agregar los audios</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de agregar</p>
+              <ul class="tool-req__list" id="ua-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="ua-dropzone">
+              <label class="field-label" for="ua-file">Seleccionar audios o arrastrarlos aquí</label>
+              <input class="bg-file" id="ua-file" type="file" accept="audio/*" multiple />
+            </div>
+            <p class="rec-error" id="ua-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ua-order-heading">
+            <h3 class="field-label" id="ua-order-heading">2. Ordenar</h3>
+            <p class="tool-note" id="ua-summary"></p>
+            <ol class="unificar-list" id="ua-list" aria-label="Audios a unir, en orden" hidden></ol>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ua-run-heading">
+            <h3 class="field-label" id="ua-run-heading">3. Formato y descarga</h3>
+            <fieldset class="tool-panel">
+              <legend class="field-label">Formato del archivo</legend>
+              <label class="tool-radio">
+                <input type="radio" name="ua-formato" id="ua-formato-mp3" value="mp3" checked />
+                MP3 (128 kbps, más liviano)
+              </label>
+              <label class="tool-radio">
+                <input type="radio" name="ua-formato" id="ua-formato-wav" value="wav" />
+                WAV (sin compresión, más pesado)
+              </label>
+            </fieldset>
+            <div class="tool-panel">
+              <label class="field-label" for="ua-nombre">Nombre del archivo (sin extensión)</label>
+              <input class="tool-select" id="ua-nombre" type="text" maxlength="120" autocomplete="off" />
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="ua-run" disabled>Unir audios</button>
+              <button type="button" class="btn btn--ghost" id="ua-clear" disabled>Vaciar lista</button>
+            </div>
+            <div class="bg-progress doc-progress" id="ua-progress-wrap" hidden>
+              <progress aria-labelledby="ua-progress-text"></progress>
+              <span id="ua-progress-text"></span>
+            </div>
+            <div class="doc-result" id="ua-results" hidden></div>
+          </section>
+
+          <p class="rec-status" id="ua-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/unificar-audios.ts"></script>
+  </body>
+</html>

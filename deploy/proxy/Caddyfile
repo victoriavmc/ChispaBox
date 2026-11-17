@@ -1,0 +1,52 @@
+# Caddyfile del proxy compartido. Ruta en el VPS: /opt/proxy/Caddyfile
+# Cada sitio añade su bloque; el nombre del servicio (chispabox-web) se resuelve por la red "edge".
+# Validar antes de recargar: docker compose exec caddy caddy validate --config /etc/caddy/Caddyfile
+
+{
+	email {$ACME_EMAIL}
+}
+
+# Redirección de www al dominio principal.
+www.{$CHISPABOX_DOMAIN} {
+	redir https://{$CHISPABOX_DOMAIN}{uri} permanent
+}
+
+{$CHISPABOX_DOMAIN} {
+	encode zstd gzip
+
+	# Sin CSP aquí: la CSP la define nginx de ChispaBox (evita dos CSP que se combinan).
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+
+	# Endpoint de sugerencias (mismo origen: no requiere cambios en connect-src de la CSP).
+	handle /api/sugerencias* {
+		reverse_proxy chispabox-sugerencias:3000
+	}
+
+	handle {
+		reverse_proxy chispabox-web:8080 {
+			header_up Host {host}
+		}
+	}
+
+	# Registro de acceso en fichero rotado dentro del volumen caddy_data (contiene IP y URL; ver privacidad).
+	# El acortador de enlaces envía su código en ?c=; no debe quedar en el registro.
+	log {
+		output file /data/access-chispabox.log {
+			roll_size 5MiB
+			roll_keep 3
+			roll_keep_for 720h   # retención de accesos: 30 días
+		}
+		format filter {
+			wrap json
+			fields {
+				# Enlaces cortos /s/CODIGO y parámetro ?c=: se ocultan en el registro.
+				request>uri regexp "^((?:/s/))[A-Za-z0-9]{7}/?|([?&]c=)[^&]*" "${1}${2}REDACTED"
+				# Referer: puede contener el código del acortador; no se registra.
+				request>headers>Referer delete
+			}
+		}
+	}
+}

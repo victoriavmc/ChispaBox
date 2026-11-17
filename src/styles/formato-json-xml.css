@@ -1,0 +1,138 @@
+/* Formatear y validar JSON/XML: controles, área de texto, resultados y marca del error. */
+.fx-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.fx-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.fx-texto {
+  width: 100%;
+  min-height: 12rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 0.5rem);
+  background: var(--surface);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  resize: vertical;
+  white-space: pre;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.fx-texto--salida {
+  min-height: 14rem;
+}
+
+.fx-resultado {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md, 0.5rem);
+  border: 1px solid var(--border);
+}
+
+.fx-resultado[hidden] {
+  display: none;
+}
+
+.fx-resultado--error {
+  border-color: #c0392b;
+  background: rgba(192, 57, 43, 0.08);
+}
+
+.fx-resultado--ok {
+  border-color: #1e8449;
+  background: rgba(30, 132, 73, 0.08);
+}
+
+.fx-resultado__titulo {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+}
+
+.fx-resultado__detalle {
+  margin: 0;
+}
+
+.fx-extracto {
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md, 0.5rem);
+  background: var(--surface);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.85rem;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.fx-extracto[hidden] {
+  display: none;
+}
+
+.fx-vivo {
+  margin: 0.5rem 0 0;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-md, 0.5rem);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.9rem;
+}
+
+.fx-vivo[hidden] {
+  display: none;
+}
+
+.fx-vivo--error {
+  color: #ff6b7a;
+  background: rgba(230, 25, 50, 0.12);
+}
+
+.fx-vivo--ok {
+  color: #5ddc8b;
+  background: rgba(30, 132, 73, 0.12);
+}
+
+.fx-cambios {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.fx-cambios[hidden] {
+  display: none;
+}
+
+.fx-linea {
+  display: block;
+  min-height: 1.4em;
+}
+
+.fx-linea--error {
+  background: rgba(230, 25, 50, 0.12);
+  border-radius: 3px;
+}
+
+.fx-num {
+  color: var(--text-muted, #888);
+  user-select: none;
+  white-space: pre;
+}
+
+.fx-error-char {
+  background: #e61932;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 0 2px;
+}

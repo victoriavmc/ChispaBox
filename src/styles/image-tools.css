@@ -1,0 +1,395 @@
+/* Componentes compartidos de las herramientas de imagen (quitar fondo, convertir, mejorar). */
+
+[hidden] {
+  display: none !important;
+}
+
+.bg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 40rem) {
+  .bg-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bg-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.bg-figure figcaption {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.bg-figure img {
+  display: block;
+  width: 100%;
+  max-height: 22rem;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.bg-figure--checker img {
+  background-color: var(--surface-2);
+}
+
+.bg-figure--checker img {
+  background-image:
+    linear-gradient(45deg, var(--border) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--border) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--border) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--border) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+.rec-error {
+  white-space: pre-line;
+  color: var(--accent);
+  margin: 0;
+}
+
+.conv-list {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.conv-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  overflow-wrap: anywhere;
+}
+
+.conv-size-row {
+  display: grid;
+  grid-template-columns: max-content 8rem max-content 8rem;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  max-width: 34rem;
+}
+
+.conv-size-row input {
+  font: inherit;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+}
+
+@media (max-width: 40rem) {
+  .conv-size-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tool-req {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+}
+
+.tool-req__title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.tool-req__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.tool-dropzone {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.1rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+
+.tool-dropzone.is-dragover {
+  border-color: var(--accent);
+  background: var(--chip-bg);
+}
+
+.tool-info {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+}
+
+.tool-info dt {
+  color: var(--text-muted);
+}
+
+.tool-info dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.tool-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tool-methods__legend {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.tool-method {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.tool-method:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--chip-bg);
+}
+
+.tool-panel {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.tool-panel[hidden] {
+  display: none;
+}
+
+.tool-select {
+  max-width: 22rem;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.tool-note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.tool-label {
+  color: var(--text-muted);
+}
+
+.tool-swatch-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.tool-swatch {
+  display: inline-block;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: transparent;
+}
+
+.tool-zoom {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tool-zoom__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-zoom__scroll {
+  max-height: 34rem;
+  overflow: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+/* El zoom ajusta el ancho del lienzo de vista previa; el alto sigue la proporción. */
+.tool-stage {
+  position: relative;
+  /* El zoom cambia el ancho: menos de 100 % se reduce y se centra; más de 100 % desplaza. */
+  width: calc(var(--zoom, 1) * 100%);
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.tool-stage canvas,
+.tool-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  inset: 0;
+}
+
+.tool-stage canvas {
+  position: relative;
+}
+
+/* Cuadrícula de transparencia con grises de contraste fuerte: se ve sobre fondos blancos y negros. */
+.tool-checker {
+  background-color: #d9d9d9;
+  background-image:
+    linear-gradient(45deg, #a3a3a3 25%, transparent 25%),
+    linear-gradient(-45deg, #a3a3a3 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #a3a3a3 75%),
+    linear-gradient(-45deg, transparent 75%, #a3a3a3 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/* Divisor y rótulos de la comparación antes/después */
+.tool-split {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.tool-tag {
+  position: absolute;
+  top: 0.5rem;
+  z-index: 3;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.tool-tag--left {
+  left: 0.5rem;
+}
+
+.tool-tag--right {
+  right: 0.5rem;
+}
+
+.tool-export {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+
+.bg-file {
+  width: 100%;
+  max-width: 28rem;
+  font: inherit;
+  color: var(--text);
+}
+
+.bg-file::file-selector-button {
+  margin-right: 0.75rem;
+  padding: 0.6rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--on-accent);
+  background: var(--accent);
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.bg-hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.bg-progress {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.bg-progress progress {
+  width: 100%;
+  height: 0.6rem;
+  accent-color: var(--accent);
+}
+
+.bg-progress span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.tool-info[hidden],
+.tool-panel[hidden] {
+  display: none;
+}
+
+@media (max-width: 40rem) {
+  .tool-info {
+    grid-template-columns: 1fr;
+  }
+  .tool-info dt {
+    margin-top: 0.4rem;
+  }
+}
+
+/* Mejorar imagen: el original define la altura de la vista previa; el resultado se superpone con el mismo tamaño. */
+#mej-original {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+#mej-result {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

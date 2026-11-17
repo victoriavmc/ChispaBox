@@ -1,0 +1,91 @@
+/* «Contacto» del pie de página: botón que abre un diálogo con la dirección y el botón de copiar.
+ * Usa los tokens de variables.css (claro y oscuro). */
+
+.site-footer__contacto-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.site-footer__contacto-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.contacto-modal {
+  width: min(92vw, 30rem);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-hover);
+}
+
+.contacto-modal::backdrop {
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+.contacto-modal__box {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.contacto-modal__titulo {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.contacto-modal__texto,
+.contacto-modal__ayuda {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.contacto-modal__direccion {
+  margin: 0;
+  font-weight: 700;
+  user-select: all;
+  word-break: break-all;
+}
+
+.contacto-modal__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.contacto-modal__acciones .site-footer__estado {
+  margin-right: auto;
+  font-weight: 600;
+}
+
+.site-footer__copiar {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.site-footer__copiar:hover {
+  background: var(--chip-bg);
+}
+
+.site-footer__copiar:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}

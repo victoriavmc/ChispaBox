@@ -1,0 +1,45 @@
+# Dependencias y artefactos locales (se reinstalan y compilan dentro de la imagen)
+node_modules
+dist
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Control de versiones y editores
+.git
+.gitignore
+.vscode
+.idea
+*.swp
+.DS_Store
+Thumbs.db
+
+# Docker y documentación (no necesarios para compilar)
+Dockerfile
+compose.yaml
+.dockerignore
+README.md
+*.md
+
+# Archivos temporales y de entorno
+.env
+.env.*
+*.env
+!*.env.example
+*.log
+coverage
+tmp
+
+# Contexto de construcción: solo lo que la imagen necesita.
+# La imagen web copia solo raíz (*.html, configs), templates, paginas, public, server, src y scripts.
+deploy
+docs
+experimentos
+tests
+.claude
+*.docx
+
+# Herramientas locales opcionales (extras/local): nunca forman parte de la imagen de producción.
+extras
+local-ocr
+public/ocr

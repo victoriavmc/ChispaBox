@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Descarga un video de YouTube en MP4, WebM o MKV, con las calidades que realmente existen." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Descargar video de YouTube | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page yt-page">
+        <!-- @include:encabezado titulo="Descargar video de YouTube" subtitulo="Pegá el enlace de un video propio o cuya descarga esté autorizada. El video se procesa en el servidor de esta aplicación y solo se ofrecen las calidades que el video tiene de verdad." personaje="/images/characters/miles-cutout.webp" -->
+
+        <p class="rec-error yt-unavailable" id="yt-unavailable" role="status" hidden>
+          Esta herramienta no está disponible en este entorno.
+        </p>
+
+        <div id="yt-app" hidden>
+          <section class="rec-panel" aria-labelledby="yt-link-heading">
+            <h2 class="field-label" id="yt-link-heading">1. Enlace del video</h2>
+            <label class="field-label" for="yt-url">Enlace de YouTube</label>
+            <div class="yt-row">
+              <input
+                class="text-input yt-input"
+                id="yt-url"
+                type="url"
+                inputmode="url"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="https://www.youtube.com/watch?v=…"
+              />
+              <button type="button" class="btn btn--primary" id="yt-analyze">Analizar</button>
+            </div>
+            <p class="tool-note">Se aceptan enlaces de youtube.com/watch, m.youtube.com, youtu.be y shorts. No se admiten listas ni canales.</p>
+            <p class="rec-error" id="yt-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" id="yt-info-panel" aria-labelledby="yt-info-heading" hidden>
+            <h2 class="field-label" id="yt-info-heading">2. Información del video</h2>
+            <dl class="tool-info" id="yt-info"></dl>
+          </section>
+
+          <section class="rec-panel" id="yt-options-panel" aria-labelledby="yt-opt-heading" hidden>
+            <h2 class="field-label" id="yt-opt-heading">3. Formato, calidad y nombre</h2>
+
+            <div class="tool-panel">
+              <label class="field-label" for="yt-format">Formato de salida</label>
+              <select id="yt-format" class="tool-select"></select>
+              <p class="tool-note">MP4 es el formato recomendado. Solo aparecen los formatos que se pueden generar con las herramientas instaladas.</p>
+            </div>
+
+            <div class="tool-panel">
+              <label class="field-label" for="yt-quality">Calidad (resolución disponible)</label>
+              <select id="yt-quality" class="tool-select"></select>
+              <p class="tool-note yt-size" id="yt-size" aria-live="polite"></p>
+            </div>
+
+            <div class="tool-panel">
+              <label class="field-label" for="yt-name">Nombre del archivo (sin extensión)</label>
+              <input class="text-input yt-input" id="yt-name" type="text" maxlength="180" autocomplete="off" />
+              <p class="tool-note">
+                Nombre final:
+                <strong class="yt-final-name" id="yt-final-name"></strong>
+              </p>
+            </div>
+          </section>
+
+          <section class="rec-panel" id="yt-run-panel" aria-labelledby="yt-run-heading" hidden>
+            <h2 class="field-label" id="yt-run-heading">4. Descargar y guardar</h2>
+
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="yt-download" disabled>Descargar video</button>
+              <button type="button" class="btn btn--ghost" id="yt-cancel" hidden>Cancelar</button>
+            </div>
+
+            <div class="bg-progress" id="yt-progress-wrap" hidden>
+              <progress id="yt-progress" max="100" value="0"></progress>
+              <span id="yt-progress-text"></span>
+            </div>
+          </section>
+
+          <p class="rec-status" id="yt-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/extras/local/web/scripts/descargar-youtube-video.ts"></script>
+  </body>
+</html>

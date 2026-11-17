@@ -1,0 +1,77 @@
+MIT License
+
+Copyright (c) 2026 VictoriaVMC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------------
+
+ALCANCE DE ESTA LICENCIA (ChispaBox)
+
+1. Código propio. Esta licencia MIT se aplica al código escrito por VictoriaVMC para
+   ChispaBox (src/, server/, paginas/, templates/, scripts/, tests/, deploy/, extras/local/ y
+   los archivos de configuración de la raíz), salvo lo indicado en los puntos 2 a 5.
+   El código fue desarrollado por VictoriaVMC con asistencia de Claude (Anthropic), bajo sus
+   decisiones, instrucciones, pruebas y supervisión. La licencia se otorga por VictoriaVMC sobre
+   las partes del código en las que tenga derechos; no renuncia a ellos por el uso de esa
+   herramienta.
+
+2. Componentes de terceros. No quedan cubiertos por esta licencia. Cada uno conserva su
+   licencia original, enumerada en THIRD_PARTY_NOTICES.md. Esto incluye, entre otros: el
+   núcleo FFmpeg en public/ffmpeg-lgpl/ (LGPL-2.1 o posterior, con LAME 3.100 bajo LGPL-2.0,
+   Opus bajo BSD-3-Clause y zlib), el diccionario español en public/dictionaries/es/ (distribuido
+   bajo MPL-1.1, una de las tres licencias que ofrece su autor), pdf.js y las fuentes que incluye
+   (Apache-2.0 y licencias propias de las fuentes), QPDF (Apache-2.0) y las demás bibliotecas de npm.
+   Las dependencias de extras/local/ se instalan desde npm por cada usuario; sus licencias figuran
+   en extras/local/README.md. Los ejecutables yt-dlp y FFmpeg no se distribuyen con el repositorio.
+   Las obligaciones de esas licencias (avisos, texto de licencia, código fuente de la versión
+   distribuida y posibilidad de reemplazo) siguen vigentes y no se reducen por esta licencia.
+
+3. Identidad visual: reserva de derechos. Las ilustraciones, personajes, logotipo, favicon,
+   imagen de agradecimiento e ilustración 404 se crearon para ChispaBox con asistencia de
+   ChatGPT (OpenAI) bajo la dirección, selección y revisión de VictoriaVMC, según la procedencia
+   declarada en docs/procedencia-imagenes.md. Están en public/images/, public/favicon.png y
+   deploy/sugerencias/assets/gracias.png. Se publican en el repositorio para verlos en el sitio,
+   pero NO se licencian bajo MIT ni bajo otra licencia abierta: se reservan todos los derechos
+   sobre ellos. Su copia, modificación, redistribución o uso fuera de ChispaBox requiere
+   autorización escrita de VictoriaVMC. Los términos de OpenAI ceden al usuario los derechos que
+   la empresa pueda tener sobre los resultados, sin garantizar que existan; si un resultado es
+   protegible depende de la ley aplicable y del aporte creativo humano. No se afirma exclusividad
+   que la ley no reconozca.
+
+4. Marca y nombre. El nombre «ChispaBox» y el logotipo no se licencian con esta licencia.
+
+5. Contenido de terceros. Las definiciones que la herramienta «Buscar palabra» consulta en
+   Wiktionary son de sus autores y se rigen por su licencia (Creative Commons BY-SA 4.0). No se
+   redistribuyen en el repositorio: se consultan en vivo a la API pública y se muestran
+   extraídos y reorganizados, con atribución y enlace a la entrada original. En la revisión de
+   procedencia no se identificó ningún otro recurso de origen externo sin autorización.
+
+Aviso: este texto es una propuesta técnica de licencia. Debe revisarse con un profesional del
+derecho antes de adoptarlo definitivamente. Decisiones que requieren revisión jurídica:
+  a) Licencia MIT del código propio y la lista de exclusiones de los puntos 2 a 5.
+  b) Reserva de derechos sobre la identidad visual (punto 3) y la procedencia declarada con
+     ChatGPT. Los términos de OpenAI se consultaron (cesión «si la hubiera»); la protegibilidad
+     de los resultados queda para la revisión jurídica.
+  c) Consulta en vivo a Wiktionary (CC BY-SA 4.0, punto 5): si el uso se considera adaptación
+     redistribuida, aplica ShareAlike.
+  d) Cumplimiento de la LGPL del núcleo FFmpeg (ofertas de código fuente y avisos) y, si se
+     confirma libc++ en el binario, su aviso (ver THIRD_PARTY_NOTICES.md, secciones 3 y 7).
+  e) Las herramientas de extras/local/ no se distribuyen con el repositorio, pero su uso
+     depende de las condiciones de YouTube, Hugging Face y de la licencia de cada dependencia.

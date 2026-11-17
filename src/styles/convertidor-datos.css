@@ -1,0 +1,16 @@
+/* Convertidor de datos: vista previa del resultado. */
+.dat-output {
+  width: 100%;
+  min-height: 12rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 0.5rem);
+  background: var(--surface);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  resize: vertical;
+  white-space: pre;
+  overflow: auto;
+}

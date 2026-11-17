@@ -1,0 +1,105 @@
+/* Página «Generador de favicon»: vista previa, opciones y lista de archivos. */
+
+/* Separación entre títulos de sección y los bloques de cada paso. */
+#panel-favicon .rec-panel > h3.field-label {
+  margin: 0 0 0.6rem;
+}
+
+#panel-favicon .tool-req {
+  margin-bottom: 0.75rem;
+}
+
+#panel-favicon .fav-preview-wrap {
+  margin-top: 1rem;
+}
+
+.fav-options {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+
+.fav-options label {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+/* Cada control ocupa su columna: el texto largo del select no la desborda ni tapa a los demás. */
+.fav-options .tool-select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.fav-options input[type='color'].tool-select {
+  height: 2.75rem;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.fav-check {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fav-preview-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.fav-preview {
+  width: 128px;
+  height: 128px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  background:
+    conic-gradient(#d9d9d9 25%, #ffffff 0 50%, #d9d9d9 0 75%, #ffffff 0) 0 0 / 16px 16px;
+}
+
+.fav-preview[hidden] {
+  display: none;
+}
+
+.fav-sizes {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.fav-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.fav-snippet {
+  width: 100%;
+  min-height: 9rem;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.fav-snippet:focus-visible {
+  outline: var(--focus-ring) solid 2px;
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .fav-result-actions .btn {
+    flex: 1 1 100%;
+  }
+}

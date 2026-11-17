@@ -1,0 +1,139 @@
+<div class="text-tool text-tool--clean">
+  <div class="clean-layout">
+    <section class="clean-editor" aria-label="Editor de texto">
+      <label class="field-label" for="text-input">Texto a analizar</label>
+      <div class="text-input-wrap">
+        <div class="text-highlight" id="text-highlight" aria-hidden="true"></div>
+        <textarea
+          class="text-input"
+          id="text-input"
+          rows="8"
+          placeholder="Escribí o pegá tu texto acá..."
+          spellcheck="true"
+        ></textarea>
+      </div>
+
+      <div class="clean-stats" role="group" aria-label="Estadísticas del texto">
+        <div class="clean-stat">
+          <span class="clean-stat__label" id="word-label">Palabras</span>
+          <output class="clean-stat__value" id="word-count" for="text-input" aria-labelledby="word-label">0</output>
+        </div>
+        <div class="clean-stat">
+          <span class="clean-stat__label" id="char-label">Caracteres con espacios</span>
+          <output class="clean-stat__value" id="char-count" for="text-input" aria-labelledby="char-label">0</output>
+        </div>
+      </div>
+
+      <div class="clean-actions" role="group" aria-label="Acciones sobre el texto">
+        <button type="button" class="btn btn--primary clean-actions__primary" id="btn-clean">
+          <svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>Limpiar texto
+        </button>
+        <div class="clean-actions__secondary">
+          <button type="button" class="btn btn--soft" id="btn-undo" disabled>
+            <svg class="icon" aria-hidden="true"><use href="#i-undo"/></svg>Deshacer
+          </button>
+          <button type="button" class="btn btn--soft" id="btn-clear">
+            <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Borrar
+          </button>
+          <button type="button" class="btn btn--soft" id="btn-copy">
+            <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copiar
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="clean-rules" aria-labelledby="clean-rules-title">
+      <h2 class="clean-rules__title" id="clean-rules-title">Reglas de limpieza</h2>
+
+      <details class="rules-group rules-group--collapsible" id="rules-replace">
+        <summary class="rules-group__title">Buscar y reemplazar</summary>
+        <div class="rules-group__body">
+          <p class="rules-hint">
+            Lo que escribas en «Buscar» se resalta en el texto. Con «Reemplazar por» vacío, las coincidencias se eliminan.
+          </p>
+          <div class="replace-rule">
+            <div class="field">
+              <label class="field-label" for="replace-find">Buscar</label>
+              <input class="text-field" type="text" id="replace-find" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label class="field-label" for="replace-with">Reemplazar por</label>
+              <input class="text-field" type="text" id="replace-with" autocomplete="off" />
+            </div>
+            <div class="replace-rule__options">
+              <label class="check">
+                <input type="checkbox" id="replace-word" />
+                <span>Solo palabra completa</span>
+              </label>
+              <button type="button" class="btn btn--primary" id="btn-replace">Reemplazar</button>
+            </div>
+          </div>
+          <p class="replace-count" id="replace-count" aria-live="polite"></p>
+        </div>
+      </details>
+
+      <details class="rules-group rules-group--collapsible" id="rules-fillers">
+        <summary class="rules-group__title">Muletillas</summary>
+        <div class="rules-group__body">
+          <label class="check">
+            <input type="checkbox" id="rule-fillers" checked />
+            <span>Eliminar muletillas</span>
+          </label>
+          <div class="field">
+            <label class="field-label" for="fillers-list">Muletillas a eliminar (separadas por coma)</label>
+            <input class="text-field" type="text" id="fillers-list" value="eh, ehm, em, emm, ajá, mmm" autocomplete="off" />
+          </div>
+          <div class="rules-actions">
+            <button type="button" class="btn btn--primary" id="btn-remove-fillers">Eliminar</button>
+          </div>
+        </div>
+      </details>
+
+      <details class="rules-group rules-group--collapsible" id="rules-symbols">
+        <summary class="rules-group__title">Caracteres especiales</summary>
+        <div class="rules-group__body">
+          <div class="symbol-grid">
+            <label class="check">
+              <input type="checkbox" id="rule-hashes" checked />
+              <span>Eliminar #</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="rule-asterisks" checked />
+              <span>Eliminar asteriscos (*)</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="rule-underscores" checked />
+              <span>Eliminar _</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="rule-triple-hyphens" checked />
+              <span>Eliminar --- (tres guiones seguidos)</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="rule-hyphens" />
+              <span>Eliminar - (todos los guiones)</span>
+            </label>
+          </div>
+        </div>
+      </details>
+
+      <details class="rules-group rules-group--collapsible" id="rules-spacing">
+        <summary class="rules-group__title">Espacios y saltos de línea</summary>
+        <div class="rules-group__body">
+          <div class="symbol-grid">
+            <label class="check">
+              <input type="checkbox" id="rule-spaces" checked />
+              <span>Normalizar espacios repetidos</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="rule-newlines" checked />
+              <span>Eliminar saltos de línea excesivos</span>
+            </label>
+          </div>
+        </div>
+      </details>
+    </aside>
+  </div>
+
+  <p class="tool-status" id="tool-status" role="status" aria-live="polite"></p>
+</div>

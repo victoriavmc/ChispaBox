@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Escribí una palabra y consultá su significado, sinónimos y antónimos en español." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Buscar palabra | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="./estilos.css" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page word-page">
+        <!-- @include:encabezado titulo="Buscar palabra" subtitulo="Escribí una palabra y mirá su significado, sus sinónimos y sus antónimos en español. Las definiciones vienen de Wiktionary; para la definición oficial, abrí la RAE desde el botón." personaje="/images/characters/silvi-cutout.webp" -->
+
+        <section class="word-card" aria-labelledby="word-search-heading">
+          <h2 class="word-card__title" id="word-search-heading">Escribí la palabra</h2>
+
+          <form class="word-form" id="word-form" role="search">
+            <label for="word-input">Palabra</label>
+            <input id="word-input" type="text" maxlength="60" autocomplete="off" placeholder="Por ejemplo: feliz" />
+            <div class="word-actions">
+              <button type="submit" class="btn btn--primary" id="word-run">Buscar</button>
+              <a class="btn btn--ghost" id="word-rae" href="https://dle.rae.es/" target="_blank" rel="noopener noreferrer" hidden>Ver en la RAE</a>
+            </div>
+            <p class="word-note">
+              Al buscar, la palabra se envía a Wiktionary para consultar su artículo. Esta herramienta no guarda nada.
+            </p>
+          </form>
+
+          <p class="word-error" id="word-error" role="alert" hidden></p>
+        </section>
+
+        <section class="word-results" id="word-results-panel" aria-labelledby="word-results-heading" hidden>
+          <div class="word-card word-card--sin-margen" id="word-suggest" hidden>
+            <h2 class="word-card__title">¿No era esa? Probá con…</h2>
+            <div id="word-suggest-body"></div>
+          </div>
+
+          <div class="word-card word-card--sin-margen">
+            <h2 class="word-card__title" id="word-results-heading">Significado</h2>
+            <ol class="word-defs" id="word-definitions"></ol>
+            <p class="word-empty" id="word-definitions-empty" hidden></p>
+          </div>
+
+          <div class="word-card">
+            <h2 class="word-card__title">Sinónimos</h2>
+            <ul class="word-chips" id="word-synonyms"></ul>
+          </div>
+
+          <div class="word-card">
+            <h2 class="word-card__title">Antónimos</h2>
+            <ul class="word-chips" id="word-antonyms"></ul>
+          </div>
+
+          <p class="word-source">
+            Fuente: <a href="https://es.wiktionary.org/" target="_blank" rel="noopener noreferrer">Wiktionary en español</a>, bajo la licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener noreferrer">Creative Commons Atribución-CompartirIgual 4.0 (CC BY-SA 4.0)</a>.
+            Las definiciones, sinónimos y antónimos se extrajeron y reorganizaron para mostrarlos aquí; no son el texto original.
+            <a id="word-wikt-link" href="https://es.wiktionary.org/" target="_blank" rel="noopener noreferrer" hidden>Ver la entrada original en Wiktionary</a>.
+            La definición oficial está en el <a id="word-rae-link" href="https://dle.rae.es/" target="_blank" rel="noopener noreferrer">diccionario de la RAE</a>.
+          </p>
+        </section>
+
+        <p class="word-status" id="word-status" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/buscar-palabra.ts"></script>
+  </body>
+</html>

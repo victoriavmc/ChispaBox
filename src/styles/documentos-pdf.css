@@ -1,0 +1,431 @@
+/* Estilos de «Documentos a PDF». Usa los mismos tokens de color y componentes que las demás herramientas. */
+
+.doc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 1rem;
+  padding: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  max-width: 100%;
+}
+
+.doc-tab {
+  flex: 1 1 auto;
+  min-height: 2.6rem;
+  padding: 0.5rem 1.1rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.doc-tab:hover {
+  background: var(--chip-bg);
+}
+
+.doc-tab[aria-selected='true'] {
+  background: var(--accent-solid);
+  color: var(--on-accent);
+}
+
+.doc-tab:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.doc-panel[hidden] {
+  display: none;
+}
+
+.doc-panel__title {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.35rem;
+}
+
+.doc-subheading {
+  margin-top: 1.25rem;
+}
+
+.doc-progress progress {
+  width: 100%;
+}
+
+.doc-result,
+.doc-viewer {
+  margin-top: 1rem;
+}
+
+.doc-result[hidden],
+.doc-viewer[hidden],
+.img-list[hidden],
+.img-preview[hidden],
+#img-preview[hidden] {
+  display: none;
+}
+
+.doc-result .tool-info {
+  margin: 0.75rem 0;
+}
+
+.doc-result h3 {
+  margin: 0 0 0.5rem;
+}
+
+.img-result {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+
+.img-result__name {
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.img-result__name:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+a.btn {
+  text-decoration: none;
+}
+
+/* ---- Lista de imágenes con orden ---- */
+
+.img-list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.img-item {
+  display: grid;
+  grid-template-columns: auto 4rem 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  cursor: grab;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.img-item.is-dragging {
+  opacity: 0.55;
+}
+
+.img-item.is-dragover {
+  border-color: var(--accent-solid);
+  box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+.img-item__order {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-pill);
+  background: var(--chip-bg);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.img-item__thumb {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background: var(--bg-soft);
+}
+
+.img-item__meta {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  font-size: 0.9rem;
+}
+
+.img-item__meta strong {
+  overflow-wrap: anywhere;
+}
+
+.img-item__meta span {
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.img-item__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.img-item__btn {
+  min-height: 2.4rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.img-item__remove {
+  color: var(--accent);
+}
+
+/* ---- Vista previa de páginas (misma distribución que la exportación) ---- */
+
+.img-preview__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  margin-top: 0.5rem;
+}
+
+.img-page {
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.img-page__sheet {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  box-shadow: var(--shadow);
+}
+
+.img-page__sheet img {
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  max-width: none;
+}
+
+.img-page__sheet img.is-cropped {
+  object-fit: cover;
+}
+
+.img-page figcaption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* ---- Visor de PDF.js ---- */
+
+.pdfv-status {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.pdfv-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--c-white);
+  box-shadow: var(--shadow);
+}
+
+.pdfv-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.pdfv-page {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ---- Estados no disponibles ---- */
+
+.doc-panel.is-unavailable .tool-dropzone {
+  opacity: 0.6;
+}
+
+.tool-dropzone.is-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+#ofi-unavailable:not([hidden]) {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .doc-tabs {
+    display: inline-flex;
+    flex-wrap: nowrap;
+  }
+
+  .img-item {
+    grid-template-columns: auto 4.5rem 1fr auto;
+  }
+
+  .img-item__actions {
+    grid-column: auto;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc-tab,
+  .img-item {
+    transition: none;
+  }
+}
+
+/* ---- Tarjeta de resultado (imágenes y Office) ---- */
+
+.img-result {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 0.75rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-solid);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  box-shadow: var(--shadow);
+}
+
+.img-result__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.img-result__title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.img-stats {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+
+.img-stat {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.img-stat__label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.img-stat__value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.img-result__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.img-result__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.img-result__final {
+  margin-top: 0.9rem;
+}
+
+.img-result + .img-result {
+  margin-top: 0.6rem;
+}
+
+#img-results .doc-viewer,
+#img-results .pdfv-canvas {
+  margin-top: 0.9rem;
+}
+
+/* ---- Separación entre secciones de la página ---- */
+
+.doc-panel .rec-panel {
+  margin-top: 1.5rem;
+}
+
+.doc-panel .rec-panel:first-of-type {
+  margin-top: 1rem;
+}
+
+.doc-panel .tool-note,
+.doc-panel .tool-req {
+  margin-bottom: 0.75rem;
+}
+
+.doc-panel .rec-actions {
+  margin-top: 0.75rem;
+}
+
+.doc-panel .bg-progress {
+  margin-top: 0.75rem;
+}
+
+.ofi-notes {
+  margin-top: 0.85rem;
+}
+
+/* ---- Separación entre la zona de carga y la información del archivo ---- */
+
+.doc-panel .tool-dropzone {
+  margin-bottom: 1rem;
+}
+
+.doc-panel .tool-dropzone + .rec-error,
+.doc-panel .tool-dropzone + .tool-info {
+  margin-top: 0.25rem;
+}
+
+.doc-panel .tool-info {
+  margin-top: 1rem;
+}

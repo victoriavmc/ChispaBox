@@ -1,0 +1,6 @@
+/* Página «Quitar fondo de imagen»: los componentes compartidos están en image-tools.css. */
+
+/* Botones alineados a la derecha dentro de una sección */
+.tool-actions-end {
+  justify-content: flex-end;
+}

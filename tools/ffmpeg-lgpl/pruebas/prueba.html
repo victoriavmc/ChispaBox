@@ -1,0 +1,84 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>prueba nucleo</title></head>
+<body><pre id="salida">cargando…</pre>
+<script type="module">
+const CASOS = [
+  { nombre: 'mp3', args: ['-i','in.wav','-map','0:a:0','-vn','-c:a','libmp3lame','-b:a','128k','-f','mp3','out.mp3'], ext: 'mp3', dec: ['-i','in.mp3','-f','wav','out.wav'] },
+  { nombre: 'ogg', args: ['-i','in.wav','-map','0:a:0','-vn','-c:a','libopus','-b:a','128k','-f','ogg','out.ogg'], ext: 'ogg', dec: ['-i','in.ogg','-f','wav','out.wav'] },
+  { nombre: 'webm', args: ['-i','in.wav','-map','0:a:0','-vn','-c:a','libopus','-b:a','128k','-f','webm','out.webm'], ext: 'webm', dec: ['-i','in.webm','-f','wav','out.wav'] },
+  { nombre: 'm4a', args: ['-i','in.wav','-map','0:a:0','-vn','-c:a','aac','-b:a','128k','-f','mp4','-movflags','+faststart','out.m4a'], ext: 'm4a', dec: ['-i','in.m4a','-f','wav','out.wav'] },
+  { nombre: 'flac', args: ['-i','in.wav','-map','0:a:0','-vn','-c:a','flac','-f','flac','out.flac'], ext: 'flac', dec: ['-i','in.flac','-f','wav','out.wav'] },
+  { nombre: 'wav', args: ['-i','in.wav','-map','0:a:0','-vn','-c:a','pcm_s16le','-f','wav','out.wav'], ext: 'wav', dec: null },
+];
+function wav({ rate, channels, seconds, freqs }) {
+  const n = Math.round(rate * seconds), data = new Uint8Array(n * channels * 2), dv = new DataView(data.buffer);
+  for (let i = 0; i < n; i++) {
+    let v = 0; for (const f of freqs) v += Math.sin(2 * Math.PI * f * i / rate);
+    v = (v / freqs.length) * 0.6;
+    for (let c = 0; c < channels; c++) dv.setInt16((i * channels + c) * 2, Math.round(Math.max(-1, Math.min(1, v * (c ? 0.8 : 1))) * 32767), true);
+  }
+  const h = new DataView(new ArrayBuffer(44));
+  const s = (o, t) => [...t].forEach((ch, k) => h.setUint8(o + k, ch.charCodeAt(0)));
+  s(0,'RIFF'); h.setUint32(4, 36 + data.length, true); s(8,'WAVE'); s(12,'fmt '); h.setUint32(16,16,true); h.setUint16(20,1,true); h.setUint16(22,channels,true);
+  h.setUint32(24,rate,true); h.setUint32(28,rate*channels*2,true); h.setUint16(32,channels*2,true); h.setUint16(34,16,true); s(36,'data'); h.setUint32(40,data.length,true);
+  const out = new Uint8Array(44 + data.length); out.set(new Uint8Array(h.buffer), 0); out.set(data, 44); return out;
+}
+function pcm(buf) {
+  const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength); let off = 12, ch = 0, rate = 0;
+  while (off < buf.length - 8) {
+    const id = String.fromCharCode(...buf.subarray(off, off + 4)); const size = dv.getUint32(off + 4, true);
+    if (id === 'fmt ') { ch = dv.getUint16(off + 10, true); rate = dv.getUint32(off + 12, true); }
+    if (id === 'data') { const frames = Math.floor(size / (2 * ch)); const m = new Float32Array(frames);
+      for (let i = 0; i < frames; i++) m[i] = dv.getInt16(off + 8 + i * ch * 2, true) / 32768; return { m, rate, ch, frames }; }
+    off += 8 + size + (size % 2);
+  }
+  throw new Error('sin data');
+}
+function snr(ref, dec) {
+  const L = Math.min(ref.length, 88200); let best = { lag: 0, c: -Infinity };
+  for (let lag = -4000; lag <= 4000; lag += 2) { let c = 0; for (let i = 0; i < L; i += 4) { const j = i + lag; if (j < 0 || j >= dec.length) continue; c += ref[i] * dec[j]; } if (c > best.c) best = { lag, c }; }
+  let se = 0, sr = 0, n = 0; for (let i = 0; i < L; i++) { const j = i + best.lag; if (j < 0 || j >= dec.length) continue; const e = ref[i] - dec[j]; se += e * e; sr += ref[i] * ref[i]; n++; }
+  return n && se > 0 ? 10 * Math.log10(sr / se) : 99;
+}
+const original = wav({ rate: 44100, channels: 2, seconds: 3, freqs: [440, 1320] });
+const ref = pcm(original);
+async function nuevo(carpeta) {
+  const mod = await import(`./${carpeta}/ffmpeg-core.js`);
+  const create = mod.default ?? mod.createFFmpegCore;
+  const logs = [];
+  const m = await create({ locateFile: (f) => (f.endsWith('.wasm') ? `./${carpeta}/ffmpeg-core.wasm` : f) });
+  m.setLogger(({ message }) => logs.push(message));
+  return { m, logs };
+}
+async function correr(carpeta, args, archivos) {
+  const { m, logs } = await nuevo(carpeta);
+  for (const [n, d] of Object.entries(archivos)) m.FS.writeFile(n, d);
+  const t0 = performance.now(); let ret; try { ret = m.exec(...args); } catch (e) { ret = 'EXC ' + e.message; }
+  const ms = Math.round(performance.now() - t0);
+  let out = null; try { out = m.FS.readFile(args.at(-1)); } catch (e) {}
+  return { ret, ms, out, logs, mem: m.HEAPU8 ? +(m.HEAPU8.length / 1048576).toFixed(1) : null };
+}
+async function bateria(carpeta) {
+  const res = { casos: {} };
+  const v = await correr(carpeta, ['-version'], {}); res.version = v.logs.slice(0, 1).join(' ');
+  const enc = await correr(carpeta, ['-encoders'], {}); res.codificadores = enc.logs.filter(l => /libopus|libmp3lame|\baac\b|\bflac\b|pcm_s16le|libvorbis|libx264/.test(l)).map(l => l.trim());
+  for (const c of CASOS) {
+    const e = await correr(carpeta, c.args, { 'in.wav': original });
+    const r = { ret: e.ret, ms: e.ms, mem: e.mem, bytes: e.out ? e.out.length : 0 };
+    if (e.ret !== 0) r.errorCodificar = e.logs.slice(-3);
+    if (e.out && c.dec) {
+      const d = await correr(carpeta, c.dec, { [`in.${c.ext}`]: e.out });
+      r.decRet = d.ret; r.decMs = d.ms;
+      if (d.out) { const p = pcm(d.out); r.duracion = +(p.frames / p.rate).toFixed(3); r.canales = p.ch; r.tasa = p.rate; r.snr = +snr(ref.m, p.m).toFixed(1); }
+      else r.errorDecodificar = d.logs.slice(-3);
+    }
+    res.casos[c.nombre] = r;
+  }
+  return res;
+}
+const resultado = {};
+document.getElementById('salida').textContent = 'ejecutando…';
+resultado.actual = await bateria('actual');
+resultado.lgpl = await bateria('lgpl');
+window.__resultado = resultado;
+document.getElementById('salida').textContent = 'listo';
+</script></body></html>

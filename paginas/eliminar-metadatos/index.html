@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Quita el autor, el programa con el que se creó el PDF, la ubicación GPS, la fecha y los datos de la cámara de tus fotos (JPG, PNG, WebP). Se procesa en tu navegador; el archivo no se sube a ningún servidor."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Eliminar metadatos | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Eliminar metadatos" subtitulo="Mirá qué información oculta tienen tu PDF o tus fotos (autor, programa, fechas, ubicación GPS, datos de la cámara) y descargá una copia sin ellos. Todo se procesa en tu navegador: el archivo no se sube a ningún servidor y el original no se modifica." personaje="/images/characters/silvi-cutout.webp" -->
+
+        <div id="panel-metadatos" class="doc-panel">
+          <h2 class="doc-panel__title">Limpiar un PDF o una imagen</h2>
+
+          <section class="rec-panel" aria-labelledby="meta-sel-heading">
+            <h3 class="field-label" id="meta-sel-heading">1. Cargar el archivo</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="meta-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="meta-dropzone">
+              <label class="field-label" for="meta-file">Seleccionar un PDF, JPG, PNG o WebP, o arrastrarlo aquí</label>
+              <input
+                class="bg-file"
+                id="meta-file"
+                type="file"
+                accept=".pdf,application/pdf,.jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+              />
+            </div>
+            <p class="rec-error" id="meta-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="meta-found-heading">
+            <h3 class="field-label" id="meta-found-heading">2. Información encontrada</h3>
+            <dl class="tool-info" id="meta-info" hidden></dl>
+            <div class="tool-req" aria-label="Qué se quita">
+              <p class="tool-req__title">Qué se quita</p>
+              <ul class="tool-req__list">
+                <li><strong>PDF:</strong> título, autor, asunto, palabras clave, programa creador, programa productor y fechas.</li>
+                <li><strong>PDF:</strong> metadatos XML (XMP), JavaScript incrustado, adjuntos y el autor y la fecha de las anotaciones. Se pierden los marcadores (índice) y los formularios. Las páginas, el texto, las imágenes y los enlaces se conservan.</li>
+                <li><strong>Imágenes:</strong> ubicación GPS, fecha, datos de la cámara (bloque EXIF con miniatura), XMP, IPTC, comentarios y textos incrustados.</li>
+                <li><strong>Imágenes:</strong> los píxeles no se tocan ni se recomprimen. Se conserva la orientación de la foto y el perfil de color.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="meta-run-heading">
+            <h3 class="field-label" id="meta-run-heading">3. Descargar la copia limpia</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="meta-nombre">Nombre del archivo (sin extensión)</label>
+              <input class="tool-select" id="meta-nombre" type="text" maxlength="120" autocomplete="off" />
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="meta-run" disabled>Eliminar metadatos</button>
+              <button type="button" class="btn btn--ghost" id="meta-clear">Otro archivo</button>
+            </div>
+            <div class="doc-result" id="meta-results" hidden></div>
+          </section>
+
+          <p class="rec-status" id="meta-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/eliminar-metadatos.ts"></script>
+  </body>
+</html>

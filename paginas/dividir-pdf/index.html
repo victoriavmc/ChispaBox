@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Divide un PDF por páginas individuales o por intervalos, en tu navegador y con software libre. El archivo no se sube a ningún servidor."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Dividir PDF | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Dividir PDF" subtitulo="Separá un PDF en páginas individuales o en intervalos, por ejemplo de la página 3 a la 8. Todo se procesa en tu navegador: el archivo no se sube a ningún servidor y el original no se modifica." personaje="/images/characters/silvi-cutout.webp" -->
+
+        <div id="panel-dividir-pdf" class="doc-panel">
+          <h2 class="doc-panel__title">Dividir un PDF</h2>
+
+          <section class="rec-panel" aria-labelledby="dividir-sel-heading">
+            <h3 class="field-label" id="dividir-sel-heading">1. Seleccionar el PDF</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="dividir-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="dividir-dropzone">
+              <label class="field-label" for="dividir-file">Seleccionar un PDF o arrastrarlo aquí</label>
+              <input class="bg-file" id="dividir-file" type="file" accept=".pdf,application/pdf" />
+            </div>
+            <p class="rec-error" id="dividir-error" role="alert" hidden></p>
+            <dl class="tool-info" id="dividir-info" hidden></dl>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="dividir-opt-heading">
+            <h3 class="field-label" id="dividir-opt-heading">2. Cómo dividirlo</h3>
+            <fieldset class="tool-panel">
+              <legend class="field-label">Modo de división</legend>
+              <label class="tool-radio">
+                <input type="radio" name="dividir-modo" id="dividir-modo-paginas" value="paginas" checked />
+                Cada página en un PDF separado (ZIP si son varias)
+              </label>
+              <label class="tool-radio">
+                <input type="radio" name="dividir-modo" id="dividir-modo-seleccion" value="seleccion" />
+                Un solo PDF con las páginas elegidas
+              </label>
+              <label class="tool-radio">
+                <input type="radio" name="dividir-modo" id="dividir-modo-intervalos" value="intervalos" />
+                Por intervalos (un PDF por intervalo)
+              </label>
+            </fieldset>
+            <div class="tool-panel" id="dividir-intervalos-wrap" hidden>
+              <label class="field-label" for="dividir-intervalos">Intervalos de páginas</label>
+              <input
+                class="tool-select"
+                id="dividir-intervalos"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="Ej.: 3-8, 10, 12-14"
+                maxlength="300"
+                aria-describedby="dividir-intervalos-help"
+              />
+              <p class="tool-note" id="dividir-intervalos-help">Ejemplos válidos: 3-8 · 1, 4, 6-9 · 5.</p>
+            </div>
+
+            <div class="tool-panel dividir-grid-wrap" id="dividir-grid-wrap" hidden>
+              <h4 class="field-label">Elegí las páginas a separar</h4>
+              <p class="tool-note" id="dividir-grid-help"></p>
+              <div class="dividir-toolbar">
+                <button type="button" class="btn btn--ghost" id="dividir-sel-todas">Seleccionar todas</button>
+                <button type="button" class="btn btn--ghost" id="dividir-sel-ninguna">Ninguna</button>
+                <button type="button" class="btn btn--ghost" id="dividir-sel-invertir">Invertir selección</button>
+                <span class="dividir-count" id="dividir-grid-count" role="status" aria-live="polite"></span>
+              </div>
+              <ol class="dividir-grid" id="dividir-grid" aria-label="Páginas del PDF"></ol>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="dividir-run-heading">
+            <h3 class="field-label" id="dividir-run-heading">3. Dividir y descargar</h3>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="dividir-run" disabled>Dividir PDF</button>
+              <button type="button" class="btn btn--ghost" id="dividir-clear">Otro PDF</button>
+            </div>
+            <div class="bg-progress doc-progress" id="dividir-progress-wrap" hidden>
+              <progress aria-labelledby="dividir-progress-text"></progress>
+              <span id="dividir-progress-text"></span>
+            </div>
+            <div class="doc-result" id="dividir-results" hidden></div>
+          </section>
+
+          <p class="rec-status" id="dividir-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <dialog class="dividir-zoom" id="dividir-zoom" aria-labelledby="dividir-zoom-title">
+      <div class="dividir-zoom__head">
+        <h2 class="dividir-zoom__title" id="dividir-zoom-title">Página</h2>
+        <button type="button" class="btn btn--ghost" id="dividir-zoom-close">Cerrar</button>
+      </div>
+      <canvas class="dividir-zoom__canvas" id="dividir-zoom-canvas" aria-label="Página ampliada"></canvas>
+      <div class="dividir-zoom__nav">
+        <button type="button" class="btn btn--ghost" id="dividir-zoom-prev">Anterior</button>
+        <button type="button" class="btn btn--ghost" id="dividir-zoom-next">Siguiente</button>
+      </div>
+    </dialog>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/dividir-pdf.ts"></script>
+  </body>
+</html>

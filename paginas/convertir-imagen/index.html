@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Convierte imágenes entre JPG, PNG, WebP e ICO en tu navegador." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Convertir formato de imagen | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Convertir formato de imagen" subtitulo="Pasá imágenes de JPG a PNG, WebP o ICO, y al revés. Todo se hace en tu navegador, sin subir nada a un servidor." personaje="/images/characters/florencia-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="conv-load-heading">
+          <h2 class="field-label" id="conv-load-heading">1. Elegí las imágenes</h2>
+
+          <div class="tool-req" aria-label="Requisitos de entrada">
+            <p class="tool-req__title">Antes de cargar</p>
+            <ul class="tool-req__list" id="conv-requirements"></ul>
+          </div>
+
+          <div class="tool-dropzone" id="conv-dropzone">
+            <label class="field-label" for="conv-file">Seleccionar imágenes o arrastrarlas aquí</label>
+            <input
+              class="bg-file"
+              id="conv-file"
+              type="file"
+              multiple
+              accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            />
+          </div>
+
+          <p class="rec-error" id="conv-error" role="alert" hidden></p>
+
+          <ol class="conv-list" id="conv-list" hidden></ol>
+
+          <dl class="tool-info" id="conv-info" hidden></dl>
+
+          <div class="bg-grid">
+            <figure class="bg-figure">
+              <img id="conv-preview-original" alt="Imagen original (vista previa)" hidden />
+              <figcaption>Original (primera imagen)</figcaption>
+            </figure>
+            <figure class="bg-figure bg-figure--checker">
+              <img id="conv-preview-result" alt="Resultado de la conversión" hidden />
+              <figcaption>Resultado</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="conv-opt-heading">
+          <h2 class="field-label" id="conv-opt-heading">2. Opciones</h2>
+
+          <div class="tool-panel">
+            <label class="field-label" for="conv-format">Formato de salida</label>
+            <select id="conv-format" class="tool-select">
+              <option value="webp">WebP (con transparencia)</option>
+              <option value="png">PNG (con transparencia)</option>
+              <option value="jpeg">JPG (sin transparencia)</option>
+              <option value="ico">ICO (con transparencia, icono de Windows)</option>
+            </select>
+          </div>
+
+          <div class="tool-panel">
+            <label class="tool-method"
+              ><input type="checkbox" id="conv-keep-size" checked />
+              <span>Mantener dimensiones originales</span></label
+            >
+            <div id="conv-size-fields" hidden>
+              <label class="tool-method"
+                ><input type="checkbox" id="conv-keep-ratio" checked />
+                <span>Conservar proporciones</span></label
+              >
+              <div class="conv-size-row">
+                <label class="field-label" for="conv-width">Ancho (px)</label>
+                <input type="number" id="conv-width" min="1" max="8000" step="1" />
+                <label class="field-label" for="conv-height">Alto (px)</label>
+                <input type="number" id="conv-height" min="1" max="8000" step="1" />
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-panel" id="conv-quality-wrap">
+            <label class="field-label" for="conv-quality"
+              >Calidad: <span id="conv-quality-value">90</span></label
+            >
+            <input type="range" id="conv-quality" min="1" max="100" value="90" />
+            <p class="tool-note">Solo para JPG y WebP. Más calidad significa archivos más pesados.</p>
+          </div>
+
+          <div class="tool-panel" id="conv-bg-wrap" hidden>
+            <label class="field-label" for="conv-bg">Color de fondo para JPG</label>
+            <input type="color" id="conv-bg" value="#ffffff" />
+            <p class="tool-note">JPG no tiene transparencia: las zonas transparentes se rellenan con este color.</p>
+          </div>
+
+          <div class="tool-panel" id="conv-ico-wrap" hidden>
+            <fieldset class="tool-methods">
+              <legend class="tool-methods__legend">Tamaños del ICO</legend>
+              <label class="tool-method"><input type="checkbox" name="conv-ico-size" value="16" checked /> <span>16 × 16</span></label>
+              <label class="tool-method"><input type="checkbox" name="conv-ico-size" value="32" checked /> <span>32 × 32</span></label>
+              <label class="tool-method"><input type="checkbox" name="conv-ico-size" value="48" checked /> <span>48 × 48</span></label>
+              <label class="tool-method"><input type="checkbox" name="conv-ico-size" value="256" checked /> <span>256 × 256</span></label>
+            </fieldset>
+            <label class="field-label" for="conv-ico-mode">Encuadre (el ICO es cuadrado)</label>
+            <select id="conv-ico-mode" class="tool-select">
+              <option value="recortar">Recortar al centro (llena el cuadrado)</option>
+              <option value="ajustar">Ajustar completa con márgenes transparentes</option>
+            </select>
+            <label class="field-label" for="conv-ico-x">Desplazamiento horizontal</label>
+            <input type="range" id="conv-ico-x" min="-50" max="50" value="0" />
+            <label class="field-label" for="conv-ico-y">Desplazamiento vertical</label>
+            <input type="range" id="conv-ico-y" min="-50" max="50" value="0" />
+          </div>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--ghost" id="conv-reset-opts">Restablecer opciones</button>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="conv-run-heading">
+          <h2 class="field-label" id="conv-run-heading">3. Convertir y descargar</h2>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--primary" id="conv-run" disabled>Convertir</button>
+            <button type="button" class="btn btn--ghost" id="conv-cancel" hidden>Cancelar</button>
+            <button type="button" class="btn btn--ghost" id="conv-clear">Otras imágenes</button>
+          </div>
+
+          <div class="bg-progress" id="conv-progress-wrap" hidden>
+            <progress></progress>
+            <span id="conv-progress-text"></span>
+          </div>
+
+          <ul class="conv-list" id="conv-results" hidden></ul>
+        </section>
+
+        <p class="rec-status" id="conv-status" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/convertir-imagen.ts"></script>
+  </body>
+</html>

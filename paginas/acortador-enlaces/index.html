@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Acortá un enlace largo y obtené uno corto para compartir. Funciona en tu navegador, sin IA ni servidores externos."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Acortador de enlaces | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Acortador de enlaces" subtitulo="Pegá un enlace largo y obtené uno corto para compartir. El acortado se guarda en este navegador: no se envía a ningún servidor ni se usa IA." personaje="/images/characters/marcos-cutout.webp" -->
+
+        <!-- Vista de redirección: se muestra cuando la dirección trae ?c=código. -->
+        <div id="short-redirect" class="doc-panel" hidden>
+          <h2 class="doc-panel__title">Redirigiendo</h2>
+          <p class="tool-note" id="short-redirect-text" role="status" aria-live="polite">Buscando el enlace…</p>
+          <p class="tool-note"><a id="short-redirect-link" href="/paginas/acortador-enlaces/index.html">Ir al acortador</a></p>
+        </div>
+
+        <div id="short-form" class="doc-panel">
+          <h2 class="doc-panel__title">Crear enlace corto</h2>
+
+          <form class="rec-panel" id="short-create" novalidate>
+            <label class="field-label" for="short-url">1. Pegá el enlace largo</label>
+            <input
+              class="tool-select"
+              id="short-url"
+              name="url"
+              type="url"
+              inputmode="url"
+              autocomplete="off"
+              spellcheck="false"
+              maxlength="2048"
+              placeholder="https://ejemplo.com/una/direccion/muy/larga"
+              aria-describedby="short-hint"
+              required
+            />
+            <p class="tool-note" id="short-hint">Solo se aceptan enlaces http o https, de hasta 2048 caracteres.</p>
+            <p class="rec-error" id="short-error" role="alert" hidden></p>
+            <div>
+              <button type="submit" class="btn" id="short-submit">Acortar enlace</button>
+            </div>
+          </form>
+
+          <section class="rec-panel" id="short-result" aria-labelledby="short-result-heading" hidden>
+            <h3 class="field-label" id="short-result-heading">2. Tu enlace corto</h3>
+            <p class="short-result__link"><a id="short-result-link" href="#"></a></p>
+            <div>
+              <button type="button" class="btn btn--ghost" id="short-copy">Copiar enlace</button>
+            </div>
+            <p class="tool-note" id="short-copy-status" role="status" aria-live="polite"></p>
+          </section>
+
+          <p class="rec-status" id="short-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/acortador-enlaces.ts"></script>
+  </body>
+</html>

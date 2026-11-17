@@ -1,0 +1,32 @@
+/* Estilos de «Acortador de enlaces»: cabecera con el personaje (como en Librerías), campo y resultado. */
+
+.acortador-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.acortador-head__chibi {
+  flex: 0 0 auto;
+  width: 3.5rem;
+  height: auto;
+}
+
+.short-result__link {
+  margin: 0.5rem 0;
+  word-break: break-all;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.short-result__link a {
+  color: var(--accent, #e61932);
+}
+
+#short-create .tool-select {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+#short-create .btn {
+  margin-top: 0.5rem;
+}

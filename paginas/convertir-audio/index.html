@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Convierte audios entre OGG, MP3, M4A, MP4, WAV, FLAC y WebM en tu navegador." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Convertir formato de audio | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Convertir formato de audio" subtitulo="Subí un audio (OGG de WhatsApp, MP3, MP4, WAV, M4A…) y elegí en qué formato querés descargarlo. La conversión se hace en tu navegador, sin subir el archivo a ningún servidor." personaje="/images/characters/miles-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="audio-load-heading">
+          <h2 class="field-label" id="audio-load-heading">1. Elegí el audio</h2>
+
+          <div class="tool-req" aria-label="Requisitos de entrada">
+            <p class="tool-req__title">Antes de cargar</p>
+            <ul class="tool-req__list">
+              <li>Podés usar cualquier archivo de audio o de video: OGG, MP3, MP4, M4A, WAV, FLAC, WebM, AAC, AMR, etc.</li>
+              <li>Se convierte un archivo por vez. Para archivos muy pesados, la conversión puede tardar.</li>
+              <li>Si el video tiene varias pistas de audio, se usa la primera.</li>
+            </ul>
+          </div>
+
+          <div class="tool-dropzone" id="audio-dropzone">
+            <label class="field-label" for="audio-file">Seleccionar un audio o arrastrarlo aquí</label>
+            <input class="bg-file" id="audio-file" type="file" accept="audio/*,video/*,.ogg,.oga,.opus,.mp3,.mp4,.m4a,.aac,.wav,.flac,.webm,.amr,.3gp" />
+          </div>
+
+          <p class="rec-error" id="audio-error" role="alert" hidden></p>
+
+          <dl class="tool-info" id="audio-info" hidden></dl>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="audio-opt-heading">
+          <h2 class="field-label" id="audio-opt-heading">2. Opciones</h2>
+
+          <div class="tool-panel">
+            <label class="field-label" for="audio-format">Formato de salida</label>
+            <select id="audio-format" class="tool-select">
+              <option value="mp3">MP3 (compatible con casi todo)</option>
+              <option value="ogg">OGG (Opus, como los audios de WhatsApp)</option>
+              <option value="m4a">M4A (AAC)</option>
+              <option value="mp4">MP4 (solo audio, AAC)</option>
+              <option value="wav">WAV (sin compresión, pesado)</option>
+              <option value="flac">FLAC (sin pérdida)</option>
+              <option value="webm">WebM (Opus)</option>
+            </select>
+          </div>
+
+          <div class="tool-panel" id="audio-bitrate-wrap">
+            <label class="field-label" for="audio-bitrate">Calidad (bitrate)</label>
+            <select id="audio-bitrate" class="tool-select">
+              <option value="64k">64 kbps (archivo chico, voz)</option>
+              <option value="128k">128 kbps (calidad normal)</option>
+              <option value="192k" selected>192 kbps (buena calidad)</option>
+              <option value="320k">320 kbps (máxima calidad con pérdida)</option>
+            </select>
+            <p class="tool-note">Para WAV y FLAC no se usa. Convertir a un formato con pérdida no recupera calidad que el original ya no tiene.</p>
+          </div>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="audio-run-heading">
+          <h2 class="field-label" id="audio-run-heading">3. Convertir y descargar</h2>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--primary" id="audio-run" disabled>Convertir</button>
+            <button type="button" class="btn btn--ghost" id="audio-clear">Otro audio</button>
+          </div>
+
+          <div class="bg-progress" id="audio-progress-wrap" hidden>
+            <progress id="audio-progress" value="0" max="100"></progress>
+            <span id="audio-progress-text"></span>
+          </div>
+
+          <ul class="conv-list" id="audio-results" hidden></ul>
+        </section>
+
+        <p class="rec-status" id="audio-status" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/convertir-audio.ts"></script>
+  </body>
+</html>

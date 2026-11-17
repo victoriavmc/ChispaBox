@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Une varios PDF en uno, en el orden que elijas. Se procesa en tu navegador con software libre; el archivo no se sube a ningún servidor."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Unificar PDF | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Unificar PDF" subtitulo="Agregá varios PDF, ordenalos como quieras y descargá un único archivo con todas sus páginas. Todo se procesa en tu navegador: los archivos no se suben a ningún servidor y los originales no se modifican." personaje="/images/characters/enzo-cutout.webp" -->
+
+        <div id="panel-unificar-pdf" class="doc-panel">
+          <h2 class="doc-panel__title">Unificar varios PDF</h2>
+
+          <section class="rec-panel" aria-labelledby="unificar-sel-heading">
+            <h3 class="field-label" id="unificar-sel-heading">1. Agregar los PDF</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de agregar</p>
+              <ul class="tool-req__list" id="unificar-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="unificar-dropzone">
+              <label class="field-label" for="unificar-file">Seleccionar PDF o arrastrarlos aquí</label>
+              <input class="bg-file" id="unificar-file" type="file" accept=".pdf,application/pdf" multiple />
+            </div>
+            <p class="rec-error" id="unificar-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="unificar-order-heading">
+            <h3 class="field-label" id="unificar-order-heading">2. Ordenar y revisar</h3>
+            <p class="tool-note" id="unificar-summary"></p>
+            <ol class="unificar-list" id="unificar-list" aria-label="PDF a unir, en orden" hidden></ol>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="unificar-run-heading">
+            <h3 class="field-label" id="unificar-run-heading">3. Unir y descargar</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="unificar-nombre">Nombre del archivo (sin .pdf)</label>
+              <input class="tool-select" id="unificar-nombre" type="text" maxlength="120" autocomplete="off" />
+            </div>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="unificar-run" disabled>Unir PDF</button>
+              <button type="button" class="btn btn--ghost" id="unificar-clear" disabled>Vaciar lista</button>
+            </div>
+            <div class="bg-progress doc-progress" id="unificar-progress-wrap" hidden>
+              <progress aria-labelledby="unificar-progress-text"></progress>
+              <span id="unificar-progress-text"></span>
+            </div>
+            <div class="doc-result" id="unificar-results" hidden></div>
+          </section>
+
+          <p class="rec-status" id="unificar-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/unificar-pdf.ts"></script>
+  </body>
+</html>

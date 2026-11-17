@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Creá códigos QR para enlaces, textos, redes Wi-Fi o contactos, y leé QR desde imágenes. Todo se procesa en tu navegador."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Generador y lector de QR | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Generador y lector de QR" subtitulo="Creá un código QR para un enlace, un texto, una red Wi-Fi o un contacto, o leé uno desde una imagen. Todo se procesa en tu navegador: nada se envía a un servidor." personaje="/images/characters/vale-cutout.webp" -->
+
+        <div id="panel-qr" class="doc-panel">
+          <h2 class="doc-panel__title">Crear un código QR</h2>
+
+          <section class="rec-panel" aria-labelledby="qr-tipo-heading">
+            <h3 class="field-label" id="qr-tipo-heading">1. Qué querés codificar</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="qr-tipo">Tipo de contenido</label>
+              <select class="tool-select" id="qr-tipo">
+                <option value="enlace">Enlace web</option>
+                <option value="texto">Texto</option>
+                <option value="wifi">Red Wi-Fi</option>
+                <option value="contacto">Contacto</option>
+              </select>
+            </div>
+
+            <div class="tool-panel" id="qr-campos-enlace" data-tipo="enlace">
+              <label class="field-label" for="qr-enlace">Enlace (http o https)</label>
+              <input class="tool-select" id="qr-enlace" type="url" placeholder="https://ejemplo.com" maxlength="1000" autocomplete="off" />
+            </div>
+
+            <div class="tool-panel" id="qr-campos-texto" data-tipo="texto" hidden>
+              <label class="field-label" for="qr-texto">Texto</label>
+              <textarea class="tool-select qr-textarea" id="qr-texto" rows="4" maxlength="1000"></textarea>
+            </div>
+
+            <div class="tool-panel" id="qr-campos-wifi" data-tipo="wifi" hidden>
+              <label class="field-label" for="qr-ssid">Nombre de la red (SSID)</label>
+              <input class="tool-select" id="qr-ssid" type="text" maxlength="100" autocomplete="off" />
+              <label class="field-label" for="qr-clave">Contraseña</label>
+              <input class="tool-select" id="qr-clave" type="text" maxlength="100" autocomplete="off" />
+              <label class="field-label" for="qr-cifrado">Seguridad</label>
+              <select class="tool-select" id="qr-cifrado">
+                <option value="WPA">WPA / WPA2 / WPA3</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">Sin contraseña</option>
+              </select>
+              <label class="tool-radio">
+                <input type="checkbox" id="qr-oculta" />
+                La red es oculta
+              </label>
+            </div>
+
+            <div class="tool-panel" id="qr-campos-contacto" data-tipo="contacto" hidden>
+              <label class="field-label" for="qr-nombre">Nombre completo</label>
+              <input class="tool-select" id="qr-nombre" type="text" maxlength="120" autocomplete="off" />
+              <label class="field-label" for="qr-telefono">Teléfono</label>
+              <input class="tool-select" id="qr-telefono" type="tel" maxlength="40" autocomplete="off" />
+              <label class="field-label" for="qr-email">Correo</label>
+              <input class="tool-select" id="qr-email" type="email" maxlength="120" autocomplete="off" />
+              <label class="field-label" for="qr-org">Organización (opcional)</label>
+              <input class="tool-select" id="qr-org" type="text" maxlength="120" autocomplete="off" />
+              <label class="field-label" for="qr-web">Sitio web (opcional, http o https)</label>
+              <input class="tool-select" id="qr-web" type="url" maxlength="200" placeholder="https://" autocomplete="off" />
+              <label class="field-label" for="qr-nacimiento">Fecha de nacimiento (opcional)</label>
+              <input class="tool-select" id="qr-nacimiento" type="date" autocomplete="off" />
+              <fieldset class="tool-panel qr-direccion">
+                <legend class="field-label">Dirección (opcional)</legend>
+                <label class="field-label" for="qr-calle">Calle y número</label>
+                <input class="tool-select" id="qr-calle" type="text" maxlength="120" autocomplete="street-address" />
+                <label class="field-label" for="qr-ciudad">Ciudad</label>
+                <input class="tool-select" id="qr-ciudad" type="text" maxlength="80" autocomplete="address-level2" />
+                <label class="field-label" for="qr-cp">Código postal</label>
+                <input class="tool-select" id="qr-cp" type="text" maxlength="20" autocomplete="postal-code" />
+                <label class="field-label" for="qr-pais">País</label>
+                <input class="tool-select" id="qr-pais" type="text" maxlength="80" autocomplete="country-name" />
+              </fieldset>
+            </div>
+
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="qr-generar">Generar QR</button>
+            </div>
+            <p class="rec-error" id="qr-error-gen" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="qr-res-heading" id="qr-resultado-wrap" hidden>
+            <h3 class="field-label" id="qr-res-heading">2. Tu código QR</h3>
+            <div class="qr-out">
+              <canvas id="qr-canvas" class="qr-canvas" aria-label="Código QR generado"></canvas>
+              <div class="qr-out__acciones">
+                <button type="button" class="btn btn--primary" id="qr-png">Descargar PNG</button>
+                <button type="button" class="btn btn--ghost" id="qr-svg">Descargar SVG</button>
+              </div>
+            </div>
+          </section>
+
+          <h2 class="doc-panel__title">Leer un código QR</h2>
+
+          <section class="rec-panel" aria-labelledby="qr-leer-heading">
+            <h3 class="field-label" id="qr-leer-heading">3. Cargar una imagen con el código</h3>
+            <div class="tool-req" aria-label="Requisitos de la imagen">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="qr-requirements"></ul>
+            </div>
+            <div class="tool-dropzone" id="qr-dropzone">
+              <label class="field-label" for="qr-file">Seleccionar una imagen o arrastrarla aquí</label>
+              <input class="bg-file" id="qr-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" />
+            </div>
+            <p class="rec-error" id="qr-error-leer" role="alert" hidden></p>
+
+            <div class="qr-read" id="qr-read-wrap" hidden>
+              <h4 class="field-label">Contenido del código</h4>
+              <p class="qr-read__texto" id="qr-read-texto"></p>
+              <p class="tool-note" id="qr-read-aviso"></p>
+              <div class="rec-actions">
+                <button type="button" class="btn btn--ghost" id="qr-copiar">Copiar contenido</button>
+                <a class="btn btn--primary" id="qr-abrir" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir enlace</a>
+              </div>
+            </div>
+          </section>
+
+          <p class="rec-status" id="qr-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/generador-qr.ts"></script>
+  </body>
+</html>

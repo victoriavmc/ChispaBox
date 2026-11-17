@@ -1,0 +1,270 @@
+/* ==========================================================================
+   Limpiar texto (.text-tool--clean): editor a la izquierda, reglas a la derecha.
+   Todo está acotado a .text-tool--clean para no afectar al contador (.text-tool).
+   Sin position: absolute para distribuir controles; las alturas se adaptan al contenido.
+   ========================================================================== */
+
+.text-tool.text-tool--clean {
+  display: block;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.text-tool--clean .clean-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ---------- Editor ---------- */
+.text-tool--clean .clean-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.text-tool--clean .text-input-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.text-tool--clean .text-input,
+.text-tool--clean .text-highlight {
+  box-sizing: border-box;
+  height: 14rem;
+  min-height: 14rem;
+}
+
+/* Contadores debajo del textarea, en flujo normal */
+.text-tool--clean .clean-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.clean-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+
+.clean-stat__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-muted);
+}
+
+.clean-stat__value {
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
+  font-weight: 900;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Acciones: principal a ancho completo y secundarias en fila que se reacomoda */
+.text-tool--clean .clean-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.text-tool--clean .clean-actions__primary {
+  width: 100%;
+}
+
+.text-tool--clean .clean-actions__secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.text-tool--clean .clean-actions__secondary .btn {
+  flex: 1 1 7.5rem;
+  width: auto;
+}
+
+/* ---------- Reglas ---------- */
+.text-tool--clean .clean-rules {
+  grid-area: auto; /* anula el área con nombre de main.css, que creaba columnas extra */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+
+.clean-rules__title {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.text-tool--clean .rules-group {
+  gap: 0.5rem;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  min-width: 0;
+}
+
+.text-tool--clean .clean-rules__title + .rules-group {
+  border-top: 0;
+}
+
+.text-tool--clean .symbol-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.text-tool--clean .rules-hint {
+  line-height: 1.45;
+}
+
+/* Buscar y reemplazar: campos en dos columnas y opciones/botón en una fila propia */
+.text-tool--clean .replace-rule {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  align-items: end;
+  min-width: 0;
+}
+
+.text-tool--clean .replace-rule .field {
+  min-width: 0;
+}
+
+.replace-rule__options {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+}
+
+.text-tool--clean .replace-rule .check {
+  min-height: 2.75rem;
+}
+
+.text-tool--clean .replace-count {
+  margin-top: 0.1rem;
+}
+
+/* Grupo desplegable (Buscar y reemplazar): el encabezado es el disparador */
+.text-tool--clean .rules-group--collapsible {
+  display: block;
+}
+
+.text-tool--clean .rules-group--collapsible > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  cursor: pointer;
+  list-style: none;
+  padding-block: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.text-tool--clean .rules-group--collapsible > summary::-webkit-details-marker {
+  display: none;
+}
+
+.text-tool--clean .rules-group--collapsible > summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.3rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--dur-base) ease;
+}
+
+.text-tool--clean .rules-group--collapsible[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.text-tool--clean .rules-group--collapsible > summary:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.text-tool--clean .rules-group__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-bottom: 0.6rem;
+}
+
+.text-tool--clean .rules-hint {
+  margin: 0;
+}
+
+.text-tool--clean .replace-rule {
+  gap: 0.4rem 0.6rem;
+}
+
+.text-tool--clean .replace-rule .check {
+  min-height: 2.25rem;
+}
+
+.replace-rule__options {
+  gap: 0.4rem 0.8rem;
+}
+
+.text-tool--clean .replace-count {
+  min-height: 0;
+  margin: 0;
+}
+
+.text-tool--clean .replace-count:empty {
+  display: none;
+}
+
+.rules-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Estado (mensajes de la herramienta) debajo de ambas columnas */
+.text-tool--clean .tool-status {
+  margin-top: 1rem;
+}
+
+/* ---------- Tablet y escritorio ---------- */
+@media (min-width: 64rem) {
+  .text-tool--clean .clean-layout {
+    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+  }
+
+  .text-tool--clean .text-input,
+  .text-tool--clean .text-highlight {
+    height: 18rem;
+    min-height: 18rem;
+  }
+}
+
+/* ---------- Celulares estrechos ---------- */
+@media (max-width: 29.99rem) {
+  .text-tool--clean .symbol-grid,
+  .text-tool--clean .replace-rule {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .text-tool--clean .clean-actions__secondary .btn {
+    flex-basis: 100%;
+  }
+}

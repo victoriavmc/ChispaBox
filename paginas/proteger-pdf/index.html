@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Cifra un PDF con contraseña (AES-256) para compartirlo con más seguridad. Todo se procesa en tu navegador; el archivo no se sube a ningún servidor."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Proteger PDF con contraseña | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page pp-page">
+        <!-- @include:encabezado titulo="Proteger PDF con contraseña" subtitulo="Cifra un PDF con contraseña para compartirlo con más seguridad, todo en tu navegador. El archivo no se sube a ningún servidor." personaje="/images/characters/enzo-cutout.webp" -->
+
+        <section class="rec-panel" aria-labelledby="pp-load-heading">
+          <h2 class="field-label" id="pp-load-heading">1. Elegí el PDF</h2>
+
+          <div class="tool-req" aria-label="Requisitos de entrada">
+            <p class="tool-req__title">Antes de cargar</p>
+            <ul class="tool-req__list" id="pp-requirements"></ul>
+          </div>
+
+          <div class="tool-dropzone" id="pp-dropzone">
+            <label class="field-label" for="pp-file">Seleccionar un PDF o arrastrarlo aquí</label>
+            <input class="bg-file" id="pp-file" type="file" accept=".pdf,application/pdf" />
+          </div>
+
+          <p class="rec-error" id="pp-error" role="alert" hidden></p>
+          <dl class="tool-info" id="pp-info" hidden></dl>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="pp-pass-heading">
+          <h2 class="field-label" id="pp-pass-heading">2. Elegí la contraseña</h2>
+
+          <div class="tool-panel">
+            <label class="field-label" for="pp-clave">Contraseña para abrir el PDF</label>
+            <input
+              class="tool-select"
+              id="pp-clave"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+              maxlength="128"
+              aria-describedby="pp-clave-hint"
+              disabled
+            />
+            <p class="tool-note" id="pp-clave-hint">Mínimo 8 caracteres. Usá una combinación que no sea fácil de adivinar.</p>
+          </div>
+
+          <div class="tool-panel">
+            <label class="field-label" for="pp-clave2">Repetir la contraseña</label>
+            <input
+              class="tool-select"
+              id="pp-clave2"
+              type="password"
+              autocomplete="new-password"
+              maxlength="128"
+              disabled
+            />
+            <label class="tool-method"
+              ><input type="checkbox" id="pp-mostrar" />
+              <span>Mostrar las contraseñas</span></label
+            >
+            <p class="rec-status" id="pp-clave-msg" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="tool-panel">
+            <label class="tool-method"
+              ><input type="checkbox" id="pp-restringir" />
+              <span>Restringir impresión, edición y copia de texto</span></label
+            >
+            <p class="tool-note">
+              Son restricciones que respetan los lectores de PDF; no impiden que alguien con la contraseña las cambie con herramientas avanzadas. La contraseña para abrir el archivo sí es la protección principal.
+            </p>
+          </div>
+
+          <details class="pp-details" id="pp-details">
+            <summary class="field-label">¿El PDF ya tiene contraseña?</summary>
+            <div class="tool-panel pp-details__body">
+              <label class="field-label" for="pp-actual">Contraseña anterior del PDF</label>
+              <input class="tool-select" id="pp-actual" type="password" autocomplete="off" maxlength="128" disabled />
+              <p class="tool-note">Solo si el PDF ya está protegido. Se usa para desbloquearlo y volver a protegerlo con la contraseña nueva.</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="rec-panel" aria-labelledby="pp-run-heading">
+          <h2 class="field-label" id="pp-run-heading">3. Proteger y descargar</h2>
+
+          <div class="tool-panel">
+            <label class="field-label" for="pp-nombre">Nombre del archivo (sin .pdf)</label>
+            <input class="tool-select" id="pp-nombre" type="text" maxlength="120" autocomplete="off" disabled />
+          </div>
+
+          <div class="rec-actions">
+            <button type="button" class="btn btn--primary" id="pp-run" disabled>Proteger PDF</button>
+            <button type="button" class="btn btn--ghost" id="pp-clear">Otro PDF</button>
+          </div>
+
+          <p class="rec-status" id="pp-status" role="status" aria-live="polite"></p>
+
+          <div class="doc-result" id="pp-results" hidden></div>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/proteger-pdf.ts"></script>
+  </body>
+</html>

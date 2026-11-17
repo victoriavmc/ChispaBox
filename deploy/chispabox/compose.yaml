@@ -1,0 +1,85 @@
+# ChispaBox: contenedor web (nginx sin root) detrás del proxy Caddy.
+# Propuesta para revisión: NO desplegar hasta aprobar el plan.
+# Ruta prevista en el VPS: /opt/chispabox/compose.yaml
+
+name: chispabox
+
+services:
+  web:
+    build:
+      context: ../..            # raíz del repositorio (ver Dockerfile propuesto)
+      dockerfile: Dockerfile
+    image: chispabox-web:1.0.1  # versión explícita; no usar "latest" en producción
+    container_name: chispabox-web
+    restart: unless-stopped
+    # Sin "ports:": nada se publica al host. Solo Caddy llega por la red "edge".
+    expose:
+      - "8080"
+    networks:
+      - edge
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+    user: "101:101"            # usuario nginx de la imagen nginx-unprivileged
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          pids: 64
+          memory: 64M
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  sugerencias:
+    build:
+      context: ../sugerencias
+      dockerfile: Dockerfile
+    image: chispabox-sugerencias:1.0.1
+    container_name: chispabox-sugerencias
+    restart: unless-stopped
+    # Credenciales SMTP en un archivo del servidor (fuera del repositorio, permisos 600).
+    env_file:
+      - ./sugerencias.env
+    environment:
+      PORT: "3000"
+    expose:
+      - "3000"
+    networks:
+      - edge
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          pids: 64
+          memory: 96M
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  edge:
+    external: true
+    name: edge                 # creada por el proyecto "proxy" (docker network create edge si no existe)

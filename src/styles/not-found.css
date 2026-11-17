@@ -1,0 +1,70 @@
+/* ==========================================================================
+   Página 404: ilustración + texto + acciones. Mobile-first, sin dependencias.
+   ========================================================================== */
+
+.not-found__inner {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.not-found__art {
+  width: 100%;
+  max-width: 52rem;
+}
+
+.not-found__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.not-found__text {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  max-width: 36rem;
+}
+
+.not-found__code {
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.not-found__text .section-title {
+  margin: 0;
+}
+
+.not-found__text .section-sub {
+  margin: 0;
+}
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 48rem) {
+  .not-found__inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    justify-items: start;
+    text-align: left;
+  }
+
+  .not-found__text {
+    justify-items: start;
+  }
+
+  .not-found__actions {
+    justify-content: flex-start;
+  }
+}

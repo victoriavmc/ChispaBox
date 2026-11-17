@@ -1,0 +1,27 @@
+{
+  "name": "chispabox-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Herramientas de ChispaBox que se ejecutan solo en tu computadora (no se publican en Hostinger).",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.local.config.ts",
+    "build": "vite build --config vite.local.config.ts",
+    "preview": "vite preview --config vite.local.config.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc -p tsconfig.server.json",
+    "test": "node --experimental-strip-types --no-warnings --test \"tests/**/*.test.ts\"",
+    "api:youtube": "node --experimental-strip-types server/youtube/standalone.ts"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.3.2",
+    "@tesseract.js-data/eng": "1.0.0",
+    "@tesseract.js-data/spa": "1.0.0",
+    "tesseract.js": "7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  }
+}

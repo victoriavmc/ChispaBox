@@ -1,0 +1,16 @@
+# Normalización de fines de línea: texto con LF en el repositorio; binarios sin conversión.
+* text=auto
+
+# Binarios: nunca se convierten ni se comparan como texto
+*.wasm binary
+*.webp binary
+*.png binary
+*.gz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.dic binary
+*.aff text
+*.traineddata binary
+*.docx binary
+*.pdf binary

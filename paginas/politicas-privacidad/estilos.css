@@ -1,0 +1,133 @@
+/* Estilos de la página «Políticas y privacidad». Usa los tokens de src/styles/variables.css (claro y oscuro). */
+
+.legal {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.legal__indice {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.25rem;
+}
+
+.legal__indice ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.25rem;
+  columns: 2;
+}
+
+.legal__indice a {
+  color: var(--accent-texto);
+  font-weight: 600;
+}
+
+.legal__fecha {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.legal__seccion {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.5rem;
+  scroll-margin-top: 1rem;
+}
+
+.legal__seccion h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  color: var(--accent-texto);
+}
+
+.legal__seccion h3 {
+  margin: 1.25rem 0 0.4rem;
+  font-size: 1.05rem;
+}
+
+.legal__seccion p {
+  margin: 0 0 0.75rem;
+}
+
+.legal__seccion a {
+  color: var(--accent-texto);
+  text-underline-offset: 0.15em;
+}
+
+.legal__lista {
+  margin: 0 0 0.75rem;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.legal__lista--numerada {
+  list-style: decimal;
+}
+
+.legal__tabla-wrap {
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.legal__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  min-width: 26rem;
+}
+
+.legal__tabla th,
+.legal__tabla td {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal__tabla th {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.legal__tabla tr:last-child td {
+  border-bottom: 0;
+}
+
+.legal__tabla code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.legal__indice:focus-within,
+.legal__seccion a:focus-visible,
+.legal__indice a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+@media (max-width: 40rem) {
+  .legal__indice ol {
+    columns: 1;
+  }
+
+  .legal__seccion {
+    padding: 1rem;
+  }
+}

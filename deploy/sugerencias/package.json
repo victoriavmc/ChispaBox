@@ -1,0 +1,17 @@
+{
+  "name": "chispabox-sugerencias",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Endpoint de sugerencias de ChispaBox (sin base de datos).",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "nodemailer": "10.3.1"
+  }
+}

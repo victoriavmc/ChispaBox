@@ -1,0 +1,47 @@
+/* Estilos de «Generador y lector de QR». */
+
+.qr-textarea {
+  min-height: 6rem;
+  resize: vertical;
+  font: inherit;
+}
+
+.qr-out {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.qr-canvas {
+  display: block;
+  width: min(100%, 18rem);
+  height: auto;
+  padding: 0.75rem;
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+}
+
+.qr-out__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qr-read {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.qr-read__texto {
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}

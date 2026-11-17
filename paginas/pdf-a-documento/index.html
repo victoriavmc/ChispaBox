@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Convierte un PDF a un documento editable (Word, OpenDocument o RTF) con LibreOffice local, sin servicios externos."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>PDF a documento | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="PDF a documento" subtitulo="Elegí el tipo de documento al que querés convertir el PDF. Se extrae el texto y se arma un documento editable con párrafos y títulos, en el servidor de esta aplicación, sin servicios externos. El PDF original nunca se modifica." personaje="/images/characters/marcos-cutout.webp" -->
+
+        <div id="panel-pdf-doc" class="doc-panel">
+          <h2 class="doc-panel__title">PDF a documento editable</h2>
+
+          <section class="rec-panel" aria-labelledby="pdfdoc-sel-heading">
+            <h3 class="field-label" id="pdfdoc-sel-heading">1. Seleccionar el PDF</h3>
+            <div class="tool-req" aria-label="Requisitos de entrada">
+              <p class="tool-req__title">Antes de cargar</p>
+              <ul class="tool-req__list" id="pdfdoc-requirements"></ul>
+            </div>
+            <p class="rec-error" id="pdfdoc-unavailable" hidden></p>
+            <div class="tool-dropzone" id="pdfdoc-dropzone">
+              <label class="field-label" for="pdfdoc-file">Seleccionar un PDF o arrastrarlo aquí</label>
+              <input class="bg-file" id="pdfdoc-file" type="file" accept=".pdf,application/pdf" />
+            </div>
+            <p class="rec-error" id="pdfdoc-error" role="alert" hidden></p>
+            <dl class="tool-info" id="pdfdoc-info" hidden></dl>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="pdfdoc-opt-heading">
+            <h3 class="field-label" id="pdfdoc-opt-heading">2. Tipo de documento</h3>
+            <div class="tool-panel">
+              <label class="field-label" for="pdfdoc-target">Convertir a</label>
+              <select id="pdfdoc-target" class="tool-select"></select>
+              <p class="tool-note" id="pdfdoc-target-note"></p>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="pdfdoc-run-heading">
+            <h3 class="field-label" id="pdfdoc-run-heading">3. Convertir y descargar</h3>
+            <div class="rec-actions">
+              <button type="button" class="btn btn--primary" id="pdfdoc-run" disabled>Convertir</button>
+              <button type="button" class="btn btn--ghost" id="pdfdoc-cancel" hidden>Cancelar</button>
+              <button type="button" class="btn btn--ghost" id="pdfdoc-clear">Otro PDF</button>
+            </div>
+            <div class="bg-progress doc-progress" id="pdfdoc-progress-wrap" hidden>
+              <progress aria-labelledby="pdfdoc-progress-text"></progress>
+              <span id="pdfdoc-progress-text"></span>
+            </div>
+            <div class="doc-result" id="pdfdoc-results" hidden></div>
+          </section>
+
+          <p class="rec-status" id="pdfdoc-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/pdf-a-documento.ts"></script>
+  </body>
+</html>

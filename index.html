@@ -1,0 +1,1538 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Graba audios, recorta y une audios, convierte imágenes, cuenta palabras y caracteres, y limpia tus textos desde el navegador."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>ChispaBox | Pequeñas herramientas, grandes soluciones.</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+    <link
+      rel="preload"
+      as="image"
+      href="/images/characters/mika-cutout.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <h1 class="hero__title" id="hero-title">
+              <span class="hero__title-main">Chispa</span>
+              <span class="hero__title-accent">Box</span>
+            </h1>
+
+            <p class="hero__lead">
+              Pequeñas herramientas, grandes soluciones. Rápidas y simples, sin
+              registro. Grabá, editá, convertí y limpiá tus archivos y textos desde el
+              navegador, sin crear cuenta.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#herramientas">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-play" />
+                </svg>
+                Explorar herramientas
+              </a>
+            </div>
+          </div>
+          <div class="hero__art" aria-hidden="true">
+            <img
+              class="chibi chibi--hero-cast"
+              src="/images/characters/hero-cast-v6-cutout.webp"
+              width="1380"
+              height="641"
+              alt=""
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER DE CARACTERÍSTICAS -->
+      <section class="features" aria-label="Características de la plataforma">
+        <ul class="container features__list">
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"
+              ><svg class="icon"><use href="#i-wave" /></svg></span
+            ><span>32 Herramientas</span>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"
+              ><svg class="icon"><use href="#i-zap" /></svg></span
+            ><span>Rápidas y simples</span>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"
+              ><svg class="icon"><use href="#i-shield" /></svg></span
+            ><span>Todo en el navegador</span>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"
+              ><svg class="icon"><use href="#i-monitor" /></svg></span
+            ><span>Sin instalación</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- HERRAMIENTAS -->
+      <section class="section" id="herramientas" aria-labelledby="tools-title">
+        <div class="container">
+          <header class="section-head">
+            <h2 class="section-title" id="tools-title">Herramientas</h2>
+            <p class="section-sub">
+              Todo en un solo lugar, rápido, simple y desde tu navegador.
+            </p>
+          </header>
+
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-mic" /></svg
+              >Audio
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-rec-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-mic" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-rec-title">
+                      Grabar audio
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Graba, escucha y descarga tus audios.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/grabar-audio/index.html"
+                      >Abrir grabadora
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/sopi-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-audio-conv-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-refresh" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-audio-conv-title">
+                      Convertir formato de audio
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Pasá audios de OGG, MP3, MP4 y más al formato que quieras,
+                    en tu navegador.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/convertir-audio/index.html"
+                      >Abrir conversor
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/miles-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-split-pdf-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-lines" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-split-pdf-title">
+                      Unificar audios
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Combina varias grabaciones en un solo archivo.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/unificar-audios/index.html"
+                      >Abrir unificar audios<svg
+                        class="icon"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/mika-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-recortar-audio-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-wave" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-recortar-audio-title">
+                      Recortar audio
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Elegí el inicio y el final de un audio y descargá solo esa
+                    parte.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/recortar-audio/index.html"
+                      >Abrir recortar audio
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/marcos-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-lines" /></svg
+              >Texto y escritura
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-count-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon tool-icon--text" aria-hidden="true"
+                      >Aa</span
+                    >
+                    <h3 class="tool-card__title" id="tool-count-title">
+                      Contar palabras y caracteres
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Cuenta la cantidad de palabras y de caracteres de tu texto,
+                    por separado.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/contador/index.html"
+                      >Abrir contador
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/florencia-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-clean-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-broom" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-clean-title">
+                      Limpiar texto
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Elimina automáticamente muletillas, asteriscos y caracteres
+                    no deseados.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/limpiador/index.html"
+                      >Abrir limpiador
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/enzo-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-word-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-lines" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-word-title">
+                      Buscar palabra
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Consulta el significado, los sinónimos y los antónimos de
+                    una palabra en español.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/buscar-palabra/index.html"
+                      >Abrir buscador
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/silvi-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-layers" /></svg
+              >Imágenes y diseño
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-bg-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-layers" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-bg-title">
+                      Quitar fondo de imagen
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Elimina el fondo de una imagen y deja solo el personaje o el
+                    objeto.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/quitar-fondo/index.html"
+                      >Abrir quitar fondo
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/marcos-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-convert-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-refresh" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-convert-title">
+                      Convertir formato de imagen
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Cambia una imagen entre JPG, PNG, WebP e ICO, sin subirla a
+                    ningún servidor.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/convertir-imagen/index.html"
+                      >Abrir convertir imagen
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/florencia-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-resize-crop-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-expand" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-resize-crop-title">
+                      Redimensionar y recortar imágenes
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Cambia el tamaño y recorta imágenes a las medidas que
+                    necesites, sin subirlas a ningún servidor.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/redimensionar-imagen/index.html"
+                      >Abrir redimensionar y recortar
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/sopi-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-enhance-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-expand" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-enhance-title">
+                      Mejorar calidad de imagen
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Ajusta nitidez, brillo, contraste y color con métodos
+                    clásicos, sin inteligencia artificial.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/mejorar-imagen/index.html"
+                      >Abrir mejorar imagen
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/mika-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-favicon-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-expand" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-favicon-title">
+                      Generador de favicon
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Crea íconos para sitios web en distintos tamaños.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/generador-favicon/index.html"
+                      >Abrir generador de favicon
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/vale-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-color-picker-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-star" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-color-picker-title">
+                      Selector de color
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Selecciona un píxel de una imagen y obtiene su valor en HEX,
+                    RGB, HSL y HSV.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/selector-color/index.html"
+                      >Abrir selector de color
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/miles-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-note" /></svg
+              >Documentos y PDF
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-doc-pdf-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-note" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-doc-pdf-title">
+                      Documento a PDF
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Convierte Word, Excel, PowerPoint e imágenes JPG, PNG o WebP
+                    a PDF. Las imágenes se procesan en tu navegador; los
+                    documentos de Office, en el servidor de la aplicación.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/documentos-a-pdf/index.html"
+                      >Abrir documentos a PDF
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/florencia-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-dividir-pdf-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-layers" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-dividir-pdf-title">
+                      Dividir PDF
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Separá un PDF en páginas individuales o por intervalos, por
+                    ejemplo de la página 3 a la 8. Todo se procesa en tu
+                    navegador.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/dividir-pdf/index.html"
+                      >Abrir dividir PDF
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/silvi-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-unificar-pdf-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-layers" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-unificar-pdf-title">
+                      Unificar PDF
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Une varios PDF en uno, en el orden que elijas. Todo se
+                    procesa en tu navegador.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/unificar-pdf/index.html"
+                      >Abrir unificar PDF
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/enzo-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-organize-pdf-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-grid" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-organize-pdf-title">
+                      Organizar páginas
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Reordena, gira, elimina y extrae páginas de un PDF.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/organizar-paginas/index.html"
+                      >Abrir organizar páginas
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/mika-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-compress-pdf-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-zap" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-compress-pdf-title">
+                      Comprimir PDF
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Reduce el peso de un PDF con distintos niveles de
+                    compresión, según si lo necesitás para enviar por correo o
+                    para imprimir.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/comprimir-pdf/index.html"
+                      >Abrir comprimir PDF
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/sopi-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-chart" /></svg
+              >Datos y desarrollo
+            </h3>
+            <div class="tools-grid">
+              <article
+                class="tool-card"
+                aria-labelledby="tool-data-converter-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-chart" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-data-converter-title">
+                      Convertidor de datos
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Convierte CSV a JSON, JSON a CSV, XML a JSON y Excel a CSV.
+                    Muy útil para desarrolladores, analistas y usuarios
+                    administrativos.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/convertidor-datos/index.html"
+                      >Abrir convertidor de datos
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/vale-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-json-xml-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-lines" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-json-xml-title">
+                      Formatear y validar JSON/XML
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Ordena, indenta y valida JSON y XML, y marca dónde está el
+                    error si el formato no es correcto.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/formato-json-xml/index.html"
+                      >Abrir formateador JSON/XML
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/mika-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-shield" /></svg
+              >Seguridad
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-integrity-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-shield" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-integrity-title">
+                      Verificador de integridad
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Calcula el SHA-256 de archivos y compara hashes para
+                    comprobar si un archivo cambió. Muy útil para perfiles
+                    técnicos y de ciberseguridad.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/verificador-integridad/index.html"
+                      >Abrir verificador
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/miles-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-passwords-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-shield" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-passwords-title">
+                      Generador de contraseñas
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Genera contraseñas aleatorias y seguras con la longitud y
+                    los caracteres que elijas, y muestra qué tan fuerte es. Se
+                    genera localmente en tu navegador.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/generador-contrasenas/index.html"
+                      >Abrir generador de contraseñas
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/vale-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-metadata-pdf-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-shield" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-metadata-pdf-title">
+                      Eliminar metadatos
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Quita el GPS, la fecha y los datos de la cámara de tus
+                    fotos, y el autor, el programa y otras propiedades ocultas
+                    de tus PDF.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/eliminar-metadatos/index.html"
+                      >Abrir eliminar metadatos
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/silvi-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                aria-labelledby="tool-pdf-password-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-shield" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-pdf-password-title">
+                      Proteger PDF con contraseña
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Cifra un PDF con contraseña para compartirlo con más
+                    seguridad, todo en tu navegador.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/proteger-pdf/index.html"
+                      >Abrir proteger PDF
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/enzo-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-monitor" /></svg
+              >Herramientas web
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-qr-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-monitor" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-qr-title">
+                      Generador y lector de QR
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Crea códigos QR para enlaces, textos, redes Wi-Fi o
+                    contactos. Lee QR desde imágenes y muestra el contenido
+                    antes de abrir enlaces.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/generador-qr/index.html"
+                      >Abrir generador y lector de QR
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/vale-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-shorten-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-monitor" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-shorten-title">
+                      Acortador de enlaces
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Acorta enlaces largos y genera un enlace más corto y fácil
+                    de compartir.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/acortador-enlaces/index.html"
+                      >Abrir acortador de enlaces
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/marcos-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-sparkles" /></svg
+              >Próximas herramientas
+            </h3>
+            <div class="tools-grid">
+              <article
+                class="tool-card"
+                data-dev-link
+                aria-labelledby="tool-video-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-youtube" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-video-title">
+                      Descargar video de YouTube
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Descarga videos en MP4, WebM o MKV, solo contenido
+                    autorizado.
+                  </p>
+                                                      <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/miles-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                data-dev-link
+                aria-labelledby="tool-music-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-music" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-music-title">
+                      Descargar música de YouTube
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Convierte y descarga audio en MP3, M4A, WAV o FLAC, solo
+                    contenido autorizado.
+                  </p>
+                                                      <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/marcos-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                data-dev-link
+                aria-labelledby="tool-playlist-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-youtube" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-playlist-title">
+                      Descargar playlist de YouTube
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Descarga una playlist o varios videos juntos en un ZIP, solo
+                    contenido autorizado.
+                  </p>
+                                                      <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/florencia-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                data-dev-link
+                aria-labelledby="tool-trans-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-lines" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-trans-title">
+                      Transcribir audio a texto
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Convierte tus audios en texto de forma automática.
+                  </p>
+                                                      <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/vale-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                data-dev-link
+                aria-labelledby="tool-pdf-doc-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-copy" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-pdf-doc-title">
+                      PDF a documento
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Convierte un PDF a un documento editable. Elegís el tipo de
+                    documento al que querés convertirlo; según el archivo, el
+                    resultado no siempre quedará perfecto.
+                  </p>
+                  <!-- @dev-only -->
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/pdf-a-documento/index.html"
+                      >Abrir PDF a documento
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                  <!-- @end-dev-only -->
+                  <!-- @prod-only -->
+                  <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                  <!-- @end-prod-only -->
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/marcos-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article
+                class="tool-card"
+                data-dev-link
+                aria-labelledby="tool-ocr-title"
+              >
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-note" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-ocr-title">
+                      OCR de documentos
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Reconoce texto de fotografías o documentos escaneados. Podés
+                    copiarlo o exportarlo a TXT y DOCX.
+                  </p>
+                                                      <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/miles-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-next-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-sparkles" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-next-title">
+                      Próximas herramientas
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Estamos preparando nuevas herramientas. Si hay una que te
+                    gustaría tener, contanos.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="#sugerencias"
+                      >Sugerir una herramienta
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/vale-cutout.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LLAMADA A LA ACCIÓN -->
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="container closing__inner">
+          <div class="closing__copy">
+            <h2 class="closing__title" id="closing-title">
+              ¡Esto recién empieza!
+            </h2>
+            <p class="closing__text">
+              Seguimos incorporando herramientas para que tengas todo lo que
+              necesitás en un solo lugar.
+            </p>
+          </div>
+          <div class="closing__art" aria-hidden="true">
+            <img
+              class="chibi chibi--closing-main"
+              src="/images/characters/grupo-cutout.webp"
+              width="1774"
+              height="887"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- SUGERENCIAS DE HERRAMIENTAS -->
+      <section class="suggest" id="sugerencias" aria-labelledby="suggest-title">
+        <div class="container">
+          <header class="section-head">
+            <h2 class="section-title" id="suggest-title">
+              ¿Qué herramienta te gustaría tener?
+            </h2>
+            <p class="section-sub">
+              ¡Tu idea puede ser la próxima! Contanos qué funcionalidad te
+              gustaría que agreguemos.
+            </p>
+          </header>
+
+          <div class="suggest__layout">
+            <figure class="suggest__art">
+              <img
+                class="chibi suggest__chibi"
+                src="/images/characters/vale-miles-idea.webp"
+                width="1025"
+                height="1457"
+                alt="Vale con su libreta, pensativa, y Miles saludando, junto a un globo con una bombilla que representa una idea"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <div class="suggest__main">
+              <div class="suggest__panel" id="suggest-panel">
+                <form class="suggest__form" id="suggest-form" novalidate>
+                  <p class="suggest__notice" id="suggest-notice" hidden>
+                    <svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="#i-alert" />
+                    </svg>
+                    <span
+                      >Por ahora no estamos recibiendo sugerencias desde este
+                      formulario. Gracias por la idea; volvé a intentarlo más
+                      adelante.</span
+                    >
+                  </p>
+
+                  <div class="field">
+                    <label class="field-label" for="suggest-description">
+                      Describí la herramienta o funcionalidad
+                      <span class="suggest__req">(obligatorio)</span>
+                    </label>
+                    <textarea
+                      class="text-field suggest__textarea"
+                      id="suggest-description"
+                      name="description"
+                      rows="5"
+                      maxlength="1000"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="suggest-description-help suggest-description-error"
+                    ></textarea>
+                    <p class="suggest__help" id="suggest-description-help">
+                      Entre 10 y 1000 caracteres.
+                    </p>
+                    <p
+                      class="suggest__error"
+                      id="suggest-description-error"
+                      hidden
+                    ></p>
+                  </div>
+
+                  <div class="field">
+                    <label class="field-label" for="suggest-email">
+                      Correo de contacto
+                      <span class="suggest__req">(opcional)</span>
+                    </label>
+                    <input
+                      class="text-field"
+                      type="email"
+                      id="suggest-email"
+                      name="email"
+                      maxlength="254"
+                      autocomplete="email"
+                      inputmode="email"
+                      aria-invalid="false"
+                      aria-describedby="suggest-email-help suggest-email-error"
+                    />
+                    <p class="suggest__help" id="suggest-email-help">
+                      Opcional. Si lo dejás, te enviamos un único agradecimiento automático y lo usamos solo para responderte si hace falta. No lo usamos para publicidad.
+                    </p>
+                    <p
+                      class="suggest__error"
+                      id="suggest-email-error"
+                      hidden
+                    ></p>
+                  </div>
+
+                  <!-- Captcha propio (pregunta matemática, sin terceros). La pregunta la carga suggestions.ts -->
+                  <div class="field">
+                    <label class="field-label" for="suggest-captcha">
+                      Para evitar envíos automáticos:
+                      <span id="suggest-captcha-question"
+                        >cargando la pregunta…</span
+                      >
+                      <span class="suggest__req">(obligatorio)</span>
+                    </label>
+                    <input
+                      class="text-field"
+                      id="suggest-captcha"
+                      name="captcha"
+                      type="text"
+                      inputmode="numeric"
+                      autocomplete="off"
+                      required
+                      aria-describedby="suggest-captcha-error"
+                    />
+                    <p
+                      class="suggest__error"
+                      id="suggest-captcha-error"
+                      hidden
+                    ></p>
+                  </div>
+
+                  <!-- Campo trampa para bots: los humanos no lo ven ni lo completan -->
+                  <div class="suggest__hp" aria-hidden="true">
+                    <label for="suggest-website">No completes este campo</label>
+                    <input
+                      type="text"
+                      id="suggest-website"
+                      name="website"
+                      tabindex="-1"
+                      autocomplete="off"
+                    />
+                  </div>
+
+                  <div class="suggest__actions">
+                    <button
+                      type="submit"
+                      class="btn btn--primary"
+                      id="suggest-submit"
+                      disabled
+                    >
+                      <svg class="icon" aria-hidden="true" focusable="false">
+                        <use href="#i-send" />
+                      </svg>
+                      <span>Enviar sugerencia</span>
+                    </button>
+                    <p
+                      class="suggest__status"
+                      id="suggest-status"
+                      role="status"
+                      aria-live="polite"
+                    ></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="local-modal" id="local-modal" aria-labelledby="local-modal-titulo">
+      <form method="dialog" class="local-modal__box">
+        <h2 class="local-modal__titulo" id="local-modal-titulo">Versión local</h2>
+        <p class="local-modal__texto">
+          Esta herramienta solo funciona en la versión local. Redirigite al GitHub del proyecto para verla.
+        </p>
+        <div class="local-modal__acciones">
+          <button type="submit" class="btn btn--ghost">Cerrar</button>
+          <a class="btn btn--primary" href="https://github.com/victoriavmc/ChispaBox" target="_blank" rel="noopener noreferrer">Ir a GitHub</a>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+  </body>
+</html>

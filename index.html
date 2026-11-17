@@ -1112,7 +1112,7 @@
                     autorizado.
                   </p>
                                                       <p class="tool-card__foot">
-                    <span class="badge badge--soon">Disponible en la versión local</span>
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
                   </p>
                 </div>
                 <img
@@ -1144,7 +1144,7 @@
                     contenido autorizado.
                   </p>
                                                       <p class="tool-card__foot">
-                    <span class="badge badge--soon">Disponible en la versión local</span>
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
                   </p>
                 </div>
                 <img
@@ -1176,7 +1176,7 @@
                     contenido autorizado.
                   </p>
                                                       <p class="tool-card__foot">
-                    <span class="badge badge--soon">Disponible en la versión local</span>
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
                   </p>
                 </div>
                 <img
@@ -1207,7 +1207,7 @@
                     Convierte tus audios en texto de forma automática.
                   </p>
                                                       <p class="tool-card__foot">
-                    <span class="badge badge--soon">Disponible en la versión local</span>
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
                   </p>
                 </div>
                 <img
@@ -1252,7 +1252,7 @@
                   <!-- @end-dev-only -->
                   <!-- @prod-only -->
                   <p class="tool-card__foot">
-                    <span class="badge badge--soon">Disponible en la versión local</span>
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
                   </p>
                   <!-- @end-prod-only -->
                 </div>
@@ -1285,7 +1285,7 @@
                     copiarlo o exportarlo a TXT y DOCX.
                   </p>
                                                       <p class="tool-card__foot">
-                    <span class="badge badge--soon">Disponible en la versión local</span>
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
                   </p>
                 </div>
                 <img
@@ -1518,6 +1518,22 @@
         </div>
       </section>
     </main>
+
+    <dialog class="local-modal" id="local-modal" aria-labelledby="local-modal-titulo">
+      <form method="dialog" class="local-modal__box">
+        <h2 class="local-modal__titulo" id="local-modal-titulo">Versión local</h2>
+        <p class="local-modal__texto">
+          Esta herramienta solo funciona en la versión local. Redirigite al GitHub del proyecto para verla:
+        </p>
+        <p class="local-modal__enlace">
+          <a href="https://github.com/victoriavmc/ChispaBox" target="_blank" rel="noopener noreferrer">github.com/victoriavmc/ChispaBox</a>
+        </p>
+        <div class="local-modal__acciones">
+          <button type="submit" class="btn btn--ghost">Cerrar</button>
+          <a class="btn btn--primary" href="https://github.com/victoriavmc/ChispaBox" target="_blank" rel="noopener noreferrer">Ir a GitHub</a>
+        </div>
+      </form>
+    </dialog>
 
     <!-- @include:footer -->
 

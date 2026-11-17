@@ -1,0 +1,66 @@
+/* Modal «Versión local». Usa los tokens de variables.css (claro y oscuro). */
+
+.badge--btn {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+  transition: filter var(--dur-fast) var(--ease-out);
+}
+
+.badge--btn:hover {
+  filter: brightness(0.96);
+}
+
+.badge--btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.local-modal {
+  width: min(92vw, 28rem);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-hover);
+}
+
+.local-modal::backdrop {
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+.local-modal__box {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.local-modal__titulo {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.local-modal__texto {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.local-modal__enlace {
+  margin: 0;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.local-modal__enlace a {
+  color: var(--accent-texto, var(--accent));
+}
+
+.local-modal__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}

@@ -8,6 +8,7 @@ import '../styles/encabezado.css';
 import { initTheme } from './theme';
 import { initTextTools } from './text-tools';
 import { initSuggestions } from './suggestions';
+import './modal-local';
 
 initTheme();
 

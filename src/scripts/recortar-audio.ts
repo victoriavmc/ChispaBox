@@ -4,6 +4,7 @@
  */
 import '../styles/image-tools.css';
 import '../styles/documentos-pdf.css';
+import '../styles/recortar-onda.css';
 import { formatBytes } from '../shared/image-limits.ts';
 import { sanitizeBaseName, baseNameOf } from '../shared/nombres-archivo.ts';
 import {
@@ -15,6 +16,7 @@ import {
 } from '../shared/recortar-audio.ts';
 import { decodeRecording, encodeMp3, encodeWav } from '../lib/audio-export.ts';
 import { recortarAudio, reproducirFragmento } from '../lib/recortar-audio.ts';
+import { crearSelectorOnda } from '../lib/selector-onda.ts';
 import {
   attachDropzone,
   clearError,
@@ -40,11 +42,37 @@ const E = {
   clear: requireEl<HTMLButtonElement>('ra-clear'),
   results: requireEl<HTMLElement>('ra-results'),
   status: requireEl<HTMLElement>('ra-status'),
+  wave: requireEl<HTMLElement>('ra-wave'),
+  waveStage: requireEl<HTMLElement>('ra-wave-stage'),
+  waveCanvas: requireEl<HTMLCanvasElement>('ra-wave-canvas'),
+  waveSel: requireEl<HTMLElement>('ra-wave-sel'),
+  waveHInicio: requireEl<HTMLElement>('ra-h-inicio'),
+  waveHFin: requireEl<HTMLElement>('ra-h-fin'),
+  waveTipInicio: requireEl<HTMLElement>('ra-tip-inicio'),
+  waveTipFin: requireEl<HTMLElement>('ra-tip-fin'),
+  waveDur: requireEl<HTMLElement>('ra-wave-dur'),
+  waveReset: requireEl<HTMLButtonElement>('ra-wave-reset'),
 };
 
 let audio: { buffer: AudioBuffer; nombre: string } | null = null;
 let detenerEscucha: (() => void) | null = null;
 let busy = false;
+
+/** Forma de onda: arrastrar los bordes actualiza los campos de texto, y viceversa. */
+const onda = crearSelectorOnda({
+  stage: E.waveStage,
+  canvas: E.waveCanvas,
+  sel: E.waveSel,
+  handleInicio: E.waveHInicio,
+  handleFin: E.waveHFin,
+  tipInicio: E.waveTipInicio,
+  tipFin: E.waveTipFin,
+  onChange: (inicio, fin) => {
+    E.inicio.value = formatTiempo(inicio);
+    E.fin.value = formatTiempo(fin);
+    leerRango();
+  },
+});
 
 function describeError(error: unknown): string {
   return error instanceof Error ? error.message : 'No se pudo procesar el audio.';
@@ -63,6 +91,7 @@ function leerRango(): { inicio: number; fin: number } | null {
     return null;
   }
   E.rangoMsg.textContent = `Se conserva de ${formatTiempo(inicio!)} a ${formatTiempo(fin!)} (${formatTiempo(fin! - inicio!)}).`;
+  onda.setRango(inicio!, fin!);
   return { inicio: inicio!, fin: fin! };
 }
 
@@ -73,6 +102,15 @@ function setControlsEnabled(enabled: boolean): void {
   E.nombre.disabled = !enabled;
   E.run.disabled = !enabled;
   E.clear.disabled = !enabled;
+  E.waveReset.disabled = !enabled;
+}
+
+/** Vuelve a seleccionar todo el audio. */
+function restablecerRango(): void {
+  if (!audio) return;
+  E.inicio.value = '0:00.0';
+  E.fin.value = formatTiempo(audio.buffer.duration);
+  leerRango();
 }
 
 function resetResults(): void {
@@ -102,11 +140,16 @@ async function loadFile(file: File): Promise<void> {
     E.inicio.value = '0:00.0';
     E.fin.value = formatTiempo(buffer.duration);
     E.nombre.value = `${audio.nombre}-recorte`;
+    E.waveDur.textContent = formatTiempo(buffer.duration);
+    E.wave.hidden = false;
+    onda.setAudio(buffer);
     setControlsEnabled(true);
     leerRango();
     setStatus(E.status, 'Audio listo. Elegí la parte a conservar.');
   } catch (error) {
     audio = null;
+    E.wave.hidden = true;
+    onda.setAudio(null);
     setControlsEnabled(false);
     showError(E.error, `No se pudo leer el audio: ${describeError(error)}`);
     setStatus(E.status, '');
@@ -128,6 +171,9 @@ function clearAudio(): void {
   E.fin.value = '';
   E.nombre.value = '';
   E.rangoMsg.textContent = '';
+  E.wave.hidden = true;
+  onda.setAudio(null);
+  E.waveDur.textContent = '';
   setControlsEnabled(false);
   resetResults();
   setStatus(E.status, '');
@@ -197,5 +243,6 @@ E.inicio.addEventListener('input', () => leerRango());
 E.fin.addEventListener('input', () => leerRango());
 E.escuchar.addEventListener('click', listen);
 E.parar.addEventListener('click', stopListening);
+E.waveReset.addEventListener('click', restablecerRango);
 E.run.addEventListener('click', () => void run());
 E.clear.addEventListener('click', clearAudio);

@@ -1,0 +1,236 @@
+/* Selector visual de «Recortar audio»: forma de onda con bordes arrastrables.
+ * Usa los tokens de variables.css (claro y oscuro se resuelven solos). */
+
+.wf {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.wf[hidden] {
+  display: none;
+}
+
+/* ---- Barra superior ---- */
+
+.wf-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.wf-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--chip-bg);
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.wf-tool--on {
+  background: var(--accent-solid);
+  color: var(--on-accent);
+}
+
+.wf-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.6rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wf-reset:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--chip-bg);
+}
+
+.wf-reset:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.wf-reset:focus-visible,
+.wf-handle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.wf-ico {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+/* ---- Escenario de la onda ---- */
+
+/* El color de este elemento es el de la onda (lo lee selector-onda.ts). */
+.wf-stage {
+  position: relative;
+  height: clamp(110px, 18vw, 150px);
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--accent);
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.wf-stage.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.wf-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Lo que queda fuera del recorte se atenúa con el fondo de la página; la parte elegida queda limpia. */
+.wf-sel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  box-shadow: 0 0 0 200vmax color-mix(in srgb, var(--bg) 70%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wf-stage.is-dragging {
+  cursor: ew-resize;
+}
+
+/* ---- Bordes de inicio y final ---- */
+
+.wf-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  margin-left: -7px;
+  background: var(--text);
+  border-radius: 4px;
+  cursor: ew-resize;
+  z-index: 2;
+  touch-action: none;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.wf-handle::before {
+  /* Área de toque más amplia que la barra visible. */
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -12px;
+  right: -12px;
+}
+
+.wf-handle::after {
+  /* Agarre: puntitos centrados. */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--bg) 1.4px, transparent 1.6px) 0 0 / 3px 6px repeat-y;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.wf-handle:hover,
+.wf-stage.is-dragging .wf-handle:active {
+  background: var(--accent);
+}
+
+.wf-handle--start {
+  border-radius: 4px 0 0 4px;
+}
+
+.wf-handle--end {
+  border-radius: 0 4px 4px 0;
+}
+
+/* Las etiquetas se colocan hacia dentro del escenario para no quedar recortadas en los bordes. */
+.wf-tip {
+  position: absolute;
+  top: 6px;
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--shadow);
+}
+
+.wf-handle--end .wf-tip {
+  left: auto;
+  right: 12px;
+}
+
+.wf-handle--start .wf-tip {
+  left: 12px;
+}
+
+/* ---- Eje de tiempos ---- */
+
+.wf-axis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.1rem;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.wf-axis span:last-child {
+  color: var(--text-muted);
+}
+
+.wf-hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-handle {
+    transition: none;
+  }
+}

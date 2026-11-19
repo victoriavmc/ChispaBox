@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Calculá la dirección de red, la máscara, el broadcast y el rango de hosts de una IPv4 a partir de su prefijo o máscara. Todo se calcula en tu navegador."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Calculadora de IP | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Calculadora de IP" subtitulo="Escribí una IPv4 con su prefijo (/24) o su máscara (255.255.255.0) y obtené la red, el broadcast y el rango de hosts. El cálculo se hace en tu navegador." personaje="/images/characters/miles-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Calcular una subred</h2>
+
+          <section class="rec-panel" aria-labelledby="ip-entrada-heading">
+            <h3 class="field-label" id="ip-entrada-heading">1. Dirección y máscara</h3>
+            <form class="red-form" id="ip-form" novalidate>
+              <div class="red-form__fila">
+                <label class="field-label" for="ip-entrada" hidden>Dirección IPv4 con prefijo o máscara</label>
+                <input
+                  class="red-input"
+                  id="ip-entrada"
+                  type="text"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  spellcheck="false"
+                  maxlength="64"
+                  placeholder="192.168.1.10/24"
+                  aria-describedby="ip-ayuda"
+                />
+                <button type="submit" class="btn btn--primary">Calcular</button>
+              </div>
+              <p class="red-ayuda" id="ip-ayuda">
+                Formatos aceptados: <code>192.168.1.10/24</code>, <code>10.0.5.7 255.255.0.0</code> o <code>172.16.0.1/12</code>.
+              </p>
+            </form>
+            <p class="rec-error" id="ip-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ip-resultado-heading">
+            <h3 class="field-label" id="ip-resultado-heading">2. Resultado</h3>
+            <dl class="red-datos" id="ip-datos" hidden></dl>
+          </section>
+
+          <p class="rec-status" id="ip-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/calculadora-ip.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Comprobá si un servidor web responde en puertos HTTPS comunes. Solo para servidores tuyos o con permiso. La prueba se hace desde tu navegador."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Escáner de puertos | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Escáner de puertos" subtitulo="Revisá si un servidor responde en algunos puertos HTTPS. Usalo solo con servidores tuyos o con permiso de quien los administra." personaje="/images/characters/marcos-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Revisar puertos de un servidor</h2>
+
+          <section class="rec-panel" aria-labelledby="pto-consulta-heading">
+            <h3 class="field-label" id="pto-consulta-heading">1. Servidor y puertos</h3>
+            <div class="red-aviso">
+              <strong>Límites de esta prueba.</strong> Un navegador no puede abrir conexiones TCP cualquiera. Por eso la prueba intenta una conexión HTTPS a cada puerto: solo detecta servidores que hablan HTTPS. Un puerto con otro protocolo (SSH, FTP, bases de datos) o con un certificado no válido aparece como «Sin respuesta». No reemplaza a un escáner de red como nmap.
+            </div>
+            <form class="red-form" id="pto-form" novalidate>
+              <label class="field-label" for="pto-host">Servidor (dominio o IP)</label>
+              <input
+                class="red-input"
+                id="pto-host"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                maxlength="253"
+                placeholder="mi-sitio.com"
+              />
+              <label class="field-label" for="pto-puertos">Puertos (separados por coma, hasta 20)</label>
+              <div class="red-form__fila">
+                <input
+                  class="red-input"
+                  id="pto-puertos"
+                  type="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  maxlength="200"
+                  aria-describedby="pto-ayuda"
+                />
+                <button type="submit" class="btn btn--primary" id="pto-btn">Revisar puertos</button>
+              </div>
+              <p class="red-ayuda" id="pto-ayuda">
+                Puertos que no se pueden consultar desde el navegador (por ejemplo 22, 25 o 3306) se rechazan.
+              </p>
+            </form>
+            <p class="rec-error" id="pto-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="pto-resultado-heading">
+            <h3 class="field-label" id="pto-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="pto-resultado" hidden>
+              <div class="red-tabla-wrap" id="pto-tabla-wrap" hidden>
+                <table class="red-tabla">
+                  <thead>
+                    <tr>
+                      <th scope="col">Puerto</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">Tiempo</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pto-registros"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <p class="rec-status" id="pto-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/escaner-puertos.ts"></script>
+  </body>
+</html>

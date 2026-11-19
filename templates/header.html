@@ -5,7 +5,7 @@
     <a class="brand" href="/" aria-label="ChispaBox, ir al inicio">
       <img
         class="brand__mark"
-        src="/images/logo/chispabox-logo.png"
+        src="/images/logo/chispabox-logo.webp"
         width="512"
         height="512"
         alt=""
@@ -19,15 +19,32 @@
 
     <div class="header-actions">
       <nav class="site-nav" aria-label="Principal">
-        <ul class="nav-list">
-          <li>
-            <a class="nav-link" href="/#herramientas"
-              ><svg class="icon" aria-hidden="true">
-                <use href="#i-grid" /></svg
-              >Herramientas</a
-            >
-          </li>
-        </ul>
+        <div class="menu-herr" data-menu-herr>
+          <button
+            type="button"
+            class="menu-herr__btn"
+            aria-expanded="false"
+            aria-controls="menu-herr-panel"
+            data-menu-herr-btn
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-lines" /></svg>
+            <span>Herramientas</span>
+          </button>
+          <div class="menu-herr__panel" id="menu-herr-panel" hidden>
+            <p class="menu-herr__titulo">Ir a una categoría</p>
+            <ul class="menu-herr__lista">
+              <li><a class="menu-herr__link" href="/#herramientas">Todas las herramientas</a></li>
+              <li><a class="menu-herr__link" href="/#cat-audio">Audio</a></li>
+              <li><a class="menu-herr__link" href="/#cat-texto">Texto y escritura</a></li>
+              <li><a class="menu-herr__link" href="/#cat-imagenes">Imágenes y diseño</a></li>
+              <li><a class="menu-herr__link" href="/#cat-documentos">Documentos y PDF</a></li>
+              <li><a class="menu-herr__link" href="/#cat-datos">Datos y desarrollo</a></li>
+              <li><a class="menu-herr__link" href="/#cat-seguridad">Seguridad</a></li>
+              <li><a class="menu-herr__link" href="/#cat-networking">Networking</a></li>
+              <li><a class="menu-herr__link" href="/#cat-web">Herramientas web</a></li>
+            </ul>
+          </div>
+        </div>
       </nav>
 
       <button

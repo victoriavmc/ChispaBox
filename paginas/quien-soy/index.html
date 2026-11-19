@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Mirá qué información de tu navegador y de tu conexión puede ver cualquier sitio web. Todo se lee en tu navegador; la IP pública solo se consulta si lo pedís."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Quién soy | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Quién soy" subtitulo="Mirá qué sabe tu navegador sobre tu equipo y tu conexión. Los datos se leen aquí, en tu navegador. La IP pública solo se consulta si pulsás el botón." personaje="/images/characters/vale-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Tu IP y tu equipo</h2>
+
+          <div class="qs-layout" id="quien-layout">
+          <section class="rec-panel" aria-labelledby="quien-ip-heading">
+            <h3 class="field-label" id="quien-ip-heading">1. Tu IP, ubicación y proveedor</h3>
+            <div class="red-aviso">
+              <strong>Servicios externos.</strong> Al pulsar el botón, tu navegador consulta <code>ipwho.is</code> (ubicación y proveedor; si no responde, <code>ipinfo.io</code>), <code>api6.ipify.org</code> (IPv6), <code>dns.google</code> (nombre de host) y <code>tile.openstreetmap.org</code> (mapa). Cada servicio ve tu IP. ChispaBox no guarda ningún dato.
+            </div>
+            <div class="red-acciones">
+              <button type="button" class="btn btn--primary" id="quien-ip-btn">Consultar mi IP</button>
+            </div>
+            <div class="qs-resultado" id="quien-ip-resultado" hidden>
+              <div class="qs-tarjetas" id="quien-tarjetas"></div>
+              <dl class="red-datos qs-detalles" id="quien-ip-detalles"></dl>
+              <div class="qs-mapa" id="quien-mapa" role="img" aria-label="Mapa con la ubicación aproximada de tu IP" hidden></div>
+              <p class="tool-note">
+                La ubicación es aproximada: suele indicar la ciudad, no tu dirección exacta. El círculo del mapa muestra la zona estimada.
+              </p>
+            </div>
+            <p class="tool-note">
+              La IP de tu red interna (la de tu router, por ejemplo 192.168.x.x) no se puede leer de forma confiable desde una página web.
+            </p>
+            <p class="rec-error" id="quien-error" role="alert" hidden></p>
+          </section>
+
+          <details class="rec-panel qs-aside" id="quien-navegador">
+            <summary class="qs-aside__resumen">
+              <span class="field-label">2. Lo que informa el navegador</span>
+            </summary>
+            <div class="qs-aside__cuerpo">
+              <p class="tool-note">Cualquier sitio que visites puede leer estos mismos datos. Por eso conviene saber qué muestran.</p>
+              <dl class="red-datos" id="quien-datos"></dl>
+            </div>
+          </details>
+          </div>
+
+          <p class="rec-status" id="quien-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/quien-soy.ts"></script>
+  </body>
+</html>

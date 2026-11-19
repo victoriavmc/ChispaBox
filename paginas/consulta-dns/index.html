@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Consultá registros DNS (A, AAAA, MX, TXT, NS, CNAME y SOA) de un dominio. La consulta usa un servicio DNS público externo."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Consulta DNS | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Consulta DNS" subtitulo="Mirá los registros DNS de un dominio: a qué IP apunta, qué servidor de correo usa, qué textos (TXT) tiene publicados y más." personaje="/images/characters/mika-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Consultar un dominio</h2>
+
+          <section class="rec-panel" aria-labelledby="dns-consulta-heading">
+            <h3 class="field-label" id="dns-consulta-heading">1. Dominio y tipo de registro</h3>
+            <div class="red-aviso">
+              <strong>Servicio externo.</strong> El dominio que escribas se envía a <code>dns.google</code> (Google Public DNS) para resolverlo. No se envía nada más.
+            </div>
+            <form class="red-form" id="dns-form" novalidate>
+              <fieldset class="red-tipos" id="dns-tipo-grupo">
+                <legend class="field-label">Tipo de registro</legend>
+              </fieldset>
+              <div class="red-form__fila">
+                <label class="field-label" for="dns-dominio" hidden>Dominio</label>
+                <input
+                  class="red-input"
+                  id="dns-dominio"
+                  type="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  maxlength="253"
+                  placeholder="ejemplo.com"
+                />
+                <button type="submit" class="btn btn--primary" id="dns-btn">Consultar</button>
+              </div>
+              <p class="red-ayuda red-tipo-desc" id="dns-tipo-desc" aria-live="polite"></p>
+            </form>
+            <p class="rec-error" id="dns-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="dns-resultado-heading">
+            <h3 class="field-label" id="dns-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="dns-resultado" hidden>
+              <p class="red-ayuda">Estado: <strong id="dns-estado"></strong></p>
+              <div class="red-tabla-wrap" id="dns-tabla-wrap" hidden>
+                <table class="red-tabla">
+                  <thead>
+                    <tr>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">TTL (segundos)</th>
+                      <th scope="col">Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dns-registros"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <p class="rec-status" id="dns-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/consulta-dns.ts"></script>
+  </body>
+</html>

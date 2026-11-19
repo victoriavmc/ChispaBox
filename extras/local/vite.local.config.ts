@@ -14,6 +14,8 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const PAGINAS_LOCALES = ['descargar-youtube-video', 'descargar-youtube-audio', 'descargar-playlist-youtube', 'ocr-documentos', 'transcribir-audio'];
 
 export default async (env: ConfigEnv): Promise<UserConfig> => {
+  // Marca este servidor como local: la configuración raíz muestra las herramientas que solo existen aquí.
+  process.env.CHISPABOX_LOCAL_SERVER = 'true';
   const base = typeof baseConfig === 'function' ? await baseConfig(env) : await baseConfig;
   // Variables de la raíz (.env.local, p. ej. SOFFICE_PATH) y de extras/local (.env, que tiene prioridad).
   const variables = {

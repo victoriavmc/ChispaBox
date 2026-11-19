@@ -3,6 +3,8 @@ import { basename, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { imageEnhanceApi } from './server/image-enhance.ts';
+import { seoHead } from './server/seo-head.ts';
+import { minificarHtml } from './server/html-minify.ts';
 import { documentosPdfApi } from './server/documentos-pdf/api.ts';
 import { loadDocumentosConfig } from './server/documentos-pdf/config.ts';
 
@@ -54,7 +56,9 @@ function includePartials(): Plugin {
 // Tarjetas de descargas de YouTube: en `dev`/`preview` se muestra el enlace al descargador;
 // en la compilación estática se muestra «Próximamente» (sin enlace).
 // Marcas en index.html: <!-- @dev-only --> ... <!-- @end-dev-only --> y <!-- @prod-only --> ... <!-- @end-prod-only -->.
-function devOnlyCards(localBuild: boolean): Plugin {
+// servidorLocal: true solo en extras/local (vite.local.config.ts), donde las descargas de YouTube, OCR y
+// transcripción funcionan. En `dev` de la raíz y en la versión pública esas tarjetas dicen «Disponible en la versión local».
+function devOnlyCards(localBuild: boolean, servidorLocal: boolean): Plugin {
   // En la compilación local (CHISPABOX_LOCAL=true) la tarjeta de PDF a documento se muestra completa:
   // necesita el servidor de esta app, que solo corre en dev y preview.
   const LOCAL_CARD = 'tool-pdf-doc-title';
@@ -72,6 +76,7 @@ function devOnlyCards(localBuild: boolean): Plugin {
   return {
     name: 'dev-only-cards',
     transformIndexHtml(html, ctx) {
+      if (ctx.server && !servidorLocal) return stripPublic(html);
       if (ctx.server) {
         return html
           .replace(/<!-- @prod-only -->[\s\S]*?<!-- @end-prod-only -->[ \t]*\n?/g, '')
@@ -226,8 +231,13 @@ export default defineConfig(({ mode, command }) => {
     resolve: {
       alias: [{ find: /^worker-f\/browser$/, replacement: fileURLToPath(new URL('./src/shims/worker-f-browser.ts', import.meta.url)) }],
     },
+    // El escaneo de dependencias de `dev` no debe leer la página de OCR: tesseract.js solo está instalado en extras/local
+    // (ver RG-02 y extras/local/README.md). Sin esto, Vite avisa de una dependencia no resuelta en cada arranque.
+    optimizeDeps: {
+      entries: ['index.html', '404.html', 'paginas/**/index.html', '!paginas/ocr-documentos/index.html'],
+    },
     // imageEnhanceApi, youtubeApi y documentosPdfApi solo existen en `dev` y `preview`; no se incluyen en el build estático.
-    plugins: [includePartials(), pagina404(), devOnlyCards(localBuild), sinOcrEnPublico(command === 'build' && !localBuild), shortLinks(), imageEnhanceApi(), documentosPdfApi(documentos)],
+    plugins: [includePartials(), pagina404(), devOnlyCards(localBuild, env.CHISPABOX_LOCAL_SERVER === 'true'),sinOcrEnPublico(command === 'build' && !localBuild), shortLinks(), seoHead(command === 'build' && !localBuild), minificarHtml(), imageEnhanceApi(), documentosPdfApi(documentos)],
     server: {
       host: hostOf(env.HOST, '127.0.0.1'),
       port: port(env.PORT, 5173),

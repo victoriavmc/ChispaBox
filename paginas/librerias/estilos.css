@@ -91,3 +91,99 @@
       .libs-tag--external::before {
         background: #2563eb;
       }
+
+      /* Avisos de licencia: tarjetas en cuadrícula con insignia por tipo de licencia */
+      .libs-licenses {
+        margin-top: clamp(2rem, 4vw, 3rem);
+      }
+      .libs-licenses h2 {
+        margin: 0 0 0.4rem;
+      }
+      .lic-grid {
+        list-style: none;
+        margin: 1.25rem 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        gap: 0.8rem;
+      }
+      .lic-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        padding: 0.9rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow);
+      }
+      .lic-card--destacada {
+        grid-column: 1 / -1;
+        background: var(--surface-2);
+      }
+      .lic-badge {
+        align-self: flex-start;
+        padding: 0.15rem 0.55rem;
+        border-radius: var(--radius-pill);
+        font-size: 0.78rem;
+        font-weight: 700;
+        background: var(--chip-bg);
+        color: var(--accent-texto);
+      }
+      .lic-badge--mit {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .lic-badge--apache {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .lic-badge--isc {
+        background: #ede9fe;
+        color: #5b21b6;
+      }
+      .lic-badge--bsd {
+        background: #e5e7eb;
+        color: #374151;
+      }
+      .lic-badge--lgpl {
+        background: #ffedd5;
+        color: #9a3412;
+      }
+      .lic-card__nombre {
+        margin: 0;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+      }
+      .lic-card__nota {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.45;
+      }
+      .lic-card__link {
+        margin-top: auto;
+        color: var(--accent-texto);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .lic-card__link:hover,
+      .lic-card__enlaces a:hover {
+        text-decoration: underline;
+      }
+      .lic-card__enlaces {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1rem;
+        margin: auto 0 0;
+      }
+      .lic-card__enlaces a {
+        color: var(--accent-texto);
+        font-weight: 600;
+      }
+      .lic-card__link:focus-visible,
+      .lic-card__enlaces a:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }

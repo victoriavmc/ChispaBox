@@ -207,6 +207,20 @@ async function subdominios(dominio: string): Promise<unknown> {
   }
 }
 
+/** Texto legible para cada tipo de respuesta de node:dns (MX, SOA, TXT…). */
+function formatearValor(d: unknown): string {
+  if (typeof d === 'string') return d;
+  if (Array.isArray(d)) return d.map(String).join('');
+  if (d && typeof d === 'object') {
+    const o = d as Record<string, unknown>;
+    if ('exchange' in o) return `${o.priority} ${o.exchange}`;
+    if ('nsname' in o) return `${o.nsname} ${o.hostmaster} (serie ${o.serial})`;
+    if ('address' in o) return String(o.address);
+    return JSON.stringify(d);
+  }
+  return String(d);
+}
+
 async function propagacion(dominio: string, tipo: string): Promise<unknown> {
   if (!(TIPOS_PROPAGACION as readonly string[]).includes(tipo)) throw new ErrorApi(400, 'Tipo de registro no admitido.');
   const resultados = await Promise.all(
@@ -215,7 +229,7 @@ async function propagacion(dominio: string, tipo: string): Promise<unknown> {
       resolutor.setServers([servidor]);
       try {
         const datos = await resolutor.resolve(dominio, tipo as 'A');
-        const valores = (Array.isArray(datos) ? datos : [datos]).map((d) => (typeof d === 'string' ? d : JSON.stringify(d)));
+        const valores = (Array.isArray(datos) ? datos : [datos]).map(formatearValor);
         return { servidor, estado: 'resuelta', valores };
       } catch (e) {
         const codigo = (e as NodeJS.ErrnoException).code ?? 'ERROR';

@@ -111,6 +111,13 @@
   visibility: visible;
 }
 
+/* En celulares no hay espacio para el globo: la descripción se muestra debajo de los botones. */
+@media (max-width: 36rem) {
+  .red-tipo::after {
+    display: none;
+  }
+}
+
 .red-select {
   flex: 0 0 auto;
   padding: 0.6rem 0.75rem;
@@ -252,6 +259,281 @@
   margin: 0;
   color: var(--accent);
   font-weight: 600;
+}
+
+/* Consulta DNS: desplegables opcionales (glosario y análisis de seguridad) */
+.dns-opcional {
+  display: block;
+  padding: 0;
+  overflow: hidden;
+}
+
+.dns-opcional__resumen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(0.9rem, 3vw, 1.1rem) clamp(1rem, 3vw, 1.75rem);
+  cursor: pointer;
+  list-style: none;
+}
+
+.dns-opcional__resumen::-webkit-details-marker {
+  display: none;
+}
+
+.dns-opcional__resumen::after {
+  content: "Ver";
+  flex: 0 0 auto;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--accent-texto);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dns-opcional[open] > .dns-opcional__resumen::after {
+  content: "Ocultar";
+}
+
+.dns-opcional__resumen:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+
+.dns-opcional__cuerpo {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0 clamp(1rem, 3vw, 1.75rem) clamp(1rem, 3vw, 1.5rem);
+}
+
+.dns-glosario {
+  display: grid;
+  grid-template-columns: minmax(4.5rem, 6rem) minmax(0, 1fr);
+  gap: 0.45rem 0.9rem;
+  margin: 0;
+}
+
+.dns-glosario dt {
+  font-family: ui-monospace, Consolas, monospace;
+  font-weight: 700;
+  color: var(--accent-texto);
+}
+
+.dns-glosario dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+@media (max-width: 36rem) {
+  .dns-glosario {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.1rem;
+  }
+
+  .dns-glosario dt {
+    margin-top: 0.4rem;
+  }
+}
+
+.dns-chequeos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.dns-chequeo {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+
+.dns-chequeo--ok {
+  border-left-color: #16a34a;
+}
+
+.dns-chequeo--alerta {
+  border-left-color: #d97706;
+}
+
+.dns-chequeo--falta {
+  border-left-color: var(--accent);
+}
+
+.dns-chequeo__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dns-chequeo__estado {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.dns-chequeo__detalle {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* Dominios: listas de resultados (cabeceras, historial, subdominios) */
+.cab-saltos {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: salto;
+}
+
+.cab-salto {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  overflow-wrap: anywhere;
+}
+
+.cab-salto strong {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.95rem;
+}
+
+.his-anios,
+.sub-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.his-anio,
+.sub-lista li {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.his-anio:hover {
+  border-color: var(--accent);
+  color: var(--accent-texto);
+}
+
+.his-anio:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Calculadora de IP: representación binaria */
+.bin-seccion[hidden] {
+  display: none;
+}
+
+.bin-tabla {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  overflow-x: auto;
+}
+
+/* Etiqueta a la izquierda; bits y decimal en la segunda columna, uno debajo del otro. */
+.bin-fila {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 7rem) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.2rem 0.75rem;
+  min-width: 0;
+}
+
+.bin-fila__bits,
+.bin-fila__decimal {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.bin-fila__etiqueta {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.bin-fila__bits {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+}
+
+.bin-fila__decimal {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.92rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bin--red {
+  color: #15803d;
+  font-weight: 700;
+}
+
+.bin--mascara {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.bin--host {
+  color: var(--text-muted);
+}
+
+.bin-leyenda {
+  display: inline-block;
+  margin-right: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.bin-leyenda--red {
+  color: #15803d;
+}
+
+.bin-leyenda--host {
+  color: var(--text-muted);
+}
+
+.bin-leyenda--mascara {
+  color: var(--accent);
+}
+
+@media (max-width: 36rem) {
+  .bin-fila {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+
+  .bin-fila__bits,
+  .bin-fila__decimal {
+    grid-column: 1;
+  }
 }
 
 /* «De quién es esta IP»: titular destacado */
@@ -423,3 +705,14 @@
   padding: 0 clamp(1rem, 3vw, 1.75rem) clamp(1rem, 3vw, 1.5rem);
 }
 
+
+/* Prueba de velocidad: historial de pruebas */
+#vel-historial li {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}

@@ -72,6 +72,43 @@
             </div>
           </section>
 
+          <details class="rec-panel dns-opcional">
+            <summary class="dns-opcional__resumen">
+              <span class="field-label">Opcional: qué significa cada tipo de registro</span>
+            </summary>
+            <div class="dns-opcional__cuerpo">
+              <dl class="dns-glosario">
+                <dt>A</dt><dd>Dirección IPv4 del dominio.</dd>
+                <dt>AAAA</dt><dd>Dirección IPv6 del dominio.</dd>
+                <dt>CNAME</dt><dd>Hace que un nombre apunte a otro nombre, en lugar de a una IP.</dd>
+                <dt>NS</dt><dd>Servidores de nombres autorizados para el dominio.</dd>
+                <dt>MX</dt><dd>Servidores que reciben el correo del dominio, con su prioridad.</dd>
+                <dt>TXT</dt><dd>Textos del dominio: verificaciones y reglas de correo (SPF, DKIM, DMARC).</dd>
+                <dt>PTR</dt><dd>Nombre asociado a una IP (búsqueda DNS inversa).</dd>
+                <dt>SRV</dt><dd>Puerto y servidor de un servicio concreto del dominio.</dd>
+                <dt>SOA</dt><dd>Datos administrativos de la zona: correo del administrador, tiempos de actualización.</dd>
+                <dt>CAA</dt><dd>Autoridades de certificados que pueden emitir certificados para el dominio.</dd>
+                <dt>DS</dt><dd>Parte de DNSSEC: firma que protege las respuestas DNS.</dd>
+                <dt>DNSKEY</dt><dd>Clave pública de DNSSEC para verificar las firmas.</dd>
+              </dl>
+            </div>
+          </details>
+
+          <details class="rec-panel dns-opcional" id="dns-analisis">
+            <summary class="dns-opcional__resumen">
+              <span class="field-label">Opcional: análisis de seguridad y correo</span>
+            </summary>
+            <div class="dns-opcional__cuerpo">
+              <p class="tool-note">
+                Revisa MX, SPF, DMARC, servidores de nombres, CAA y DNSSEC del dominio escrito arriba. Usa <code>dns.google</code> y no envía ningún correo.
+              </p>
+              <div class="red-acciones">
+                <button type="button" class="btn btn--primary" id="dns-analizar-btn">Analizar dominio</button>
+              </div>
+              <ul class="dns-chequeos" id="dns-chequeos" hidden></ul>
+            </div>
+          </details>
+
           <p class="rec-status" id="dns-status" role="status" aria-live="polite"></p>
         </div>
       </div>
@@ -81,5 +118,6 @@
 
     <script type="module" src="/src/scripts/main.ts"></script>
     <script type="module" src="/src/scripts/consulta-dns.ts"></script>
+    <script type="module" src="/src/scripts/dns-analisis.ts"></script>
   </body>
 </html>

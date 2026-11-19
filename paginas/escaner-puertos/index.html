@@ -29,7 +29,7 @@
           <section class="rec-panel" aria-labelledby="pto-consulta-heading">
             <h3 class="field-label" id="pto-consulta-heading">1. Servidor y puertos</h3>
             <div class="red-aviso">
-              <strong>Límites de esta prueba.</strong> Un navegador no puede abrir conexiones TCP cualquiera. Por eso la prueba intenta una conexión HTTPS a cada puerto: solo detecta servidores que hablan HTTPS. Un puerto con otro protocolo (SSH, FTP, bases de datos) o con un certificado no válido aparece como «Sin respuesta». No reemplaza a un escáner de red como nmap.
+              <strong>Límites de esta prueba.</strong> Con la versión local de ChispaBox se abre una conexión TCP real a cada puerto. En la versión pública, un navegador no puede abrir conexiones TCP cualquiera: allí solo se intenta una conexión HTTPS y un puerto con otro protocolo aparece como «Sin respuesta». No reemplaza a un escáner de red como nmap.
             </div>
             <form class="red-form" id="pto-form" novalidate>
               <label class="field-label" for="pto-host">Servidor (dominio o IP)</label>
@@ -42,21 +42,25 @@
                 maxlength="253"
                 placeholder="mi-sitio.com"
               />
-              <label class="field-label" for="pto-puertos">Puertos (separados por coma, hasta 20)</label>
+              <label class="field-label" for="pto-puertos">Puerto o lista de puertos (separados por coma, hasta 20)</label>
+              <input
+                class="red-input"
+                id="pto-puertos"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                maxlength="200"
+                aria-describedby="pto-ayuda"
+              />
+              <label class="field-label" for="pto-comunes">Puertos comunes predefinidos</label>
               <div class="red-form__fila">
-                <input
-                  class="red-input"
-                  id="pto-puertos"
-                  type="text"
-                  autocomplete="off"
-                  spellcheck="false"
-                  maxlength="200"
-                  aria-describedby="pto-ayuda"
-                />
-                <button type="submit" class="btn btn--primary" id="pto-btn">Revisar puertos</button>
+                <select class="red-select" id="pto-comunes" aria-describedby="pto-ayuda">
+                  <option value="">Selecciona un puerto común</option>
+                </select>
+                <button type="submit" class="btn btn--primary" id="pto-btn">Escanear puertos</button>
               </div>
               <p class="red-ayuda" id="pto-ayuda">
-                Puertos que no se pueden consultar desde el navegador (por ejemplo 22, 25 o 3306) se rechazan.
+                Con la versión local de ChispaBox se hace una conexión TCP real a cada puerto. En la versión pública solo se puede probar HTTPS desde el navegador.
               </p>
             </form>
             <p class="rec-error" id="pto-error" role="alert" hidden></p>
@@ -70,6 +74,7 @@
                   <thead>
                     <tr>
                       <th scope="col">Puerto</th>
+                      <th scope="col">Servicio</th>
                       <th scope="col">Estado</th>
                       <th scope="col">Tiempo</th>
                     </tr>

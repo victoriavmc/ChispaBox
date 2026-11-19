@@ -502,6 +502,183 @@
                   <td class="libs-muted">—</td>
                 </tr>
 
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/mika-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Prueba de velocidad</td>
+                  <td>
+                    JavaScript propio + Fetch API del navegador; sin librerías. Servicio de prueba de <code>speed.cloudflare.com</code>
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> La prueba descarga y sube datos de prueba a <code>speed.cloudflare.com</code>, que ve tu IP. El historial se guarda solo en tu navegador.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Servicio público (sin versión)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <!-- DOMINIOS -->
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/vale-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Disponibilidad de dominio</td>
+                  <td>
+                    JavaScript propio + RDAP a través de <code>rdap.org</code> (protocolo IETF); sin librerías
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> El dominio que escribís se envía a <code>rdap.org</code>, que redirige al registro oficial.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Servicio público (sin versión)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/mika-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Generador de nombres</td>
+                  <td>
+                    JavaScript propio + RDAP a través de <code>rdap.org</code>; sin librerías
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> Cada nombre propuesto se consulta en <code>rdap.org</code>.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Servicio público (sin versión)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/florencia-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Convertidor Punycode</td>
+                  <td>
+                    JavaScript propio (decodificación RFC 3492) y la API <code>URL</code> del navegador; sin librerías
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> La conversión se hace en tu navegador.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/silvi-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Valorar un dominio</td>
+                  <td>
+                    JavaScript propio (reglas de longitud, caracteres, extensión y pronunciación); sin librerías
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> El cálculo se hace en tu navegador.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/enzo-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Correo: SPF, DKIM y DMARC</td>
+                  <td>
+                    JavaScript propio + DNS sobre HTTPS de Google Public DNS (<code>dns.google</code>); sin librerías
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> Los nombres a revisar se envían a <code>dns.google</code>. No se envía correo.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Servicio público (sin versión)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/marcos-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Verificar SSL</td>
+                  <td>
+                    Módulo <code>node:tls</code> de Node.js en el servidor local; sin librerías
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Solo en la versión local. La conexión sale desde tu equipo hacia el sitio que consultes.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa (Node.js)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/miles-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Cabeceras HTTP</td>
+                  <td>
+                    Fetch API de Node.js en el servidor local; sin librerías
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--local">Local</span> Solo en la versión local. Sigue las redirecciones del sitio que consultes.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa (Node.js)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/florencia-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Historial del dominio</td>
+                  <td>
+                    API CDX de Internet Archive (<code>web.archive.org</code>) desde el servidor local
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> Solo en la versión local. Se consulta Internet Archive.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Servicio público (sin versión)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/mika-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Buscar subdominios</td>
+                  <td>
+                    Registros públicos de certificados de <code>crt.sh</code> desde el servidor local
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> Solo en la versión local. Se consulta crt.sh.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Servicio público (sin versión)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
+                <tr>
+                  <td class="libs-face">
+                    <img src="/images/characters/silvi-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+                  </td>
+                  <td>Propagación DNS</td>
+                  <td>
+                    Módulo <code>node:dns</code> de Node.js con resolutores públicos (8.8.8.8, 1.1.1.1, 9.9.9.9, 208.67.222.222, 64.6.64.6)
+                    <details class="libs-privacy">
+                      <summary>Privacidad</summary>
+                      <p><span class="libs-tag libs-tag--external">Servicio externo</span> Solo en la versión local. Las consultas van a esos resolutores.</p>
+                    </details>
+                  </td>
+                  <td class="libs-muted">Nativa (Node.js)</td>
+                  <td class="libs-muted">—</td>
+                </tr>
+
                 <!-- HERRAMIENTAS WEB -->
                 <tr>
                   <td class="libs-face">

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Mira desde cuándo hay capturas de un dominio en el Internet Archive, año por año. Solo en la versión local." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Historial del dominio | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Historial del dominio" subtitulo="Mirá desde cuándo hay capturas de un dominio en el Internet Archive y ábrelas año por año." personaje="/images/characters/florencia-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Capturas del dominio en el tiempo</h2>
+
+          <section class="rec-panel" aria-labelledby="his-entrada-heading">
+            <h3 class="field-label" id="his-entrada-heading">1. Dominio</h3>
+            <div class="red-aviso"><strong>Solo en la versión local.</strong> Esta consulta la hace el servidor local de ChispaBox (extras/local), no tu navegador. En la versión pública no está disponible.</div>
+            <form class="red-form" id="his-form" novalidate>
+              <div class="red-form__fila">
+                <label class="field-label" for="his-entrada" hidden>Dominio</label>
+                <input class="red-input" id="his-entrada" type="text" autocomplete="off" spellcheck="false" maxlength="2048" placeholder="ejemplo.com" />
+                <button type="submit" class="btn btn--primary" id="his-btn">Buscar capturas</button>
+              </div>
+            </form>
+            <p class="rec-error" id="his-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="his-resultado-heading">
+            <h3 class="field-label" id="his-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="his-resultado" hidden>
+              <div class="ip-titular" id="his-resumen" hidden></div>
+              <ul class="his-anios" id="his-anios"></ul>
+            </div>
+          </section>
+
+          <p class="rec-status" id="his-status" role="status" aria-live="polite"></p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/dominio-historial.ts"></script>
+  </body>
+</html>

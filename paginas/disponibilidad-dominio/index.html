@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Revisá si un dominio está libre para registrar. Consulta el registro oficial RDAP de cada extensión." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Disponibilidad de dominio | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Disponibilidad de dominio" subtitulo="Escribí un nombre o un dominio completo. El dato sale del registro oficial de cada extensión." personaje="/images/characters/vale-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Ver si un dominio está libre</h2>
+
+          <section class="rec-panel" aria-labelledby="disp-entrada-heading">
+            <h3 class="field-label" id="disp-entrada-heading">1. Dominio</h3>
+            <div class="red-aviso"><strong>Servicio externo.</strong> Se consulta <code>rdap.org</code> (registro oficial). El dominio que escribís se envía a ese servicio.</div>
+            <form class="red-form" id="disp-form" novalidate>
+              <div class="red-form__fila">
+                <label class="field-label" for="disp-entrada" hidden>Dominio</label>
+                <input class="red-input" id="disp-entrada" type="text" autocomplete="off" spellcheck="false" maxlength="253" placeholder="mimarca.com" />
+                <button type="submit" class="btn btn--primary" id="disp-btn">Consultar</button>
+              </div>
+            </form>
+            <p class="rec-error" id="disp-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="disp-resultado-heading">
+            <h3 class="field-label" id="disp-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="disp-resultado" hidden>
+              <div class="ip-titular" id="disp-estado" hidden></div>
+              <dl class="red-datos" id="disp-datos"></dl>
+              <p class="tool-note">Un dominio que no aparece en el registro suele estar libre. Confirmalo en un registrador antes de comprarlo: puede haber reservas o trámites pendientes.</p>
+            </div>
+          </section>
+
+          <p class="rec-status" id="disp-status" role="status" aria-live="polite"></p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/disponibilidad-dominio.ts"></script>
+  </body>
+</html>

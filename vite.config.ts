@@ -178,6 +178,12 @@ const SOLO_DESARROLLO = new Set([
   'pdf-a-documento',
   'transcribir-audio',
   'ocr-documentos',
+  // Dominios que necesitan la API del servidor local (extras/local): solo aparecen en esa versión.
+  'dominio-ssl',
+  'dominio-cabeceras',
+  'dominio-historial',
+  'dominio-subdominios',
+  'dominio-propagacion',
 ]);
 
 // Los archivos de OCR (public/ocr/) se copian a dist/ por ser parte de public/.

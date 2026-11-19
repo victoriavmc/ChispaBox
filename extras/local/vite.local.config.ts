@@ -9,9 +9,12 @@ import { loadYoutubeConfig } from './server/youtube/config.ts';
 import { youtubeApi } from './server/youtube/vite-plugin.ts';
 import { requisitosLocales } from './server/disponibilidad.ts';
 import { indiceLocal } from './server/indice-local.ts';
+import { dominiosLocalApi } from './server/dominios-api.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PAGINAS_LOCALES = ['descargar-youtube-video', 'descargar-youtube-audio', 'descargar-playlist-youtube', 'ocr-documentos', 'transcribir-audio'];
+// Páginas de Dominios que solo funcionan con la API local (viven en paginas/ de la raíz).
+const PAGINAS_DOMINIO_LOCALES = ['dominio-ssl', 'dominio-cabeceras', 'dominio-historial', 'dominio-subdominios', 'dominio-propagacion'];
 
 export default async (env: ConfigEnv): Promise<UserConfig> => {
   // Marca este servidor como local: la configuración raíz muestra las herramientas que solo existen aquí.
@@ -24,15 +27,16 @@ export default async (env: ConfigEnv): Promise<UserConfig> => {
     ...process.env,
   };
   const youtube = loadYoutubeConfig(variables);
-  const inputs = Object.fromEntries(
-    PAGINAS_LOCALES.map((nombre) => [`extras/local/web/paginas/${nombre}`, join(HERE, 'web', 'paginas', nombre, 'index.html')]),
-  );
+  const inputs = Object.fromEntries([
+    ...PAGINAS_LOCALES.map((nombre) => [`extras/local/web/paginas/${nombre}`, join(HERE, 'web', 'paginas', nombre, 'index.html')]),
+    ...PAGINAS_DOMINIO_LOCALES.map((nombre) => [`paginas/${nombre}`, join(HERE, '..', '..', 'paginas', nombre, 'index.html')]),
+  ]);
   return mergeConfig(base, {
     // La raíz del sitio es el repositorio (no esta carpeta): así /src, /public y /paginas resuelven igual que en la versión pública.
     root: join(HERE, '..', '..'),
     server: { host: '127.0.0.1', port: 5180, strictPort: true },
     preview: { host: '127.0.0.1', port: 5181, strictPort: true },
-    plugins: [youtubeApi(youtube), requisitosLocales(youtube, variables), indiceLocal()],
+    plugins: [youtubeApi(youtube), requisitosLocales(youtube, variables), indiceLocal(), dominiosLocalApi()],
     build: {
       outDir: join(HERE, 'dist'),
       emptyOutDir: true,

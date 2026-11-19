@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Puntaje orientativo de un dominio según longitud, caracteres, extensión y facilidad de pronunciación." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Valorar un dominio | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Valorar un dominio" subtitulo="Un puntaje orientativo para un dominio según su longitud, sus caracteres, su extensión y lo fácil que es de pronunciar. Es una estimación, no una tasación." personaje="/images/characters/silvi-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Puntaje del dominio</h2>
+
+          <section class="rec-panel" aria-labelledby="val-entrada-heading">
+            <h3 class="field-label" id="val-entrada-heading">1. Dominio</h3>
+            <form class="red-form" id="val-form" novalidate>
+              <div class="red-form__fila">
+                <label class="field-label" for="val-entrada" hidden>Dominio</label>
+                <input class="red-input" id="val-entrada" type="text" autocomplete="off" spellcheck="false" maxlength="253" placeholder="ejemplo.com" />
+                <button type="submit" class="btn btn--primary" id="val-btn">Valorar</button>
+              </div>
+            </form>
+            <p class="rec-error" id="val-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="val-resultado-heading">
+            <h3 class="field-label" id="val-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="val-resultado" hidden>
+              <div class="ip-titular" id="val-puntaje"></div>
+              <ul class="dns-chequeos" id="val-criterios"></ul>
+              <p class="tool-note">Es un cálculo orientativo con reglas simples. El valor real de un dominio depende de la demanda, la marca y el mercado.</p>
+            </div>
+          </section>
+
+          <p class="rec-status" id="val-status" role="status" aria-live="polite"></p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/valorar-dominio.ts"></script>
+  </body>
+</html>

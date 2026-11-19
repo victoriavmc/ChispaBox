@@ -205,7 +205,7 @@ export interface ResultadoPuertos {
 }
 
 /** Lee una lista de puertos separados por coma o espacio, sin repetidos ni bloqueados. */
-export function validarPuertos(texto: string): ResultadoPuertos {
+export function validarPuertos(texto: string, opciones: { permitirBloqueados?: boolean } = {}): ResultadoPuertos {
   const puertos: number[] = [];
   const errores: string[] = [];
   const tokens = texto.split(/[\s,;]+/).filter((t) => t !== '');
@@ -219,7 +219,7 @@ export function validarPuertos(texto: string): ResultadoPuertos {
       errores.push(`${numero} está fuera del rango 1-65535.`);
       continue;
     }
-    if (PUERTOS_BLOQUEADOS.has(numero)) {
+    if (!opciones.permitirBloqueados && PUERTOS_BLOQUEADOS.has(numero)) {
       errores.push(`El puerto ${numero} no se puede consultar desde el navegador.`);
       continue;
     }
@@ -255,9 +255,14 @@ export const CODIGO_TIPO_DNS: Readonly<Record<number, string>> = {
   2: 'NS',
   5: 'CNAME',
   6: 'SOA',
+  12: 'PTR',
   15: 'MX',
   16: 'TXT',
   28: 'AAAA',
+  33: 'SRV',
+  43: 'DS',
+  48: 'DNSKEY',
+  257: 'CAA',
 };
 
 const ESTADO_DNS: Readonly<Record<number, string>> = {

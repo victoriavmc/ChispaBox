@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Muestra cada redirección de una URL, su código de estado y las cabeceras de seguridad de la respuesta. Solo en la versión local." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Cabeceras HTTP | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Cabeceras HTTP" subtitulo="Escribí un dominio o una URL para ver cada redirección, el código de estado y las cabeceras de respuesta." personaje="/images/characters/miles-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Ver las cabeceras de una URL</h2>
+
+          <section class="rec-panel" aria-labelledby="cab-entrada-heading">
+            <h3 class="field-label" id="cab-entrada-heading">1. Dirección</h3>
+            <div class="red-aviso"><strong>Solo en la versión local.</strong> Esta consulta la hace el servidor local de ChispaBox (extras/local), no tu navegador. En la versión pública no está disponible.</div>
+            <form class="red-form" id="cab-form" novalidate>
+              <div class="red-form__fila">
+                <label class="field-label" for="cab-entrada" hidden>Dirección</label>
+                <input class="red-input" id="cab-entrada" type="text" autocomplete="off" spellcheck="false" maxlength="2048" placeholder="https://chispabox.io" />
+                <button type="submit" class="btn btn--primary" id="cab-btn">Revisar</button>
+              </div>
+            </form>
+            <p class="rec-error" id="cab-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="cab-resultado-heading">
+            <h3 class="field-label" id="cab-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="cab-resultado" hidden>
+              <ol class="cab-saltos" id="cab-saltos"></ol>
+              <p class="tool-note">Las cabeceras de seguridad (HSTS, CSP, X-Frame-Options) protegen al visitante. Si falta alguna, conviene agregarla en el servidor.</p>
+            </div>
+          </section>
+
+          <p class="rec-status" id="cab-status" role="status" aria-live="polite"></p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/dominio-cabeceras.ts"></script>
+  </body>
+</html>

@@ -16,7 +16,7 @@
     <link
       rel="preload"
       as="image"
-      href="/images/characters/mika-cutout.webp"
+      href="/images/characters/hero-cast-v6-cutout-w800.webp"
       type="image/webp"
       fetchpriority="high"
     />
@@ -38,8 +38,8 @@
 
             <p class="hero__lead">
               Pequeñas herramientas, grandes soluciones. Rápidas y simples, sin
-              registro. Grabá, editá, convertí y limpiá tus archivos y textos desde el
-              navegador, sin crear cuenta.
+              registro. Grabá, editá, convertí y limpiá tus archivos y textos
+              desde el navegador, sin crear cuenta.
             </p>
             <div class="hero__actions">
               <a class="btn btn--primary" href="#herramientas">
@@ -53,9 +53,9 @@
           <div class="hero__art" aria-hidden="true">
             <img
               class="chibi chibi--hero-cast"
-              src="/images/characters/hero-cast-v6-cutout.webp"
-              width="1380"
-              height="641"
+              src="/images/characters/hero-cast-v6-cutout-w800.webp"
+              width="800"
+              height="372"
               alt=""
               fetchpriority="high"
               decoding="async"
@@ -70,7 +70,7 @@
           <li class="feature">
             <span class="feature__icon" aria-hidden="true"
               ><svg class="icon"><use href="#i-wave" /></svg></span
-            ><span>32 Herramientas</span>
+            ><span id="contador-herramientas">31 Herramientas</span>
           </li>
           <li class="feature">
             <span class="feature__icon" aria-hidden="true"
@@ -100,7 +100,19 @@
             </p>
           </header>
 
-          <div class="tool-category">
+          <nav class="cat-nav" aria-label="Ir a una categoría de herramientas">
+            <a class="cat-nav__link" href="#cat-audio">Audio</a>
+            <a class="cat-nav__link" href="#cat-texto">Texto</a>
+            <a class="cat-nav__link" href="#cat-imagenes">Imágenes</a>
+            <a class="cat-nav__link" href="#cat-documentos">Documentos y PDF</a>
+            <a class="cat-nav__link" href="#cat-datos">Datos</a>
+            <a class="cat-nav__link" href="#cat-seguridad">Seguridad</a>
+            <a class="cat-nav__link" href="#cat-networking">Networking</a>
+            <a class="cat-nav__link" href="#cat-dominios">Dominios</a>
+            <a class="cat-nav__link" href="#cat-web">Web</a>
+          </nav>
+
+          <div class="tool-category" id="cat-audio">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-mic" /></svg
@@ -132,7 +144,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/sopi-cutout.webp"
+                  src="/images/characters/sopi-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -169,7 +181,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/miles-cutout.webp"
+                  src="/images/characters/miles-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -204,7 +216,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/mika-cutout.webp"
+                  src="/images/characters/mika-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -241,7 +253,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/marcos-cutout.webp"
+                  src="/images/characters/marcos-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -251,7 +263,7 @@
               </article>
             </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" id="cat-texto">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-lines" /></svg
@@ -284,7 +296,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/florencia-cutout.webp"
+                  src="/images/characters/florencia-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -318,7 +330,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/enzo-cutout.webp"
+                  src="/images/characters/enzo-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -352,7 +364,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/silvi-cutout.webp"
+                  src="/images/characters/silvi-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -362,7 +374,7 @@
               </article>
             </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" id="cat-imagenes">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-layers" /></svg
@@ -395,7 +407,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/marcos-cutout.webp"
+                  src="/images/characters/marcos-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -429,7 +441,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/florencia-cutout.webp"
+                  src="/images/characters/florencia-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -466,7 +478,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/sopi-cutout.webp"
+                  src="/images/characters/sopi-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -500,7 +512,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/mika-cutout.webp"
+                  src="/images/characters/mika-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -533,7 +545,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/vale-cutout.webp"
+                  src="/images/characters/vale-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -570,7 +582,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/miles-cutout.webp"
+                  src="/images/characters/miles-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -580,7 +592,7 @@
               </article>
             </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" id="cat-documentos">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-note" /></svg
@@ -614,7 +626,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/florencia-cutout.webp"
+                  src="/images/characters/florencia-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -652,7 +664,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/silvi-cutout.webp"
+                  src="/images/characters/silvi-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -689,7 +701,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/enzo-cutout.webp"
+                  src="/images/characters/enzo-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -725,7 +737,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/mika-cutout.webp"
+                  src="/images/characters/mika-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -763,7 +775,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/sopi-cutout.webp"
+                  src="/images/characters/sopi-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -773,7 +785,7 @@
               </article>
             </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" id="cat-datos">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-chart" /></svg
@@ -810,7 +822,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/vale-cutout.webp"
+                  src="/images/characters/vale-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -844,7 +856,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/mika-cutout.webp"
+                  src="/images/characters/mika-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -854,7 +866,7 @@
               </article>
             </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" id="cat-seguridad">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-shield" /></svg
@@ -888,7 +900,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/miles-cutout.webp"
+                  src="/images/characters/miles-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -923,7 +935,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/vale-cutout.webp"
+                  src="/images/characters/vale-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -961,7 +973,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/silvi-cutout.webp"
+                  src="/images/characters/silvi-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -998,7 +1010,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/enzo-cutout.webp"
+                  src="/images/characters/enzo-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1008,7 +1020,279 @@
               </article>
             </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" id="cat-networking">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-wave" /></svg
+              >Networking
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-whoami-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-monitor" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-whoami-title">
+                      Quién soy
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Mirá qué datos de tu navegador y de tu conexión puede leer
+                    cualquier sitio. La IP pública se consulta solo si lo pedís.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/quien-soy/index.html"
+                      >Abrir Quién soy
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/vale-cutout-w400.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-ip-calc-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-layers" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-ip-calc-title">
+                      Calculadora de IP
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Calculá la red, la máscara, el broadcast y el rango de hosts
+                    de una IPv4 a partir de su prefijo o máscara.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/calculadora-ip/index.html"
+                      >Abrir calculadora
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/miles-cutout-w400.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-dns-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-note" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-dns-title">
+                      Consulta DNS
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Consultá registros A, AAAA, MX, TXT, NS, CNAME y SOA de un
+                    dominio con un servicio DNS público.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/consulta-dns/index.html"
+                      >Abrir consulta DNS
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/mika-cutout-w400.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-ports-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-zap" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-ports-title">
+                      Escáner de puertos
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Comprobá si un servidor responde en puertos HTTPS comunes.
+                    Solo para servidores tuyos o con permiso.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/escaner-puertos/index.html"
+                      >Abrir escáner
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/marcos-cutout-w400.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-ip-owner-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"
+                      ><svg class="icon"><use href="#i-grid" /></svg
+                    ></span>
+                    <h3 class="tool-card__title" id="tool-ip-owner-title">
+                      De quién es esta IP
+                    </h3>
+                  </div>
+                  <p class="tool-card__desc">
+                    Mirá quién administra una IP o un dominio, en qué país está
+                    registrada y a qué correo escribir si hay abuso.
+                  </p>
+                  <p class="tool-card__foot">
+                    <a
+                      class="tool-card__cta"
+                      href="/paginas/de-quien-es-ip/index.html"
+                      >Abrir consulta
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" /></svg
+                    ></a>
+                  </p>
+                </div>
+                <img
+                  class="chibi chibi--card"
+                  src="/images/characters/florencia-cutout-w400.webp"
+                  width="600"
+                  height="900"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-velocidad-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-wave" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-velocidad-title">Prueba de velocidad</h3>
+                  </div>
+                  <p class="tool-card__desc">Medí la descarga, la carga, la latencia y la fluctuación de tu conexión a internet.</p>
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/prueba-velocidad/index.html">Abrir prueba
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/mika-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category" id="cat-dominios">
+            <h3 class="tool-category__title">
+              <svg class="icon tool-category__icon" aria-hidden="true">
+                <use href="#i-grid" /></svg
+              >Dominios
+            </h3>
+            <div class="tools-grid">
+              <article class="tool-card" aria-labelledby="tool-disponibilidad-dominio-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-grid" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-disponibilidad-dominio-title">Disponibilidad de dominio</h3>
+                  </div>
+                  <p class="tool-card__desc">Escribí un nombre y revisá si está libre para registrar, con el registro oficial de cada extensión.</p>
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/disponibilidad-dominio/index.html">Abrir disponibilidad
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/vale-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-generador-nombres-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-sparkles" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-generador-nombres-title">Generador de nombres</h3>
+                  </div>
+                  <p class="tool-card__desc">Combiná palabras clave con prefijos y sufijos y revisá cuáles nombres están libres.</p>
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/generador-nombres/index.html">Abrir generador
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/mika-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-punycode-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-refresh" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-punycode-title">Convertidor Punycode</h3>
+                  </div>
+                  <p class="tool-card__desc">Pasá dominios con ñ o tildes a su forma ASCII (xn--) y al revés.</p>
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/punycode/index.html">Abrir convertidor
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/florencia-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-valorar-dominio-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-star" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-valorar-dominio-title">Valorar un dominio</h3>
+                  </div>
+                  <p class="tool-card__desc">Un puntaje orientativo según longitud, caracteres, extensión y facilidad para decirlo.</p>
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/valorar-dominio/index.html">Abrir valoración
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/silvi-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" aria-labelledby="tool-correo-dominio-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-mail" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-correo-dominio-title">Correo: SPF, DKIM y DMARC</h3>
+                  </div>
+                  <p class="tool-card__desc">Revisá si el correo de un dominio está protegido contra suplantaciones, con los selectores DKIM comunes.</p>
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/correo-dominio/index.html">Abrir revisión de correo
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/enzo-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+            </div>
+          </div>
+          <div class="tool-category" id="cat-web">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-monitor" /></svg
@@ -1042,7 +1326,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/vale-cutout.webp"
+                  src="/images/characters/vale-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1076,7 +1360,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/marcos-cutout.webp"
+                  src="/images/characters/marcos-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1086,7 +1370,7 @@
               </article>
             </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" id="cat-proximas">
             <h3 class="tool-category__title">
               <svg class="icon tool-category__icon" aria-hidden="true">
                 <use href="#i-sparkles" /></svg
@@ -1111,13 +1395,20 @@
                     Descarga videos en MP4, WebM o MKV, solo contenido
                     autorizado.
                   </p>
-                                                      <p class="tool-card__foot">
-                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  <p class="tool-card__foot">
+                    <button
+                      type="button"
+                      class="badge badge--soon badge--btn"
+                      data-local-modal
+                      aria-haspopup="dialog"
+                    >
+                      Disponible en la versión local
+                    </button>
                   </p>
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/miles-cutout.webp"
+                  src="/images/characters/miles-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1143,13 +1434,20 @@
                     Convierte y descarga audio en MP3, M4A, WAV o FLAC, solo
                     contenido autorizado.
                   </p>
-                                                      <p class="tool-card__foot">
-                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  <p class="tool-card__foot">
+                    <button
+                      type="button"
+                      class="badge badge--soon badge--btn"
+                      data-local-modal
+                      aria-haspopup="dialog"
+                    >
+                      Disponible en la versión local
+                    </button>
                   </p>
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/marcos-cutout.webp"
+                  src="/images/characters/marcos-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1175,13 +1473,20 @@
                     Descarga una playlist o varios videos juntos en un ZIP, solo
                     contenido autorizado.
                   </p>
-                                                      <p class="tool-card__foot">
-                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  <p class="tool-card__foot">
+                    <button
+                      type="button"
+                      class="badge badge--soon badge--btn"
+                      data-local-modal
+                      aria-haspopup="dialog"
+                    >
+                      Disponible en la versión local
+                    </button>
                   </p>
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/florencia-cutout.webp"
+                  src="/images/characters/florencia-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1206,13 +1511,20 @@
                   <p class="tool-card__desc">
                     Convierte tus audios en texto de forma automática.
                   </p>
-                                                      <p class="tool-card__foot">
-                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  <p class="tool-card__foot">
+                    <button
+                      type="button"
+                      class="badge badge--soon badge--btn"
+                      data-local-modal
+                      aria-haspopup="dialog"
+                    >
+                      Disponible en la versión local
+                    </button>
                   </p>
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/vale-cutout.webp"
+                  src="/images/characters/vale-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1252,13 +1564,20 @@
                   <!-- @end-dev-only -->
                   <!-- @prod-only -->
                   <p class="tool-card__foot">
-                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                    <button
+                      type="button"
+                      class="badge badge--soon badge--btn"
+                      data-local-modal
+                      aria-haspopup="dialog"
+                    >
+                      Disponible en la versión local
+                    </button>
                   </p>
                   <!-- @end-prod-only -->
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/marcos-cutout.webp"
+                  src="/images/characters/marcos-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1284,19 +1603,131 @@
                     Reconoce texto de fotografías o documentos escaneados. Podés
                     copiarlo o exportarlo a TXT y DOCX.
                   </p>
-                                                      <p class="tool-card__foot">
-                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  <p class="tool-card__foot">
+                    <button
+                      type="button"
+                      class="badge badge--soon badge--btn"
+                      data-local-modal
+                      aria-haspopup="dialog"
+                    >
+                      Disponible en la versión local
+                    </button>
                   </p>
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/miles-cutout.webp"
+                  src="/images/characters/miles-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
                   loading="lazy"
                   decoding="async"
                 />
+              </article>
+              <article class="tool-card" data-dev-link aria-labelledby="tool-dominio-ssl-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-shield" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-dominio-ssl-title">Verificar SSL</h3>
+                  </div>
+                  <p class="tool-card__desc">Mirá si el certificado HTTPS de un sitio es válido, quién lo emitió y cuántos días le quedan.</p>
+                  <!-- @dev-only -->
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/dominio-ssl/index.html">Abrir verificación SSL
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                  <!-- @end-dev-only -->
+                  <!-- @prod-only -->
+                  <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                  <!-- @end-prod-only -->
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/marcos-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" data-dev-link aria-labelledby="tool-dominio-cabeceras-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-layers" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-dominio-cabeceras-title">Cabeceras HTTP</h3>
+                  </div>
+                  <p class="tool-card__desc">Seguí cada redirección de una URL y revisá las cabeceras de seguridad de la respuesta.</p>
+                  <!-- @dev-only -->
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/dominio-cabeceras/index.html">Abrir cabeceras
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                  <!-- @end-dev-only -->
+                  <!-- @prod-only -->
+                  <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                  <!-- @end-prod-only -->
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/miles-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" data-dev-link aria-labelledby="tool-dominio-historial-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-clock" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-dominio-historial-title">Historial del dominio</h3>
+                  </div>
+                  <p class="tool-card__desc">Mirá desde cuándo hay capturas de un dominio en el Internet Archive, año por año.</p>
+                  <!-- @dev-only -->
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/dominio-historial/index.html">Abrir historial
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                  <!-- @end-dev-only -->
+                  <!-- @prod-only -->
+                  <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                  <!-- @end-prod-only -->
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/florencia-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" data-dev-link aria-labelledby="tool-dominio-subdominios-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-note" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-dominio-subdominios-title">Buscar subdominios</h3>
+                  </div>
+                  <p class="tool-card__desc">Listá los subdominios que aparecen en certificados SSL públicos emitidos para un dominio.</p>
+                  <!-- @dev-only -->
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/dominio-subdominios/index.html">Abrir búsqueda
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                  <!-- @end-dev-only -->
+                  <!-- @prod-only -->
+                  <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                  <!-- @end-prod-only -->
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/mika-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
+              </article>
+              <article class="tool-card" data-dev-link aria-labelledby="tool-dominio-propagacion-title">
+                <div class="tool-card__body">
+                  <div class="tool-card__head">
+                    <span class="tool-icon" aria-hidden="true"><svg class="icon"><use href="#i-wave" /></svg></span>
+                    <h3 class="tool-card__title" id="tool-dominio-propagacion-title">Propagación DNS</h3>
+                  </div>
+                  <p class="tool-card__desc">Compará lo que responden varios resolutores DNS públicos para ver si tu cambio ya se propagó.</p>
+                  <!-- @dev-only -->
+                  <p class="tool-card__foot">
+                    <a class="tool-card__cta" href="/paginas/dominio-propagacion/index.html">Abrir propagación
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </p>
+                  <!-- @end-dev-only -->
+                  <!-- @prod-only -->
+                  <p class="tool-card__foot">
+                    <button type="button" class="badge badge--soon badge--btn" data-local-modal aria-haspopup="dialog">Disponible en la versión local</button>
+                  </p>
+                  <!-- @end-prod-only -->
+                </div>
+                <img class="chibi chibi--card" src="/images/characters/silvi-cutout-w400.webp" width="600" height="900" alt="" loading="lazy" decoding="async" />
               </article>
               <article class="tool-card" aria-labelledby="tool-next-title">
                 <div class="tool-card__body">
@@ -1322,7 +1753,7 @@
                 </div>
                 <img
                   class="chibi chibi--card"
-                  src="/images/characters/vale-cutout.webp"
+                  src="/images/characters/vale-cutout-w400.webp"
                   width="600"
                   height="900"
                   alt=""
@@ -1444,7 +1875,9 @@
                       aria-describedby="suggest-email-help suggest-email-error"
                     />
                     <p class="suggest__help" id="suggest-email-help">
-                      Opcional. Si lo dejás, te enviamos un único agradecimiento automático y lo usamos solo para responderte si hace falta. No lo usamos para publicidad.
+                      Opcional. Si lo dejás, te enviamos un único agradecimiento
+                      automático y lo usamos solo para responderte si hace
+                      falta. No lo usamos para publicidad.
                     </p>
                     <p
                       class="suggest__error"
@@ -1518,15 +1951,28 @@
       </section>
     </main>
 
-    <dialog class="local-modal" id="local-modal" aria-labelledby="local-modal-titulo">
+    <dialog
+      class="local-modal"
+      id="local-modal"
+      aria-labelledby="local-modal-titulo"
+    >
       <form method="dialog" class="local-modal__box">
-        <h2 class="local-modal__titulo" id="local-modal-titulo">Versión local</h2>
+        <h2 class="local-modal__titulo" id="local-modal-titulo">
+          Versión local
+        </h2>
         <p class="local-modal__texto">
-          Esta herramienta solo funciona en la versión local. Redirigite al GitHub del proyecto para verla.
+          Esta herramienta solo funciona en la versión local. Redirigite al
+          GitHub del proyecto para verla.
         </p>
         <div class="local-modal__acciones">
           <button type="submit" class="btn btn--ghost">Cerrar</button>
-          <a class="btn btn--primary" href="https://github.com/victoriavmc/ChispaBox" target="_blank" rel="noopener noreferrer">Ir a GitHub</a>
+          <a
+            class="btn btn--primary"
+            href="https://github.com/victoriavmc/ChispaBox"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Ir a GitHub</a
+          >
         </div>
       </form>
     </dialog>

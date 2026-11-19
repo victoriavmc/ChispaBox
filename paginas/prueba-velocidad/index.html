@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Prueba la velocidad de descarga, carga, latencia y fluctuación de tu conexión a internet. Mide desde tu navegador." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Prueba de velocidad | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Prueba de velocidad" subtitulo="Prueba tu velocidad y rendimiento de conexión a internet. Mide la velocidad de descarga, carga, latencia y fluctuación en segundos." personaje="/images/characters/mika-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Medir mi conexión</h2>
+
+          <section class="rec-panel" aria-labelledby="vel-inicio-heading">
+            <h3 class="field-label" id="vel-inicio-heading">1. Iniciar la prueba</h3>
+            <div class="red-aviso">
+              <strong>Servicio externo.</strong> La prueba transfiere datos de prueba con <code>speed.cloudflare.com</code>: hasta 36 MB de descarga y 4 MB de subida. Ningún dato tuyo se guarda en ChispaBox.
+            </div>
+            <div class="red-acciones">
+              <button type="button" class="btn btn--primary" id="vel-btn">Iniciar prueba</button>
+            </div>
+            <p class="tool-note" id="vel-progreso" role="status" aria-live="polite"></p>
+            <p class="rec-error" id="vel-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="vel-resultado-heading">
+            <h3 class="field-label" id="vel-resultado-heading">2. Resultados</h3>
+            <div class="red-resultado" id="vel-resultado" hidden>
+              <div class="qs-tarjetas">
+                <div class="qs-tarjeta qs-tarjeta--ip"><span class="qs-tarjeta__etiqueta">Descarga</span><strong class="qs-tarjeta__valor" id="vel-descarga">—</strong><span class="tool-note" id="vel-calificacion"></span></div>
+                <div class="qs-tarjeta"><span class="qs-tarjeta__etiqueta">Carga</span><strong class="qs-tarjeta__valor" id="vel-carga">—</strong></div>
+                <div class="qs-tarjeta"><span class="qs-tarjeta__etiqueta">Latencia</span><strong class="qs-tarjeta__valor" id="vel-latencia">—</strong></div>
+                <div class="qs-tarjeta"><span class="qs-tarjeta__etiqueta">Fluctuación</span><strong class="qs-tarjeta__valor" id="vel-jitter">—</strong></div>
+              </div>
+              <dl class="red-datos" id="vel-usos"></dl>
+              <p class="tool-note">La velocidad puede variar con la hora, el Wi-Fi y lo que esté usando tu red. Para un resultado más preciso, cerrá descargas y repetí la prueba.</p>
+            </div>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="vel-historial-heading">
+            <h3 class="field-label" id="vel-historial-heading">3. Últimas pruebas</h3>
+            <p class="tool-note">Se guardan en tu navegador (las últimas 5). Se borran al limpiar los datos del navegador.</p>
+            <ul class="his-anios" id="vel-historial"></ul>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/prueba-velocidad.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Compara lo que responden varios resolutores DNS públicos para saber si un cambio de DNS ya se ve. Solo en la versión local." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Propagación DNS | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Propagación DNS" subtitulo="Compará lo que responden varios resolutores DNS públicos para saber si tu último cambio de DNS ya se ve." personaje="/images/characters/silvi-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Propagación de un registro DNS</h2>
+
+          <section class="rec-panel" aria-labelledby="pro-entrada-heading">
+            <h3 class="field-label" id="pro-entrada-heading">1. Dominio y tipo</h3>
+            <div class="red-aviso"><strong>Solo en la versión local.</strong> Esta consulta la hace el servidor local de ChispaBox (extras/local), no tu navegador. En la versión pública no está disponible.</div>
+            <form class="red-form" id="pro-form" novalidate>
+              <div class="red-form__fila">
+                <label class="field-label" for="pro-entrada" hidden>Dominio</label>
+                <input class="red-input" id="pro-entrada" type="text" autocomplete="off" spellcheck="false" maxlength="2048" placeholder="ejemplo.com" />
+                <select class="red-select" id="pro-tipo">
+                  <option value="A">A</option><option value="AAAA">AAAA</option><option value="MX">MX</option>
+                  <option value="TXT">TXT</option><option value="NS">NS</option><option value="CNAME">CNAME</option><option value="SOA">SOA</option>
+                </select>
+                <button type="submit" class="btn btn--primary" id="pro-btn">Consultar resolutores</button>
+              </div>
+            </form>
+            <p class="rec-error" id="pro-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="pro-resultado-heading">
+            <h3 class="field-label" id="pro-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="pro-resultado" hidden>
+              <div class="red-tabla-wrap">
+                <table class="red-tabla">
+                  <thead><tr><th scope="col">Resolutor</th><th scope="col">Estado</th><th scope="col">Respuesta</th></tr></thead>
+                  <tbody id="pro-filas"></tbody>
+                </table>
+              </div>
+              <p class="tool-note">Los resolutores son servicios públicos de empresas (Google, Cloudflare, Quad9, OpenDNS). No cubren todo el mundo: es una comparación aproximada.</p>
+            </div>
+          </section>
+
+          <p class="rec-status" id="pro-status" role="status" aria-live="polite"></p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/dominio-propagacion.ts"></script>
+  </body>
+</html>

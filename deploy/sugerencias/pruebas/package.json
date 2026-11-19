@@ -4,6 +4,6 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "smtp-server": "3.13.7"
+    "smtp-server": "^3.21.6"
   }
 }

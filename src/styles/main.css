@@ -685,20 +685,35 @@ a {
 }
 
 /* Personaje en encuadre de busto: se recorta la parte inferior del cuerpo dentro de la card */
+.tool-card {
+  /* Tamaño del personaje dentro de la card: ancho del recuadro y zoom anclado a la derecha.
+     Ancho visible = --chibi-ancho x --chibi-zoom = 41,4% (empieza en el 58,6%).
+     El texto ya se limita al 56% (.tool-card__body max-width), así que no se solapan. */
+  --chibi-ancho: 36%;
+  --chibi-zoom: 1.15;
+}
+
 .tool-card .chibi--card {
   position: absolute;
   top: 0;
   right: 0;
-  width: 40%;
+  width: var(--chibi-ancho);
   height: 100%;
   max-width: none;
   margin: 0;
   object-fit: cover;
   object-position: center top;
   /* Acerca el personaje: se ve cabeza y torso, y la parte inferior queda fuera de la card */
-  transform: scale(1.5);
-  transform-origin: center top;
+  transform: scale(var(--chibi-zoom));
+  transform-origin: right top;
   pointer-events: none;
+}
+
+/* Insignias dentro de la card (p. ej. «Disponible en la versión local»): pueden partirse en líneas */
+.tool-card .badge {
+  white-space: normal;
+  max-width: 100%;
+  text-align: left;
 }
 
 .tool-card__cta {
@@ -710,7 +725,8 @@ a {
   font-weight: 800;
   font-size: 0.9rem;
   text-decoration: none;
-  white-space: nowrap;
+  /* Puede partirse en varias líneas: así no se extiende bajo el personaje en cards estrechas */
+  max-width: 100%;
   border-radius: var(--radius-sm);
 }
 

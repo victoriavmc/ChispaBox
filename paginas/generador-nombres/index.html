@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Propone nombres de dominio combinando tus palabras con prefijos y sufijos, y revisa cuáles están libres." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>Generador de nombres | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="Generador de nombres" subtitulo="Escribí una o dos palabras clave y te proponemos nombres combinados con prefijos y sufijos habituales, con su disponibilidad." personaje="/images/characters/mika-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Proponer nombres de dominio</h2>
+
+          <section class="rec-panel" aria-labelledby="gen-entrada-heading">
+            <h3 class="field-label" id="gen-entrada-heading">1. Palabras y opciones</h3>
+            <div class="red-aviso"><strong>Servicio externo.</strong> Cada nombre propuesto se consulta en <code>rdap.org</code>. Se revisan como máximo 24 nombres por vez.</div>
+            <form class="red-form" id="gen-form" novalidate>
+              <label class="field-label" for="gen-palabras">Palabras clave (separadas por coma)</label>
+              <input class="red-input" id="gen-palabras" type="text" autocomplete="off" spellcheck="false" maxlength="120" placeholder="cafe, luna" />
+              <label class="field-label" for="gen-prefijos">Prefijos (opcional)</label>
+              <input class="red-input" id="gen-prefijos" type="text" autocomplete="off" maxlength="120" value="mi, the, get" />
+              <label class="field-label" for="gen-sufijos">Sufijos (opcional)</label>
+              <input class="red-input" id="gen-sufijos" type="text" autocomplete="off" maxlength="120" value="app, hub, online, pro" />
+              <div class="red-form__fila">
+                <label class="field-label" for="gen-ext">Extensión</label>
+                <select class="red-select" id="gen-ext">
+                  <option value="com">.com</option><option value="net">.net</option><option value="org">.org</option>
+                  <option value="io">.io</option><option value="app">.app</option><option value="ar">.ar</option>
+                </select>
+                <button type="submit" class="btn btn--primary" id="gen-btn">Generar y revisar</button>
+              </div>
+            </form>
+            <p class="rec-error" id="gen-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="gen-resultado-heading">
+            <h3 class="field-label" id="gen-resultado-heading">2. Resultado</h3>
+            <div id="gen-resultado" hidden>
+              <div class="red-tabla-wrap">
+                <table class="red-tabla">
+                  <thead><tr><th scope="col">Dominio</th><th scope="col">Estado</th></tr></thead>
+                  <tbody id="gen-filas"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <p class="rec-status" id="gen-status" role="status" aria-live="polite"></p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/generador-nombres.ts"></script>
+  </body>
+</html>

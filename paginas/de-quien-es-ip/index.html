@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Consultá quién administra una dirección IP o un dominio, en qué país está registrada y a qué correo avisar por abuso. Usa RDAP, el registro oficial de las IP."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#E61932" />
+    <title>De quién es esta IP | ChispaBox</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Aplica la preferencia guardada antes del primer pintado (evita parpadeo de tema). -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <!-- @include:sprite -->
+
+    <!-- @include:header -->
+
+    <main id="main">
+      <div class="container tool-page">
+        <!-- @include:encabezado titulo="De quién es esta IP" subtitulo="Escribí una IP o un dominio y mirá quién administra ese bloque de direcciones, en qué país está registrado y a qué correo escribir si hay abuso." personaje="/images/characters/florencia-cutout-w400.webp" -->
+
+        <div class="doc-panel">
+          <h2 class="doc-panel__title">Consultar el titular</h2>
+
+          <section class="rec-panel" aria-labelledby="ip-entrada-heading">
+            <h3 class="field-label" id="ip-entrada-heading">1. IP o dominio</h3>
+            <div class="red-aviso">
+              <strong>Servicios externos.</strong> La consulta va a
+              <code>rdap.org</code>, que la redirige al registro regional que
+              administra esa IP. Si escribís un dominio, primero se resuelve con
+              <code>dns.google</code>. Ningún dato se guarda en ChispaBox.
+            </div>
+            <form class="red-form" id="ip-form" novalidate>
+              <div class="red-form__fila">
+                <label class="field-label" for="ip-entrada" hidden
+                  >IP o dominio</label
+                >
+                <input
+                  class="red-input"
+                  id="ip-entrada"
+                  type="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  maxlength="253"
+                  placeholder="190.226.127.15 o ejemplo.com"
+                />
+                <button type="submit" class="btn btn--primary" id="ip-btn">
+                  Consultar
+                </button>
+              </div>
+            </form>
+            <p class="rec-error" id="ip-error" role="alert" hidden></p>
+          </section>
+
+          <section class="rec-panel" aria-labelledby="ip-resultado-heading">
+            <h3 class="field-label" id="ip-resultado-heading">2. Resultado</h3>
+            <div class="red-resultado" id="ip-resultado" hidden>
+              <div class="ip-titular" id="ip-titular" hidden></div>
+              <dl class="red-datos" id="ip-datos"></dl>
+              <p class="tool-note">
+                El titular es quien tiene asignado el bloque. Si el bloque fue
+                reasignado a un proveedor, aparece el proveedor. El correo de
+                abuso sirve para reportar spam, ataques o contenido ilegal desde
+                esa red.
+              </p>
+            </div>
+          </section>
+
+          <p
+            class="rec-status"
+            id="ip-status"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include:footer -->
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <script type="module" src="/src/scripts/de-quien-es-ip.ts"></script>
+  </body>
+</html>
